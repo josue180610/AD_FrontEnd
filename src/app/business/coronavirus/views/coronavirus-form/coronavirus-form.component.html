@@ -1,0 +1,645 @@
+
+
+  <h4 mat-dialog-title *ngIf="txt_condition_status">
+    <mat-toolbar role="toolbar" class="task-header">
+        <img src="./assets_client/media/logos/logo-movistar.png" width="50px" class="imgdialog" alt="">
+        <span> Aviso del Sistema</span>
+        <span class="fx-spacer"></span>
+        <button mat-icon-button (click)="onNoClick()">
+            <mat-icon mat-list-icon>close</mat-icon>
+        </button>
+    </mat-toolbar>
+</h4>
+<mat-card class="container_coronavirus">
+    <h2 class="text-center" style="color: white;background-color: #00a9e0;padding: 5px;">Registro de Estado</h2>
+
+
+    <hr>
+    <div class="row">
+        <!-- <div class="col-md-3">
+                <label for="cip_emp">Cip :</label>
+                <input style="margin-left: 5px;" type="text" name="cip" id="cip_emp" class="form-control text-center"
+                    value="{{txt_cip_emp}}" disabled="disabled">
+            </div> -->
+        <div class="col-md-12" syle="padding-bottom:10px">
+            <label for="name_emp">Empleado :</label>
+            <input style="margin-left: 5px;" type="text" name="name_emp" id="name_emp" class="form-control text-center"
+                value="{{txt_employee_name}}" disabled="disabled">
+
+        </div>
+    </div>
+
+    <hr>
+    <div [formGroup]="coronavirusForm" id="form_coronavirus" class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div *ngIf="!txt_condition_general" class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Situacion laboral :</label>
+
+                            <mat-select [disabled]="txt_condition_general" [style.background-color]="background_color"
+                                [(ngModel)]="txt_status" [ngModelOptions]="{standalone: true}" class="form-control">
+                                <mat-option>None</mat-option>
+                                <mat-option *ngFor="let value of array_corona_status" [value]="value.id">
+                                    {{value.name}}</mat-option>
+                            </mat-select>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div *ngIf="!txt_condition_general" class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                    <div class="form-group">
+                        <label>Fecha de situacion laboral
+
+                            :</label>
+                        <div class="form-inline">
+                            <input class="text-center form-control col-xs-12 col-sm-12 col-md-12 col-lg-10"
+                                [matDatepicker]="picker" [(ngModel)]="txt_reason_date" name="fecha1"
+                                formControlName="date1" placeholder="YYYY-MM-DD" [disabled]="txt_condition_general">
+                            <mat-datepicker-toggle class="col-xs-12 col-sm-12 col-md-12 col-lg-2 btn-datepicker" matSuffix
+                                [for]="picker">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!txt_condition_general" class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                    <div class="form-group">
+                        <label>Tipo de presencia :</label>
+                        <mat-select [disabled]="txt_condition_general" [style.background-color]="background_color"
+                            [(ngModel)]="txt_type" [ngModelOptions]="{standalone: true}" class="form-control">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let value of array_corona_type" [value]="value.id">{{value.name}}
+                            </mat-option>
+                        </mat-select>
+
+                    </div>
+                </div>
+                <div *ngIf="!txt_condition_general" class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                    <div class="form-group">
+                        <label>Fecha de tipo de presencia
+
+                            :</label>
+                        <div class="form-inline">
+                            <input class="text-center form-control col-xs-12 col-sm-12 col-md-12 col-lg-10"
+                                [matDatepicker]="picker2" [(ngModel)]="txt_date_type" name="fecha2"
+                                formControlName="date2" placeholder="YYYY-MM-DD" [disabled]="txt_condition_general">
+                            <mat-datepicker-toggle class="col-xs-12 col-sm-12 col-md-12 col-lg-2 btn-datepicker" matSuffix
+                                [for]="picker2">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" *ngIf="txt_condition_general">
+                <div class="col-md-12">
+                    <div class="form-group">
+
+                        <label>Estado de salud:</label>
+                        {{txt_id_reason}}
+                        <mat-select [(ngModel)]="txt_id_reason" [ngModelOptions]="{standalone: true}"
+                            class="form-control">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let value of array_corona_reason" [value]="value.id">{{value.name}}
+                            </mat-option>
+                        </mat-select>
+
+                    </div>
+                </div>
+                
+            </div>
+
+            <!--add disabled buttom-->
+            <div class="row" *ngIf="!txt_condition_general">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
+                    <div class="form-group">
+
+                        <label>Estado de salud:</label>
+
+                        <mat-select [(ngModel)]="txt_id_reason" [ngModelOptions]="{standalone: true}"
+                            class="form-control">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let value of array_corona_reason" [value]="value.id">{{value.name}}
+                            </mat-option>
+                        </mat-select>
+
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+
+                        <label>Deshabilitar pase de ingreso:</label>
+                        <button class="btn btn-block bg-danger text-light" (click)="removeAccess()">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+            <!--...................-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Telefóno de contacto
+                            :</label>
+                        <input type="text" [(ngModel)]="txt_phone" [ngModelOptions]="{standalone: true}"
+                            class="form-control text-center" name="txt_telf_contact" placeholder="##########"
+                            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Dirección en caso de emergencia
+                            :</label>
+                        <input type="text" [(ngModel)]="txt_address" [ngModelOptions]="{standalone: true}"
+                            class="form-control text-center" name="txt_telf_contact" placeholder="##########">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+               
+                    <label><b>Enfermedades crónicas(Seleccione todas las opciones que te apliquen) :
+                    </b>:</label>
+                <div class="col-100">
+                    <fieldset style="border:  1px solid #00a9e0;padding: 5px;border-radius: 5px;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <fieldset>
+
+                                        <!---->
+
+                                        <div [style.background-color]="background_color">
+                                            <input [disabled]="txt_condition_general"
+                                                [style.background-color]="background_color" type="checkbox" name="chk"
+                                                [(ngModel)]="txt_chk_2" [ngModelOptions]="{standalone: true}"
+                                                [value]="3">
+                                            <label for="exampleCheck1"><b>Trabajadores nacidos hasta 1960</b>
+                                            </label><br>
+                                        </div>
+
+                                        <!---->
+                                        <input *ngIf="txt_sex_employee=='F'" type="checkbox" name="chk"
+                                            [(ngModel)]="txt_chk_0" [ngModelOptions]="{standalone: true}" [value]="1"
+                                            style="cursor:pointer">
+                                        <label *ngIf="txt_sex_employee=='F'" for="exampleCheck1"><b>Mujeres en estado de
+                                            gestacion</b></label><br>
+                                        <!---->
+                                        <!-- <input type="checkbox" name="chk" [(ngModel)]="txt_chk_1"
+                                                [ngModelOptions]="{standalone: true}" [value]="2"  style="cursor:pointer"> -->
+                                        <div>
+                                            <label class="flaticon2-add-square label-standard"></label>
+                                            <label 
+                                                style="padding-left: 10px;padding-right: 20px;"> <b>Enfermedad
+                                                    crónica</b><br />( Selecciona todas las opciones que te apliquen ) :
+                                            </label>
+
+                                            
+                                            <section id="container_chk_1"
+                                                style="width: 100%;position: relative;top: 10px;margin-left: 3px;">
+
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-xs-12 col-md-12">
+                                                        <div style="width: 100%;margin-right:10px; "
+                                                            class="form-inline">
+                                                            <mat-form-field appearance="outline" class="mat-form-style" >
+                                                                <!-- <mat-label class="font-style-mat-select text-center">Seleccionar
+                                                                                </mat-label> -->
+                                                                <mat-select [disabled]="condition_legal_entity && level_access==1" formControlName="codeSelect"
+                                                                    [(ngModel)]="select" multiple>
+                                                                    <mat-option (onSelectionChange)="getValues($event)"
+                                                                        class="font-style-mat-select"
+                                                                        *ngFor="let codeSelect of array_corona_not_group[0]"
+                                                                        [value]="codeSelect.id">
+                                                                        {{codeSelect.name}}
+                                                                    </mat-option>
+                                                                    <mat-optgroup
+                                                                        *ngFor="let group of this.array_corona_group"
+                                                                        [label]="textValidate(group.group)"
+                                                                        [disabled]="group.disabled">
+                                                                        <mat-option
+                                                                            (onSelectionChange)="getValues($event)"
+                                                                            class="font-style-mat-select"
+                                                                            *ngFor="let codeSelect of group.group_detail"
+                                                                            [value]="codeSelect.id">
+                                                                            {{codeSelect.name}}
+                                                                        </mat-option>
+                                                                    </mat-optgroup>
+                                                                </mat-select>
+                                                            </mat-form-field>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </section>
+                                        </div>
+                                        <div class="row" >
+                                            <!-- input type text group Enfermedades cardiovasculares -->
+                                            <div *ngIf="condition_Enfermedades_cardiovasculares" class="col-md-12">
+                                                <label><b>Otro tipo de Enfermedades cardiovasculares :</b></label>
+                                                <input type="text" [disabled]="condition_legal_entity  && level_access==1" style="width: 100%;"
+                                                    [(ngModel)]="txt_cardiovasculares"
+                                                    [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    placeholder="Ingresar otro tipo de enfermedad"
+                                                    name="txt_other_cardio">
+                                            </div>
+                                            <!-- input type text group Enfermedades pulmonares cronicas-->
+                                            <div *ngIf="condition_Enfermedades_pulmonares" class="col-md-12">
+                                                <label><b>Otro tipo de Enfermedades pulmonares cronicas :</b></label>
+                                                <input type="text" [disabled]="condition_legal_entity  && level_access==1" style="width: 100%;" [(ngModel)]="txt_pulmonare"
+                                                    [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    placeholder="Ingresar otro tipo de enfermedad"
+                                                    name="txt_other_pulm">
+                                            </div>
+                                            <!-- input type text group Enfermedades de inmunosupresion-->
+                                            <div *ngIf="condition_Enfermedades_inmunosupresion" class="col-md-12">
+                                                <label><b>Otro tipo de Enfermedades de inmunosupresion :</b></label>
+                                                <input type="text"  [disabled]="condition_legal_entity  && level_access==1"  style="width: 100%;"
+                                                    [(ngModel)]="txt_inmunosupresion"
+                                                    [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    placeholder="Ingresar otro tipo de enfermedad"
+                                                    name="txt_other_inmu">
+                                            </div>
+                                        </div><br>
+                                        <div *ngIf="condition_upload_document" class="form-inline">
+
+                                            <section class="container_checkbox1" id="container_chk_1">
+
+                                                <div  class="row">
+                                                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                                                <p
+                                                                    class="font-style flaticon2-medical-records label-obs">
+                                                                    Adjuntar documento :</p>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-4"><input type="text"
+                                                                    name="txt_filename" class="form-control"
+                                                                    style="width: 100%;"
+                                                                    [style.background-color]="background_color"
+                                                                    [(ngModel)]="filenameazure"
+                                                                    [ngModelOptions]="{standalone: true}" readonly>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-2" [hidden]="condition_legal_entity  && level_access==1"> <button
+                                                                    for="btn-file"
+                                                                    class="btn btn-block btn_savedatacondition">Examinar</button>
+                                                                <input  [disabled]="condition_legal_entity  && level_access==1"  type="file" id="btn-file" name="btnfileCondition"
+                                                                    (change)="uploadFileHome($event)" #btnfileCondition>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-2"><i 
+                                                                    (click)="getFileAttach()" style="width: 100%;"
+                                                                    class="fas fa-download btn-download"></i></div>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                    <span class="badge-primary" style="margin:15px;padding:10px;color:white"><b>Si tienes alguna consulta,duda o deseas realizar alguna modificación de las enfermedades crónicas reportadas comunícate con Carlos Ramirez al correo carlos.ramirezla@telefonica.com</b></span>
+                                                    </div>
+                                            </section>
+                                        </div>
+                                        <div *ngIf="false" [style.background-color]="background_color">
+                                            <input [disabled]="txt_condition_general"
+                                                [style.background-color]="background_color" type="checkbox" name="chk"
+                                                [(ngModel)]="txt_chk_2" [ngModelOptions]="{standalone: true}"
+                                                [value]="3">
+                                            <label for="exampleCheck1"><b>Otro tipo de factor de riesgo</b>
+                                            </label><br>
+                                        </div>
+                                        <div *ngIf="false" [style.background-color]="background_color">
+                                            <input [disabled]="txt_condition_general"
+                                                [style.background-color]="background_color" type="checkbox" name="chk"
+                                                [(ngModel)]="txt_chk_2" [ngModelOptions]="{standalone: true}"
+                                                [value]="3">
+                                            <label for="exampleCheck1"><b>Al cuidado de un familiar</b>
+                                            </label><br>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset *ngIf="!txt_condition_general">
+                                        <legend>Otros :</legend>
+
+                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_3"
+                                            [ngModelOptions]="{standalone: true}" [value]="4" style="cursor:pointer">
+                                        <label for="exampleCheck1"><b>Personal con licencia Sindical</b>
+                                        </label><br>
+                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_4"
+                                            [ngModelOptions]="{standalone: true}" [value]="5" style="cursor:pointer">
+                                        <label for="exampleCheck1"><b>Personal con Licencia por periodo de Lactancia</b>
+                                        </label><br>
+                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_5"
+                                            [ngModelOptions]="{standalone: true}" [value]="6" style="cursor:pointer">
+                                        <label for="exampleCheck1"><b>Personal Licencia Médica</b>
+                                        </label><br>
+                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_6"
+                                            [ngModelOptions]="{standalone: true}" [value]="7" style="cursor:pointer">
+                                        <label for="exampleCheck1"><b>Otras Licencias</b>
+                                        </label><br>
+                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_7"
+                                            [ngModelOptions]="{standalone: true}" [value]="8" style="cursor:pointer">
+                                        <label for="exampleCheck1"><b>Nuevos requerimientos Personas que necesita
+                                            CITRIX/VPN
+                                            para sumarse al trabajar remoto</b>
+                                        </label><br>
+
+                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_9"
+                                            [ngModelOptions]="{standalone: true}" [value]="10" style="cursor:pointer">
+                                        <label for="exampleCheck1"><b>Contacto con persona con resultado positivo</b>
+                                        </label>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <input type="checkbox" name="chk" [(ngModel)]="txt_chk_8"
+                                                    [ngModelOptions]="{standalone: true}" [value]="9"
+                                                    style="cursor:pointer">
+                                                <label for="exampleCheck1"><b>Personal sin retorno al país</b>
+                                                </label>
+                                            </div>
+                                            <div *ngIf="txt_chk_8==true" class="col-md-7">
+                                                <mat-select [(ngModel)]="txt_country"
+                                                    [ngModelOptions]="{standalone: true}" class="form-control">
+                                                    <mat-option>None</mat-option>
+                                                    <mat-option *ngFor="let value of array_corona_country"
+                                                        [value]="value.id">
+                                                        {{value.name}}</mat-option>
+                                                </mat-select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <br><br>
+                <label style="margin-top: 15px;"><b>
+                 ¡En Movistar velamos por tu salud y de los que más quieres!. Ayúdanos a responder las siguientes preguntas:
+                
+                </b></label>
+                <div class="col-100" style="padding: 0px;">
+                    <fieldset style="border:  1px solid #00a9e0;padding: 5px;border-radius: 5px;">
+                        <div class="row" style="margin: 0px;">
+                            <div class="col-md-12">
+                                
+                                    <!--Medio de transporte-->
+                                        <br>
+                                        <div class="form-group">
+                                            <label><b># Selecciona el medio de transporte para ir a tu lugar de trabajo :</b></label>
+                                            <mat-select [(ngModel)]="txt_transport"
+                                                [ngModelOptions]="{standalone: true}"
+                                                class="form-control"
+                                                style="width: 100%;border:1px solid green;padding:5;">
+                                                <mat-option
+                                                    *ngFor="let value of array_corona_transport"
+                                                    [value]="value.id">{{value.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </div>
+                                    
+                                    <!---->
+                               
+                            </div>
+                        </div>
+                        <hr>
+                        <div style="width: 95%;margin-left: auto;margin-right: auto;">
+                            <label><b># Indícanos tu IMC : [ IMC = PESO / TALLA² ]</b></label>
+                            
+                            <p>Ingrese su peso y talla :</p>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" [disabled]="txt_imc>0 && txt_pre_register==1 && level_access==1 && condition_legal_entity==true" class="form-control"
+                                            name="txt_weight" 
+                                            (change)="caculate_imc()" [(ngModel)]="txt_weight"
+                                            [ngModelOptions]="{standalone: true}"
+                                            placeholder="Colocar el peso en Kg"
+                                            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                            <p style="margin-left: 5px;margin-top: 7px;"><b>Kg</b></p>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                    <div class="input-group">     
+                                        <input type="text" [disabled]="txt_imc>0 && txt_pre_register==1 && level_access==1 && condition_legal_entity==true" class="form-control"
+                                        name="txt_weight" 
+                                        (change)="caculate_imc()" [(ngModel)]="txt_height"
+                                        [ngModelOptions]="{standalone: true}"
+                                        placeholder="Colocar su altura en cm"
+                                        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                        <p style="margin-left: 5px;margin-top: 7px;"><b>Cm</b></p>
+                                    </div>
+                                    </div>
+                                
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text"  class="form-control"
+                                    name="txt_weight" 
+                                    (change)="caculate_imc()" [(ngModel)]="txt_imc"
+                                    [ngModelOptions]="{standalone: true}"
+                                    placeholder="Colocar el peso en Kg" disabled
+                                    onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                         
+                                    <p style="margin-left: 5px;margin-top: 7px;"><b>IMC</b></p>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p *ngIf="txt_height>=100&&txt_height<=250?false:true">La altura ingresada es incorrecta. No podra calcular si imc, ya que el rango de valores aceptados se encuentra entre 100cm y 250cm. </p>
+                            <p *ngIf="txt_weight>=0&&txt_weight<=250?false:true">El peso ingresado es incorrecta. No podra calcular si imc, ya que el maximo peso aceptado es 250kg. </p>
+                        
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!--Pop up Familiares-->
+                                <div>
+                                    <div class="form-inline">
+                                        
+                                        <label for="exampleCheck1"><b># ¿Vives con alguien de o con exposición
+                                            de Riesgo?</b>
+                                        </label><br>
+                                        <fieldset>
+                                            <mat-radio-group [(ngModel)]="txt_chk_10"
+                                            [ngModelOptions]="{standalone: true}"  (change)="show_modal_relationship(txt_chk_10)">
+                                                    <mat-radio-button class="example-radio-button"  [value]="1">
+                                                    Sí
+                                                    </mat-radio-button>
+                                                    <mat-radio-button class="example-radio-button"  [value]="0">
+                                                    No
+                                                    </mat-radio-button>
+                                                    </mat-radio-group>
+                                                   
+                                            
+                                        </fieldset>
+                                        <button *ngIf="txt_chk_10==1?true:false" class="btn btn_showRelataionship"
+                                            (click)="show_modal_relationship(2)"
+                                            style="margin-left: 10px;">Agregar otra persona</button>
+                                    </div>
+                                    <!--Table : Show family-->
+                                    <section id="sect-4" class="table-responsive" 
+                                    *ngIf="txt_chk_10==1">
+                                        <hr>
+                                        <table class="table table-hover">
+                                            <thead class="header-table">
+                                                <tr>
+                                                    <th>Nombre completo </th>
+                                                    <th>Parentesco</th>
+                                                    <th>Condiciones</th>
+                                                    <th>..</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let value of array_corona_relationship_value"
+                                                style="text-align: center;">
+                                                <td>{{value.name}}</td>
+                                                <td>{{value.id_relationship!=7?value.name_relationship:value.other_relationship}}
+                                                </td>
+                                                <td>
+                                                    <div class="form-inline">
+                                                        <p
+                                                            *ngIf="value.id_family_condition_1==1?true:false">
+                                                            Mayor a 60 años.</p>
+                                                        <p
+                                                            *ngIf="value.id_family_condition_1==1?true:false">
+                                                            ,</p>
+                                                        <p
+                                                            *ngIf="value.id_family_condition_2==1?true:false">
+                                                            Enfermedad crónica.</p>
+                                                        <p
+                                                            *ngIf="value.id_family_condition_2==1?true:false">
+                                                            ,</p>
+                                                        <p
+                                                            *ngIf="value.id_family_condition_3==1?true:false">
+                                                            Embarazo.</p>
+                                                        <p
+                                                            *ngIf="value.id_family_condition_3==1?true:false">
+                                                            ,</p>
+                                                        <p
+                                                            *ngIf="value.id_family_condition_4==1?true:false">
+                                                            Expuesto: Hospital, Policia , Militar.</p>
+                                                    </div>
+                                                </td>
+                                                <td><i class="flaticon-cancel remove-item"
+                                                        (click)="removeById(value.id)"></i></td>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <br>
+
+
+            <!-- <div class="row">
+                <div class="col-100">
+                    <div class="form-group">
+                        <label>Correo de contacto
+                            :</label>
+                        <input type="text" [(ngModel)]="txt_mail" [ngModelOptions]="{standalone: true}"
+                            class="form-control text-center" name="txt_telf_contact" placeholder="######@telefonica.com">
+    
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="row">
+                <div class="col-100">
+                    <div class="form-group">
+                        <label>Comentario:</label><br>
+                        <textarea [(ngModel)]="txt_coment" [ngModelOptions]="{standalone: true}" class="txt-area"
+                            matInput placeholder="Por ejemplo: Tengo sintomas como resfrio,fiebre, etc."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div *ngIf="false" class="col-100">
+                    <div class="form-group">
+                        <label>Documentos adjuntos
+
+                            :</label>
+                        <button class="btn btn-block btn-primary">
+                            Adjuntar documentos
+                        </button>
+                        <!-- <mat-select [disabled]="condition_Matselect" [(ngModel)]="txt_candidate_district"
+                                                                class="col-xs-4 form-control" [formControl]="myDistrict"
+                                                                (selectionChange)="district_name()" placeholder="Buscar..">
+                                                                <mat-option>
+                                                                    <ngx-mat-select-search [formControl]="searchDistrict">
+                                                                    </ngx-mat-select-search>
+                                                                </mat-option>
+                                
+                                                                <mat-option *ngFor="let option of filteredDistrict | async" [value]="option">
+                                                                    {{option}}
+                                                                </mat-option>
+                                                            </mat-select> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div *ngIf="false" class="col-100">
+                    <div class="form-group">
+                        <label>Fecha de Fin
+
+                            :</label>
+                        <div class="form-inline">
+                            <input class="text-center form-control col-xs-12 col-sm-10 col-md-10 col-lg-10"
+                                [matDatepicker]="picker2" [(ngModel)]="txt_end_date" name="fecha2"
+                                formControlName="date2" placeholder="YYYY-MM-DD">
+                            <mat-datepicker-toggle class="col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker" matSuffix
+                                [for]="picker2">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="txt_condition_status" class="row">
+                <div class="col-100">
+                    <div class="form-group">
+                        <label>Comentario:</label><br>
+                        <textarea [(ngModel)]="txt_coment" [ngModelOptions]="{standalone: true}" class="txt-area"
+                            matInput placeholder="Por ejemplo: Tengo sintomas como resfrio,fiebre, etc."></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="color: #954B97;padding: 5px;text-transform: uppercase;">
+                    Toda información que sea declarada y registrada a través de este portal web será empleada por la
+                    empresa con estricta reserva y dentro de las obligaciones de confidencialidad que impone la Ley de
+                    Protección de Datos Personales (Ley No. 29733), su reglamento y demás normas de desarrollo.
+                </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="txt_condition_general">
+                <div class="col-xs-12 col-sm-12 col-md-6 offset-md-3">
+                    <button class="btn btn-block btn-primary" (click)="save_post_validate()"
+                        style="background-color: #5BC500;color: #ffffff;">Enviar</button>
+                </div>
+            </div>
+            <div class="row" *ngIf="!txt_condition_general">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <button class="btn btn-block" (click)="save_post_validate()"
+                        style="background-color: #5BC500;color: #ffffff;">Enviar</button>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <button class="btn btn-block" (click)="onNoClick()"
+                        style="background-color: #954B97;color: #ffffff;">Salir</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</mat-card>
+

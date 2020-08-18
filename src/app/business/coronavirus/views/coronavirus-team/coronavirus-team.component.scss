@@ -1,0 +1,260 @@
+.prueba{
+
+    color: #5BC500;
+    padding: 5px;
+    margin: auto;
+}
+.cuerpo{
+    padding: 0 25px;
+}
+.loading{
+    padding: 30px;
+    text-align: center;
+}
+.data_info{
+    position: absolute;
+    right: 20px;
+    border-style: groove;
+    border:2px solid rgb(91, 197,0);
+    padding: 5px;
+    border-radius: 5px;
+}
+.data_info_smxs{
+    width: 100%;
+    border-style: groove;
+    border:2px solid rgb(91, 197,0);
+    padding: 5px;
+    border-radius: 5px;
+}
+.colors_scale{
+    position: absolute;
+    left: 20px;
+    border-style: groove;
+    overflow: hidden;
+    padding: 5px;
+    border-radius: 5px;
+    
+}
+.colors_scale_smxs{
+   
+    border-style: groove;
+    overflow: hidden;
+    padding: 5px;
+    border-radius: 5px;
+    
+}
+.btn_show_colors_scale{
+    background-color: #00a9e0;
+    color: white;
+}
+.pdcard{   
+    padding: 25px 30px !important;
+    height: 100%;
+    position: relative;
+}
+.label{
+    margin: 3px;
+}
+$radioSize: 22px;
+$radioBorder: #D1D7E3;
+$radioActive: #954B97;
+
+example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+.lista_votos{
+    text-align: left;
+    width: 80%;
+    margin: auto;
+}
+.example-radio-button {
+    margin: 5px;
+}
+.btn-guardar{
+    background-color: rgb(91, 197,0);
+    color: white;
+    transition: width 5ms;
+   justify-content: center;
+    
+}
+.btn-guardar:hover{
+    background-color: rgb(91, 197, 70);
+}
+.team_section{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    border: solid 2px #5BC500;
+    background-color: #eee;
+    border-radius: 5px;
+    border-style: groove;
+}
+.teamline{
+    margin: auto;
+    height: 20px;
+    width: 5px;
+    background-color: #00a9e0;
+}
+.bug{
+    position: absolute;
+    /* width: 20px; */
+    /* height: 20px; */
+    z-index: 2;
+    font-size: 30px;
+    top: -6px;
+    color: #dc3545;
+}
+.cont_candidate{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    background-color: #fff;
+    font-size: 12px;
+    border-bottom: solid 4px #00a9e0;
+    margin: 10px;
+    box-shadow: 0px 1px 4px 1px #00000038;
+    transition: ease-in-out 0.2s;
+}
+.cont_candidate:hover{
+    cursor: pointer;
+    transition: ease-in-out .2s;
+    background-color: #eee;
+
+}
+
+.down_level{
+    padding: 3px;
+    color: #fff;
+    text-align: center;
+    background-color: #5BC500;
+    transition: ease-in-out .2s;
+}
+.down_level:hover{
+    cursor: pointer;
+    background-color: #E9426D;
+}
+.cont_candidate_selected{
+    display: flex;
+    border-left: solid 5px #00a9e0;
+    margin: 7px 0;
+    padding: 5px 2px;
+    box-shadow: 2px 2px 4px 0px #0000007a;
+    transition: ease-in-out 0.3s;
+    background-color: #bbeaf9;
+    cursor: pointer;
+
+}
+
+.imgprofile{
+    position:absolute;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+    margin: auto;
+    height: 100%;
+    
+}
+.img_container{
+    border-radius: 40px;
+    width: 70px;
+    margin: auto;
+    overflow: hidden;
+    height: 70px;
+    position: relative;
+}
+.candidate_data{
+    flex: 1 1;
+    padding: 12px;
+}
+.cand_name{
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 13px
+}
+.cand_desc{
+    color: grey;
+    font-size: 11px;
+    line-height: 12px;
+}
+.cand_selectsec{
+    width: 40px;
+    display: flex;
+}
+.circle_out{
+    width: 35px;
+    height: 36px;
+    border-radius: 18px;
+    display: flex;
+    margin: auto;
+    transition: ease-in-out 0.2;
+}
+.circle{
+    width: 23px;
+    height: 23px;
+    margin: auto;
+    border-radius: 12px;
+    border: solid 2px #757575;
+    display: flex;
+}
+.circle_active{
+    width: 23px;
+    height: 23px;
+    margin: auto;
+    border-radius: 12px;
+    border: solid 2px #00a9e0;
+    display: flex;
+}
+.circle_in{
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    margin: auto;    
+    background-color: #00a9e0;
+}
+
+
+.container_coronavirus{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.title{
+   padding: 10px;
+}
+.btn-datepicker{
+    text-align: center;
+    background-color: rgb(233,234,232);
+    border-radius: 5px;
+    padding: 0px;
+    width: 100%; 
+    cursor: pointer;
+  }
+.txt-area{
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.container-form{
+    margin-left: 5%;
+    margin-right: 5%;
+    }
+    .font-style{
+        color: rgb(0,169,224);
+    
+    }
+    .cor_searchbutton{
+        
+        background-color: #00a9e0;
+        color: #fff;
+       
+    }
+    .cor_searchbutton:hover{
+        background-color: #0982aa ;
+    }

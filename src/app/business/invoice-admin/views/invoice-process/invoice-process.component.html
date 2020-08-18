@@ -1,0 +1,149 @@
+<div class="tp-home" >
+  <div *ngIf="espera" class="row">
+
+    <div class="col-100">
+      <mat-card>
+        <mat-card-title class="t-center">Bienvenido al Generador de Boletas Virtuales</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <div class="contenido user-data">
+            
+            <div class="col-50 primera-data" >
+              <p><span style="color: #00a9e0; font-weight: bold;">Usuario:</span> {{name}} {{lastname1}}  {{lastname2}}</p>
+              <p><span style="color: #00a9e0; font-weight: bold;">Departamento:</span> {{departamento}}</p>
+              <p><span style="color: #00a9e0; font-weight: bold;">CIP:</span> {{cip}}</p>
+            </div>
+            <div class="col-50 segunda-data" >
+              <p><span style="color: #00a9e0; font-weight: bold;">Categoria:</span> {{categoria}}</p>
+              <p><span style="color: #00a9e0; font-weight: bold;">Fecha de ingreso:</span> {{dia}}/{{mes}}/{{anio}}</p>
+              <p><span style="color: #00a9e0; font-weight: bold;">Dni:</span> {{nationaId}}</p>
+            </div>
+          </div>
+
+
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+
+  </div>
+
+  <div class="row por-2">
+
+    <div class="col-100">
+      <mat-card class="tp-card">
+        <mat-card-title class="ts-center">Seleccione su archivo Excel:</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <div class="contenido" style="width: 100%;">
+            <div class="container">
+              <div class="file-placeholder">
+                <label></label>
+                <input type="file"
+                  accept="  application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                  class="fileUpload" (change)="onFileSelected($event)">
+
+                <div class="file-browse">
+                  <span _ngcontent-xhu-c13="" class="file-browse-txt name-selecciona" > {{place}} </span>
+                  <span _ngcontent-xhu-c13="" class="file-browse-txt btn-selecciona" >Selecciona</span>
+                </div>
+              </div>
+              <span _ngcontent-xhu-c13="" (click)="onUpload()" class="browse btn-subir">Subir</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+
+  </div>
+
+  <div class="row por-2">
+     
+    <div class="col-100">
+      <mat-card class="tp-card">
+        <mat-card-title class="ts-center"> Proceso N° {{id}} </mat-card-title>
+         <mat-card-title class="ts-center">Estado: {{estatus}}</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <div class="contenido" style="width: 100%;">
+            
+            
+            <div class="separacion-cargas">
+              <div class="texto-progreso">
+                <p style="margin: 0; color: #00a9e0; font-weight: bold;">Subida del Excel:</p>
+              </div>
+              <div  class="progreso">
+                <div class="slimbar-container"> 
+                  <div class="centrado-estado">
+                    <mat-spinner *ngIf="isLoading" mode="indeterminate" strokeWidth="2" [diameter]="30"></mat-spinner>
+                  </div>
+                </div>
+                <div *ngIf="showMessage" [ngClass]=" flag ? 'primary' : 'secondary'" class="ajuste-total verde">
+                  <p><span style="color: #5bc500; font-weight: bold;">{{message}}</span> </p>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="separacion-cargas">
+              <div class="texto-progreso">
+                <p style="margin: 0; color: #00a9e0; font-weight: bold;">Creacion de la boleta en PDF:</p>
+              </div>
+              <div class="progreso">
+                <div class="slimbar-container"> 
+                  <div class="centrado-estado">
+                    <mat-spinner *ngIf="isLoading2" mode="indeterminate" strokeWidth="2" [diameter]="30"></mat-spinner>
+                  </div>
+                </div>
+                <div *ngIf="showMessage2" [ngClass]=" flag ? 'primary' : 'secondary'" class="ajuste-total verde">
+                <p><span style="color: #5bc500; font-weight: bold;">{{message2}}</span> </p>
+      
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="separacion-cargas">
+              <div class="texto-progreso">
+                <p style="margin: 0; color: #00a9e0; font-weight: bold;">Envio al Correo:</p>
+              </div>
+              <div class="progreso">
+                <div class="slimbar-container"> 
+                  <div class="centrado-estado">
+                    <mat-spinner *ngIf="isLoading3" mode="indeterminate" strokeWidth="2" [diameter]="30"></mat-spinner>
+                  </div>
+                </div>
+                <div *ngIf="showMessage3" [ngClass]=" flag ? 'primary' : 'secondary'" class="ajuste-total verde">
+                    <p><span style="color: #5bc500; font-weight: bold;">{{message3}}</span> </p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="separacion-cargas">
+              <div class="texto-progreso">
+                <p style="margin: 0; color: #00a9e0; font-weight: bold;">Subida al Azure:</p>
+              </div>
+              <div class="progreso">
+                <div class="slimbar-container"> 
+                  <div class="centrado-estado"> 
+                    <mat-spinner *ngIf="isLoading4" mode="indeterminate" strokeWidth="2" [diameter]="30"></mat-spinner>
+                  </div>
+                </div>
+                <div *ngIf="showMessage4" [ngClass]=" flag ? 'primary' : 'secondary'" class="ajuste-total verde">
+                     <p><span style="color: #5bc500; font-weight: bold;">{{message4}}</span> </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>
+</div>

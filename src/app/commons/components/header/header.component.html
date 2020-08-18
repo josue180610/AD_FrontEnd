@@ -1,0 +1,25 @@
+<div class="header-wrapper">
+  <div class="header-logo">
+    <a [routerLink]="['/']" style="margin: auto; display: flex;" ><img style="width: 120px;" src="../../../../assets/images/contigo_logo2.png"  ></a>
+    <span  (click)="menuToggle($event)" class="header-icon-m"><i class="fas fa-bars"></i></span>
+  </div>
+  <div class="header-content">
+    
+    <div class="header-menu">
+      <ul>
+        <li *ngFor="let item of currentMenu">
+          <a [routerLink]="[item.path]" [ngClass]="{'h-m-b-active': selectedMenu == item.path}" class="header-menu-button">{{item.name}}</a>
+        </li> 
+      </ul>
+    </div>
+    <div style="flex: 1;"></div>
+    <span  (click)="subToggle($event)" class="header-icon est no-est" style="padding-left: 0;justify-content: center;" ><i class="fas fa-ellipsis-v"></i></span>
+     <span class="header-user">
+      <div class="header-user-circle">
+        <i class="fas fa-user"></i>
+        {{ (name)? (name | slice:0:7)+'..':(name) }}
+      </div>
+    </span>
+    <span class="header-logout" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Salir  </span>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+@import "../../../../assets/styles/variables.scss";
+
+.menu-a-item{
+  width: 100%;
+  color: #fff;
+  height: 78px;
+  margin: 0;
+  padding: 0;
+  transition: 0.2s ease-in-out; 
+}
+.menu-a-item:hover{
+  background-color: $color-celeste-oscuro;
+  cursor: pointer;
+}
+.menu-a-item-active{
+  width: 100%;
+  color: #fff;
+  height: 78px;
+  margin: 0;
+  padding: 0;
+  transition: 0.2s ease-in-out; 
+  background-color: $color-celeste-oscuro-2 !important;
+}
+.menu-a-icon{
+  font-size: 24px;
+    margin-bottom: 3px;
+}
+.menu-wrapper ul{
+  padding: 0;
+  margin: 0;
+  
+}
+.menu-wrapper ul li{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.menu-wrapper ul li:last-child{
+  margin-bottom: 70px;
+}
+
+.menu-wrapper {
+  height: 100%;
+  width: 160px;
+  background-color: $color-celeste;
+  transition: all .4s ease-in;
+  z-index: 1000;
+  position: fixed;
+  overflow-y: scroll;
+}
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 30px;
+  background: -webkit-gradient(linear, right top,right bottom, from(#5cc500e1),to(#5bc500));
+  box-shadow: inset 2px 2px 2px rgba(255,255,255,0.25), inset -2px -2px -2px rgba(0,0,0,0.25);
+}
+::-webkit-scrollbar-track{
+  background: linear-gradient(to right, #1d1d1d23,#201c2917 1px, #100e1715 1pxrgba(16, 14, 23, 0.068)17);
+}
+a{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  margin-bottom: .25rem; 
+  justify-content: center;
+  text-decoration: none;
+   
+}
+@media(max-width:950px){
+  .menu-wrapper-desactivado{
+    transform: translateX(-160px) ;
+  }
+  .menu-wrapper-activado{
+    transform: translateX(0) ;
+  }
+ 
+}

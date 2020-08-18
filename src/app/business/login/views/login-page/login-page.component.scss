@@ -1,0 +1,49 @@
+.logo-row {
+  background: #00a9e0;
+
+  .image-logo {
+    background: url("/assets/images/contigo_logo.png") no-repeat;
+    height: 25px;
+  }
+}
+
+.body-row {
+  height: 35%;
+  border-radius: 0 0 80% 100%;
+  background: url(/assets/images/BG.jpeg);
+  background-repeat: repeat;
+  background-size: contain;
+  text-align: center;
+  background-position: center;
+  padding-top: 30px;
+}
+.img-contenedor{
+  height: 65%;
+}
+.bienvenido{
+  color: #fff;
+  font-size: 24px;
+  font-family: cursive;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+@media(max-width:600px){
+  .body-row {
+    height: 25%;
+    border-radius: 0 0 80% 80%;
+    background: url(/assets/images/BG.jpeg);
+    background-repeat: repeat;
+    background-size: contain;
+    text-align: center;
+    background-position: center;
+    padding-top: 17px;
+  }
+  .img-contenedor{
+    height: 50%;
+  }
+}
+@media(max-width:900px){
+  .img-contenedor{
+    height: 55%;
+  }
+}

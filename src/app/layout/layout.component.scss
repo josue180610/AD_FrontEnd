@@ -1,0 +1,280 @@
+.tdp-page-container{
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.tdp-body-container{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 60px;
+}
+.tdp-content-container{
+  flex: 1 1; 
+  padding: 20px;
+  padding-left: 180px;
+  background-color: #e9edf2;
+  min-height: calc(100vh - 60px);
+}
+// OLD:
+.logo-row {
+  background: #00a9e0;
+
+  .image-logo {
+    background: url("/assets/images/movistar-blanco.svg") no-repeat;
+    height: 25px;
+  }
+}
+.img-container{
+  height: 35px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.site-content{
+  flex-shrink: 1;
+  flex-grow: 1; 
+  position: relative;
+  overflow-y: auto!important;
+  height: 92vh;
+}
+.centrado-spd{
+  display: flex;
+  margin-left: 0!important;
+  margin-right: 0!important;
+  align-content: center;
+  justify-content: center;
+}
+footer{
+  flex-shrink: 0;
+  flex-grow: 0;
+  background: #5BC500;
+  padding: 3px 15px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+.new-posit{
+  position: fixed;
+  z-index: 9999;
+}
+.mve{
+  top: 0;
+  left: -20%;
+  transition: all 500ms linear;
+}
+.mveActive{
+  left: 0;
+  top:0;
+}
+.width-allActive{ 
+  position: fixed;
+  top: 0;
+  left: 15%;
+  width: 90%;
+  z-index: 9999; 
+}
+.center-contentActive{
+  padding-left: 19%;
+  padding-top: 7%;
+  transform: translateX(0%);
+}
+.center-content{
+  padding-left: 9%;
+  padding-right: 9%;
+  padding-top: 6%;
+  transform: translateX(0%);
+}
+.width-all{ 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999; 
+}
+.new-posit{ 
+  position:fixed;
+  width:100%;
+  z-index:3;
+}
+ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+  overflow:hidden;
+  width: 100%;
+  background-color:#00a9e0;
+}
+ul a{
+  display:block;
+  padding:20px;
+  text-decoration:none;
+  color: #ffffff;
+}
+ul a:hover{
+ color:#5BC500;  
+}
+.header-img{
+  float:left;
+  display:block;
+  padding:8px 20px;
+  width: 140px;
+}
+.menu{
+  clear:both;
+  max-height:0;
+  transition:max-height .2s ease-out;
+  text-align: right;
+  font-weight: bold;
+  position: absolute;
+  top: 67px;
+  right: 0;
+}
+.menu-icon{
+  padding: 28px 20px; 
+  float:right;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top:0;
+}
+.menu-icon .nav-icon{
+  background:#333;
+  display:block;
+  height:2px;
+  width:18px;
+  position:relative;
+  transition:background .2s ease-out;
+}
+.menu-icon .nav-icon:before{
+  background:#333;
+  content:"";
+  display:block;
+  height:100%;
+  width:100%;
+  position:absolute;
+  transition:all .2s ease-out;
+  top:5px;  
+
+}
+.menu-icon .nav-icon:after{
+  background:#333;
+  content:"";
+  display:block;
+  height:100%;
+  width:100%;
+  position:absolute;
+  transition:all .2s ease-out;
+  top:-5px;  
+
+}
+.menu-btn{
+  display:none;
+}
+.menu-btn:checked ~ .menu{
+  max-height:300px;
+}
+.menu-spacer {
+  flex: 1 1 auto;
+}
+.toggle-btn{
+  position: absolute;
+  left: 130%;
+  top: 20px;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+@media screen and (max-width: 650px) and (min-width: 100px){
+  .site-content{
+    height:94vh;
+  }
+  .center-content{
+    padding-top: 15%;
+  }
+
+  .tdp-content-container{
+    padding-left: 20px;
+    width: 100%;
+  }
+  .barra{
+    width: 210px!important;
+  }
+  .mve{
+    top: 0;
+    left: -58%!important;
+    transition: all 500ms linear;
+  }
+  .mveActive {
+    left: 0!important;
+    top: 0!important;
+  }
+
+  .toggle-btn{
+    position: absolute!important;
+    left: 365%!important;
+    top: 20px!important;
+    color: #ffffff!important;
+    font-size: 1.5rem!important;
+
+  }
+ 
+
+}
+@media screen and (max-width: 951px) and (min-width: 651px){
+  .site-content{
+    height: 95vh;
+  }
+  .barra{
+    width: 210px;
+  }
+  .mve{
+    position: absolute !important;
+    left: -28% !important;
+    top: 0!important;
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+  }
+  .mveActive{
+    left: 0!important;
+    top: 0!important;
+  }
+  .toggle-btn{
+    position: absolute !important;
+    left: 184% !important;
+    top: 20px !important;
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+  } 
+  .tdp-content-container{
+    padding-left: 20px;
+    width: 100%;
+  }
+
+
+}
+@media (min-width:48em){
+  ul
+  {
+    width: auto;
+  }
+
+  li{
+    float:right;
+  }
+  li a{
+    padding:23px 9px;
+  }
+  .menu{
+    clear:none;
+    float:left;
+    max-height:none;
+    top: 0;
+  }
+  .menu-icon{
+    display:none;
+  }
+
+}

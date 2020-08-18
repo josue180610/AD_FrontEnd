@@ -1,0 +1,155 @@
+<!-- <div class="tdp-container-fluid">
+  <div class="tdp-row tdp-py-4 ">
+    <div class="tdp-col-12 title-wrapper titular-sup">
+      <span class="tdp-font-hand-24">Boletas en Linea</span>
+    </div>
+  </div>
+  
+  <div class="tdp-row" style="margin-bottom:3rem;">
+    <div class="conten-first">
+      <div class="tdp-row wo-mtdp no-top">
+        <h2 class="m-aut">Bienvenido al sistema de boletas virtuales</h2>
+      </div>
+      <div class="tdp-row wo-mtdp">
+        <p class="m-aut">Ingrese los datos para la busqueda del colaborador:</p>
+      </div>
+      <div class="tdp-row wo-mtdp">
+        <div class="flex-container">
+          <div class="col-50">  
+            <input type="text" [(ngModel)]=searchString   placeholder="CIP, DNI/CEX o Nombres y apellidos" id="ip2"/> 
+          </div>   
+         
+          <div class="col-50 u-flex">
+            <div class="flex-container mid-space">
+              <div class="col-25 u-flex">
+                <button mat-raised-button style="background-color: #F59C00!important;color: white!important;" (click)="ngAfterViewInit()">Buscar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div> 
+ 
+  <div class="example-container  mat-elevation-z8">
+    <div class="responsive_table">
+      <table mat-table [dataSource]="data" matSort #matSort1="matSort" >
+        <ng-container matColumnDef="cip">
+          <mat-header-cell *matHeaderCellDef > CIP </mat-header-cell>
+          <mat-cell *matCellDef="let row" > {{row.cip}} </mat-cell> 
+        </ng-container>
+        
+        <ng-container matColumnDef="nationaId">
+          <mat-header-cell *matHeaderCellDef > DNi/CEX </mat-header-cell> 
+          <mat-cell *matCellDef="let row"  > {{row.nationaId}} </mat-cell>  
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef > Nombres y Apellidos </mat-header-cell>
+          <mat-cell *matCellDef="let row"  > {{row.name}} {{row.lastname1}} {{row.lastname2}} </mat-cell>   
+        </ng-container>
+        <ng-container matColumnDef="find">
+          <mat-header-cell *matHeaderCellDef > Ver </mat-header-cell> 
+          <mat-cell *matCellDef="let row"  > 
+            <i class="fa fa-search" (click)="showUser(row)" style="font-size: 20px;margin-right: 5px;color:rgb(0, 169, 224); cursor:pointer"></i> 
+          </mat-cell>   
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </table>
+    </div> 
+    <mat-paginator #paginator1 [pageSizeOptions]="[10]" [length]="resultsLength"> </mat-paginator> 
+  </div>
+ 
+  <div class="contenedor-tabla-bol" [ngClass]="[ oculto]"> 
+    <div class="tdp-row" style="padding-top: 2rem;">
+
+      <div class="colab-titulo d-space">
+        <div class="tdp-row wo-mtdp no-top">
+          <h3 class="m-aut">Boletas de haberes </h3>
+        </div>
+      </div>
+    
+      <div class="actions-date-invoice">
+        <div class="tdp-row wo-mtdp sp-busc" style="display: flex;align-self: center;margin-top: 0;" >
+          <p class="m-aut">Busqueda por fecha:</p>
+        </div>
+        <form class="date-block"   [formGroup]="filterForm">
+          <div class="first-date" style="background-color:#ffffff;">
+            <mat-form-field style="color: #000000;" >
+              <input matInput [matDatepicker]="fromDate" placeholder="Fecha inicio" formControlName="fromDate">
+              <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+              <mat-datepicker #fromDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="second-date" style="background-color: #ffffff;">
+            <mat-form-field style="color: #000000;" >
+              <input matInput [matDatepicker]="toDate" placeholder="Fecha fin" formControlName="toDate">
+              <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+              <mat-datepicker #toDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="send-button btn-centrad" style="display: flex; align-self: center;">
+            <button mat-button style="background-color: #5BC500; color:#ffffff"  class="primary" (click)="getDateRange(filterForm.value)">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>  
+    <div class="example-container  mat-elevation-z8" style="margin-top: 2rem;">
+      <div class="responsive_table"  >
+        <table mat-table [dataSource]="data2" matSort  #matSort2="matSort">  
+          <ng-container matColumnDef="select">
+            <th style="border-bottom: none;" mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td style="border-bottom: none;" mat-cell *matCellDef="let invo_row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(invo_row) : null"
+                            [checked]="selection.isSelected(invo_row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+              
+          <ng-container matColumnDef="type">
+            <mat-header-cell *matHeaderCellDef > Tipo </mat-header-cell> 
+            <mat-cell *matCellDef="let invo_row"  > {{invo_row.type}} </mat-cell>  
+          </ng-container> 
+              
+          <ng-container matColumnDef="emition">
+            <mat-header-cell *matHeaderCellDef > Emision</mat-header-cell>
+            <mat-cell *matCellDef="let invo_row"  > {{invo_row.datemition }} </mat-cell>   
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef > Acciones </mat-header-cell> 
+            <mat-cell *matCellDef="let invo_row"  > 
+              <div class="big-cont-icon"> 
+                <div class="cont-icon-1">
+                  <i class="fas fa-file-download" (click)="descargar()"></i>   
+                </div>
+                <div class="cont-icon-2"> 
+                  <i class="fas fa-eye" (click)="ver()"></i> 
+                </div>        
+              </div>          
+            </mat-cell>   
+          </ng-container>
+        
+          <mat-header-row *matHeaderRowDef="displayedColumnsInvo"></mat-header-row>
+          <mat-row *matRowDef="let invo_row; columns: displayedColumnsInvo;"></mat-row>
+        </table>
+      </div>
+      <mat-paginator #paginator2 [pageSizeOptions]="[10]" [length]="resultsLength2"></mat-paginator>
+    </div>
+    <div class="espacioB">
+      <div class="contB">
+        <button mat-raised-button  (click)="descargarSeleccionados()">Descargar Seleccionados</button>
+      </div>
+      <div class="contB" >
+        <button mat-raised-button style="background-color: rgb(0, 169, 224)!important;color: white!important;" (click)="descargarTodos()">Descargar Todos</button>
+      </div>
+    </div>        
+  </div>
+  
+</div> -->

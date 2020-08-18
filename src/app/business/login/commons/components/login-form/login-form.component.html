@@ -1,0 +1,18 @@
+
+
+<div class="login-form-container" [formGroup]="loginFormReactive.loginForm">
+  <div class="login-form-label">Correo electrónico</div>
+  <tdp-st-input-text styleinput="outline" label="Email" formControlName="email" (keydown.enter)="login()"
+  [errors]="loginFormReactive.email.errors | getErrorMap: loginEmailErrors: loginFormReactive.email.dirty || showError">
+  </tdp-st-input-text>
+  <div class="login-form-label">Contraseña</div>
+  <tdp-st-input-text styleinput="outline" type="password" label="Contraseña" formControlName="password"
+  (keydown.enter)="login()"
+  [errors]="loginFormReactive.password.errors | getErrorMap: loginPasswordErrors: loginFormReactive.password.dirty || showError">
+  </tdp-st-input-text>
+  <div class="login-form-label"></div>
+  <tdp-st-button label="Ingresar" stylebutton='raised' (tdpOnClick)="login()"></tdp-st-button>
+  <div class="error-login">{{loginError}}</div>
+</div>
+
+ 

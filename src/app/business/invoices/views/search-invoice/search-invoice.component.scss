@@ -1,0 +1,273 @@
+.flex-container {
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+h2,
+p {
+    font-family: cursive;
+}
+
+.titular-sup {
+    background-color: white;
+    border-radius: 10px;
+    color: #00a9e0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    padding: 10px; 
+}
+
+*:focus {
+    outline: none;
+}
+
+#ip2 {
+    border-radius: 25px;
+    border: 2px solid white;
+    padding: 20px;
+    width: 100%;
+    height: 15px;
+}
+
+.mat-form-field-underline {
+    background-color: green;
+}
+
+.mat-form-field-empty.mat-form-field-label {
+    color: green;
+}
+
+.col-50 {
+    width: 50%;
+}
+
+.col-25 {
+    width: 25%;
+}
+
+.m-aut {
+    margin: 0 0; 
+}
+
+.u-flex {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.boton {
+    width: 100% !important;
+}
+
+.mid-space {
+    justify-content: space-evenly !important;
+}
+
+.wo-mtdp {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 14px;
+}
+
+.conten-first {
+    width: 100%;
+    background-color: #5BC500;
+    padding: 25px 30px;
+    border-radius: 20px;
+    color: #ffffff;
+}
+
+.no-top {
+    margin-top: 0;
+
+}
+
+//table
+table {
+    line-height: 90%;
+    width: 100%;
+}
+
+thead th {
+    background-color: #5BC500;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+    color: white;
+    font-size: 1.3rem;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+ 
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
+}
+
+.mat-header-cell,
+.mat-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.espacioB {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 20px;
+}
+
+.d-space {
+    width: 97%;
+    margin: 0 auto;
+
+}
+
+.no-top {
+    margin-top: 0;
+
+}
+
+.colab-titulo {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background-color: #5BC500;
+    color: white;
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 20px;
+}
+
+.actions-date-invoice {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    background-color: #954B97;
+    color: white;
+    width: 100%;
+    padding: 15px 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.big-cont-icon {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.big-cont-icon i {
+    font-size: 18px;
+}
+
+.cont-icon-1 {
+    color: rgb(245, 156, 0);
+}
+
+.cont-icon-2 {
+    color: #954B97;
+}
+
+.active {
+    opacity: 1;
+}
+
+.no-active {
+    position: relative;
+    opacity: 0;
+}
+.date-block{
+    display: flex;
+    width: 76%;
+    justify-content: space-between;
+}
+@media (max-width:600px) {
+    .u-flex {
+        margin-top: 10px;
+    }
+
+    .col-50 {
+        width: 100%;
+    }
+
+    .responsive_table {
+        overflow-x: auto !important;
+    }
+
+    .mat-table {
+        min-width: 550px;
+    }
+    .espacioB{
+        flex-wrap: wrap;
+    }
+    .contB{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .contB button{
+        width: 100%;
+    } 
+    .sp-busc{
+        text-align: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    .date-bock{
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .first-date{
+        align-items: center;
+        align-self: center;
+        justify-content: center;
+        justify-items: center;
+        justify-self: center;
+        width: 100%;
+        margin-bottom: 10px; 
+    }
+    .date-block{
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .second-date{
+        align-items: center;
+        align-self: center;
+        justify-content: center;
+        justify-items: center;
+        justify-self: center;
+        width: 100%;
+        margin-bottom: 10px; 
+    }
+    .send-button{
+        width: 100%;
+    }
+    .send-button button{
+        width: 100%;
+    }
+}
+@media (max-width:960px){
+    .date-block{
+        width: 100%;
+    }
+    .sp-busc{
+        margin-bottom:10px;
+    }
+}

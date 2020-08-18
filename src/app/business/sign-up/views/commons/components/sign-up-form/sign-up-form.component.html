@@ -1,0 +1,53 @@
+<div class="tdp-container-fluid">
+  <div class="tdp-row" [formGroup]="signUpFormReactive.signUpForm">
+    <div class="tdp-col-12 tdp-mb-3">
+      <tdp-st-input-text
+        formControlName="name"
+        [errors]="signUpFormReactive.name.errors | getErrorMap: signUpNameError: signUpFormReactive.name.dirty || showError"
+        label="Nombre">
+      </tdp-st-input-text>
+    </div>
+    <div class="tdp-col-12 tdp-mb-3">
+      <tdp-st-input-text
+        formControlName="lastName"
+        [errors]="signUpFormReactive.lastName.errors | getErrorMap: signUpLastNameError: signUpFormReactive.lastName.dirty || showError"
+        label="Apellido">
+      </tdp-st-input-text>
+    </div>
+    <div class="tdp-col-12 tdp-mb-3">
+      <tdp-st-input-text
+        formControlName="email"
+        [errors]="signUpFormReactive.email.errors | getErrorMap: signUpEmailError: signUpFormReactive.email.dirty || showError"
+        label="Email">
+      </tdp-st-input-text>
+    </div>
+    <div class="tdp-col-12 tdp-mb-3">
+      <tdp-st-select
+        type="outline"
+        formControlName="documentType"
+        label="Tipo de Documento"
+        [listitems]="listDocuments"
+        [errors]="signUpFormReactive.documentType.errors | getErrorMap: signUpDocumentTypeError: signUpFormReactive.documentType.dirty || showError">
+      </tdp-st-select>
+    </div>
+    <div class="tdp-col-12 tdp-mb-3">
+      <tdp-st-input-text
+        formControlName="numberDocument"
+        [errors]="signUpFormReactive.numberDocument.errors | getErrorMap: signUpNumberDocumentError: signUpFormReactive.numberDocument.dirty || showError"
+        label="Número de Documento">
+      </tdp-st-input-text>
+    </div>
+    <div class="tdp-col-12 tdp-mb-3">
+      <label class="tdp-font-regular-14 tdp-mr-3">Estado de Usuario</label>
+      <tdp-st-switch
+        formControlName="statusUser">
+      </tdp-st-switch>
+    </div>
+    <div class="tdp-col-4">
+      <tdp-st-button label="Registrar" (tdpOnClick)="signUp()"></tdp-st-button>
+    </div>
+    <div class="tdp-col-4">
+      <tdp-st-button label="Limpiar" color="danger" (tdpOnClick)="signUpFormReactive.clearForm()"></tdp-st-button>
+    </div>
+  </div>
+</div>

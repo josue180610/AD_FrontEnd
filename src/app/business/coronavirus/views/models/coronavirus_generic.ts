@@ -1,0 +1,33 @@
+export class Coronavirus{
+    status:boolean;
+    array:{
+        id:number;
+        name:string;
+        detail:string;
+    };
+    array_r:{
+        id:number;
+        name:string;
+        detail:string;
+    };
+    array_t:{
+        id:number;
+        name:string;
+        detail:string;
+    };
+    array_c:{
+        id:number;
+        name:string;
+        detail:string;
+    };
+    array_relationship:{
+        id:number;
+        name:string;
+     
+    };
+    array_tp:{
+        id:any;
+        name:any;
+        icons:any;
+    }
+}

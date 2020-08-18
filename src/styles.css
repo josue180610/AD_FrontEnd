@@ -1,0 +1,21 @@
+@import url(d:\intento\front\node_modules\@angular\material\prebuilt-themes\deeppurple-amber.css);
+.error-text {
+  color: #b00020;
+}
+
+.site {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.site {
+  overflow-y: hidden;
+}
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,11 @@
+<div class="menu-wrapper stado" [ngClass]="oculto ? 'menu-wrapper-activado':'menu-wrapper-desactivado'">
+  <div class="for-scroll">   
+      <ul>
+        <li *ngFor="let item of currentMenu">
+          <a [routerLink]="[item.path]" 
+             [ngClass]="{'h-m-b-active': selectedMenu == item.path}" 
+            class="header-menu-button">{{item.name}}</a>
+        </li> 
+      </ul>
+  </div>
+</div>

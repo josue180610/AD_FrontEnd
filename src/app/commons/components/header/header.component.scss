@@ -1,0 +1,127 @@
+@import "../../../../assets/styles/variables.scss";
+
+.header-wrapper{
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    font-size: 20px;
+    box-shadow: 0 5px 5px -5px rgba(0,0,0,.4);
+    height: 60px;
+    line-height: 60px;
+}
+.header-logo{
+    width: 190px;
+    padding: 0 10px;
+    border-radius: 0 30px 30px 0;
+    display: flex;
+    align-items: center;
+    background-color: $color-verde;
+    text-align: center;
+    color: #fff;
+}
+.header-content{
+    display: flex;
+    color: #50535A;
+    flex: 1 1;
+    padding: 10px;
+    align-items: center;
+}
+
+.header-icon, .header-icon-m{
+    font-size: 16px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    transition: ease 0.2s;
+}
+.header-icon:hover{
+    cursor: pointer;
+    background-color: $color-base-1;
+}
+.header-icon-m:hover{
+    cursor: pointer;
+    background-color: #fff;
+    color: $color-verde;
+}
+.header-menu{
+    font-size: .9rem;
+}
+.header-logout{
+    font-size: .9rem;
+    margin: 0 5px;
+    color: $color-rojo;
+    cursor: pointer;
+}
+.header-user{
+    font-size: .9rem;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently*/
+}
+.header-user-circle{
+    background-color: $color-base-1;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    height: 40px;
+    border-radius: 20px;
+}
+.header-user-circle i{
+    margin: 5px;
+    font-size: 16px;
+}
+.header-menu-button{
+    padding: 10px;
+    margin: 0 5px;
+    font-weight: 700;
+    color: $color-gris;
+    text-decoration: none;
+    transition: ease 0.2s;
+}
+.header-menu-button:hover{
+    background-color: $color-base-1;
+    cursor: pointer;
+}
+.h-m-b-active{
+    color: $color-celeste;
+    font-weight: 700;
+    border-bottom: solid 3px $color-celeste;
+}
+.header-menu ul{
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+.header-menu ul li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.no-est{
+    display: none;
+}
+@media (max-width:950px){
+    .header-menu{
+        display: none;
+    }
+    .header-logout {
+        font-size: 0px;
+        display: flex;
+        align-items: center;
+    }
+    .header-logout  i{
+        font-size: .9rem;
+    }
+    .est{
+        display: flex!important;
+    }
+}

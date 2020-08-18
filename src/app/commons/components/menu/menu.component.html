@@ -1,0 +1,12 @@
+<div class="menu-wrapper" [ngClass]="hidden ? 'menu-wrapper-activado':'menu-wrapper-desactivado'" id="barra">
+  <div> 
+      <ul>
+      <li *ngFor="let item of moduleList">
+        <a [routerLink]="[item.views[0].path]" [ngClass]="{'menu-a-item-active': activePath==item.path, 'menu-a-item': activePath!=item.path}">
+          <div class="menu-a-icon"><i class="fas fa-bars"></i></div>  
+          <div>{{item.name}}</div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
