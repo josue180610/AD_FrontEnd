@@ -12,13 +12,19 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { FormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select'; 
 import {MatFormFieldModule} from '@angular/material/form-field'; 
+import { CoronavirusTeamComponent } from './views/coronavirus-team/coronavirus-team.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 @NgModule({
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
   ],
   providers: [DatePipe],
-  declarations: [CoronavirusAdminComponent,CoronavirusCheckingComponent,CoronavirusFormComponent],
+  declarations: [CoronavirusAdminComponent,CoronavirusCheckingComponent,CoronavirusFormComponent,CoronavirusTeamComponent],
   imports: [
+    MatPaginatorModule,
+    MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
     FormsModule,
@@ -39,6 +45,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
       {
         path:"coronaChecking",
         component:CoronavirusCheckingComponent
+      },
+      {
+        path:"coronaTeam",
+        component:CoronavirusTeamComponent
       }
     ])
   ]

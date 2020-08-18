@@ -11,15 +11,19 @@
 .menu-a-item:hover{
   background-color: $color-celeste-oscuro;
   cursor: pointer;
+  border-radius: 15px;
+  font-size: 15px;
 }
 .menu-a-item-active{
   width: 100%;
-  color: #fff;
-  height: 78px;
-  margin: 0;
-  padding: 0;
+  color: #ffffff;
+  height: auto;
+  margin: 0px;
+  padding: 0px;
   transition: 0.2s ease-in-out; 
   background-color: $color-celeste-oscuro-2 !important;
+  border-radius: 10px;
+  font-size: 15px;
 }
 .menu-a-icon{
   font-size: 24px;
@@ -36,12 +40,14 @@
   margin: 0;
 }
 .menu-wrapper ul li:last-child{
-  margin-bottom: 70px;
+  margin-bottom:10px;
+  margin-left: 10px;
+  margin-top:10px;
 }
 
 .menu-wrapper {
   height: 100%;
-  width: 160px;
+  width: auto;
   background-color: $color-celeste;
   transition: all .4s ease-in;
   z-index: 1000;
