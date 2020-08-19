@@ -5,7 +5,7 @@ const MAIN_URL_MAILING_PROD = "https://rhdigitalbackprod.azurewebsites.net";
 const MAIN_URL_QAS = "https://rhdigitalback-dev.azurewebsites.net";
 const MAIN_URL_MAILING_QAS = "https://rhdigitalback-dev.azurewebsites.net";
 //AMBIENTE LOCAL
-const MAIN_URL_LOCAL = "http://localhost:8080";
+const MAIN_URL_LOCAL = "http://192.168.43.180:8080";
 const MAIN_URL_MAILING_LOCAL = "http://localhost:5000";
 const MAIN_URL_LOCAL_PYTHON="http://localhost:5000";
 //==============================================================================================
