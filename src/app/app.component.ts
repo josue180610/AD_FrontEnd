@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private loadRouterSubscription() {
     this.routerSubscriptionRef = this.router.events.subscribe((event) => {
       if (event instanceof RouteConfigLoadStart) {
-        this.loaderService.showLoader();
+        this.loaderService.showLoader("Cargando..");
       } else if (event instanceof RouteConfigLoadEnd) {
         this.loaderService.closeLoader();
       }

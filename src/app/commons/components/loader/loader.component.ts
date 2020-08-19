@@ -11,7 +11,7 @@ export class LoaderComponent implements OnInit, OnDestroy {
   private loaderSubscriptionRef = new Subscription();
 
   showLoader = false;
-
+  message:any="";
   constructor(
     private loaderSubjectService: LoaderSubjectService,
   ) {}
@@ -26,7 +26,12 @@ export class LoaderComponent implements OnInit, OnDestroy {
 
   private loaderSubscription() {
     this.loaderSubscriptionRef = this.loaderSubjectService.loader$.subscribe((state) => {
-      this.showLoader = state;
+      console.log(state)
+      this.showLoader = state["condition"];
+      if (this.showLoader==true){
+        this.message=state["message"]
+      }
+      
     });
   }
 }

@@ -6,17 +6,18 @@ const MAIN_URL_QAS = "https://rhdigitalback-dev.azurewebsites.net";
 const MAIN_URL_MAILING_QAS = "https://rhdigitalback-dev.azurewebsites.net";
 //AMBIENTE LOCAL
 const MAIN_URL_LOCAL = "http://localhost:8080";
-const MAIN_URL_MAILING_LOCAL = "http://localhost:8080";
+const MAIN_URL_MAILING_LOCAL = "http://localhost:5000";
+const MAIN_URL_LOCAL_PYTHON="http://localhost:5000";
 //==============================================================================================
 //GENERAL URL AQUI CAMBIAR
 
-const MAIN_URL = MAIN_URL_LOCAL;
+const MAIN_URL = MAIN_URL_LOCAL_PYTHON;
 
 //SESSION
-export const URL_POST_SESSION=MAIN_URL+"/login";
+export const URL_POST_SESSION=MAIN_URL_LOCAL+"/login";
 
 //INVOICE
-export const URL_PROCESS_EXCEL=MAIN_URL+"/invoiceservice/v1/invoice/";
+export const URL_PROCESS_EXCEL=MAIN_URL_LOCAL+"/invoiceservice/v1/invoice/";
 
 //==============================================================================================
 //POR AHORA SIEMPRE ES IGUAL

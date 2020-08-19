@@ -8,12 +8,15 @@ export class LoaderSubjectService {
   private loaderSubject = new BehaviorSubject(false);
   loader$ = this.loaderSubject.asObservable();
 
-  showLoader() {
+  showLoader(text:any) {
     if (this.loaderSubject.getValue()) {
-      return;
+      return ;
     }
-
-    this.loaderSubject.next(true);
+    let json={
+      "condition":true,
+      "message":text
+    }
+    this.loaderSubject.next(json);
   }
 
   closeLoader() {

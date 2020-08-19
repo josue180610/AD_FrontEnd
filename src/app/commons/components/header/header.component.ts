@@ -4,7 +4,8 @@ import { ModuleConfigService } from 'src/app/services/module-config.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HijoscomunicacionService } from '../../../services/hijoscomunicacion.service';
 import { URL_PROCESS_EXCEL } from '../../../../app/services/url.constants';
- 
+import { LoaderSubjectService } from '../../../../app/commons/components/loader/loader-subject.service';
+
 export interface Menu {
 	title: String;
 	path: String;
@@ -20,7 +21,9 @@ export class HeaderComponent implements OnInit {
   currentMenu:Array<Menu>;
   selectedMenu:String;
  
-  constructor(private router: Router ,private service: HijoscomunicacionService ,private httpClient: HttpClient, private http: HttpClient, private moduleConfig:ModuleConfigService) {
+  constructor(private router: Router ,private service: HijoscomunicacionService 
+    ,private httpClient: HttpClient, private http: HttpClient, private moduleConfig:ModuleConfigService,
+    private loaderSubjectService: LoaderSubjectService) {
     router.events.subscribe((event) => (event instanceof NavigationEnd) && this.handleRouteChange())    
    }
 
@@ -43,10 +46,14 @@ export class HeaderComponent implements OnInit {
    
   //destruye el local storage
   logout() {
+    this.loaderSubjectService.showLoader("Saliendo del sistema..");
     localStorage.removeItem('modules');
     localStorage.removeItem('auth');
-    localStorage.removeItem('user'); 
-    this.router.navigateByUrl('/login');
+    localStorage.removeItem('user');
+    setTimeout(() => {
+      this.loaderSubjectService.closeLoader(); 
+      this.router.navigateByUrl('/login');
+    }, 2000);
   };
 
   email;
