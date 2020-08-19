@@ -1,0 +1,149 @@
+<h4 class="modalheader">{{titleForm}}
+  <span style="flex: 1 1 auto"></span>
+  <span (click)="closeModal()" class="modalclosebutton"> <i class="flaticon2-cancel-music"></i> </span>
+</h4>
+<div class="newuser-container">
+  <div id="form_01" style="width: 100%;transition: 0.3s;" *ngIf="!form_condition && action_form=='S'">
+      <div class="row"  *ngIf="action_form=='S'">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <img src="../../../../../../assets/media/formSections/one.png" class="img rounded mx-auto d-block">
+          </div>
+      </div>
+      <mat-divider></mat-divider>
+      <section style="padding-top:10px ;padding-bottom: 5px;">
+          <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-8 offset-md-2">
+                      <mat-form-field appearance="fill"  style="width: 100%;">
+                          <mat-label class="text-center">DNI o Nro de documento</mat-label>
+                          <input [(ngModel)]="supplier.nationalId" class="text-center"  matInput placeholder="DNI o Nro de documento*">
+                      </mat-form-field>
+              </div>
+          </div>
+          <div class="row">
+              <div  class="col-xs-12 col-sm-12 col-md-12">
+                  <button mat-raised-button (click)="nextForm()" class="flaticon2-next  btn_movistarceleste"> Siguiente</button> 
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-12 col-lg-12" *ngIf="show_message_condition">
+                  <p style="margin-top: 5px;padding: 5px;color: #ffffff;background-color: #5bc500;border-radius: 5px;">{{message_condition}}</p>
+              </div>
+          </div>
+      </section>
+  </div>
+  <div id="form_02" style="width: 100%;transition: 0.3s;" *ngIf="(form_condition && action_form=='S') || action_form=='E'">
+      <div class="row" *ngIf="action_form=='S'">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <img src="../../../../../../assets/media/formSections/two.png" class="img rounded mx-auto d-block">
+          </div>
+      </div>
+      <mat-divider></mat-divider>
+      <section style="padding-top:10px ;padding-bottom: 5px;">
+          <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 ">
+                      <mat-form-field appearance="fill" style="width: 100%;">
+                          <mat-label class="text-center">DNI o Nro de documento</mat-label>
+                          <input [(ngModel)]="supplier.nationalId" [disabled]="disabled_condition || action_form=='E'" class="text-center" matInput placeholder="DNI o Nro de documento*">
+                      </mat-form-field>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 " *ngIf="!edit">
+                  <mat-form-field  appearance="fill" style="width: 100%;">
+                      <mat-label class="text-center">Seleccionar servicio</mat-label>
+                      <mat-select [(ngModel)]="id_service" [disabled]="condition_service">
+                        <mat-option *ngFor="let value of suppliersCompanyService" [value]="value.id">
+                          {{value.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+          </div>
+          </div>
+          <div class="row" >
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                  <mat-form-field style="width: 100%;" appearance="fill">
+                      <mat-label class="text-center">Nombres</mat-label>
+                      <input [(ngModel)]="supplier.name" [disabled]="disabled_condition" matInput placeholder="Nombres*">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6">
+                  <mat-form-field style="width: 100%;" appearance="fill">
+                      <mat-label class="text-center">Apellido paterno</mat-label>
+                      <input [(ngModel)]="supplier.lastName1" [disabled]="disabled_condition" matInput placeholder="Apellido paterno*">
+                  </mat-form-field>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6">
+                  <mat-form-field style="width: 100%;" appearance="fill">
+                      <mat-label class="text-center">Apellido materno</mat-label>
+                      <input [(ngModel)]="supplier.lastName2" [disabled]="disabled_condition" matInput placeholder="Apellido materno*">
+                  </mat-form-field>
+              </div>
+          </div>
+          
+          <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6">
+              <mat-form-field  style="width: 100%;" appearance="fill">
+                  <mat-label class="text-center">Correo</mat-label>
+                  <input [(ngModel)]="supplier.mail" [disabled]="disabled_condition" matInput placeholder="Correo*">
+              </mat-form-field>
+              </div>
+          
+      
+              <div class="col-xs-12 col-sm-12 col-md-6">
+                  <mat-form-field  style="width: 100%;" appearance="fill">
+                      <mat-label class="text-center">Código de empleado (Propia empresa)</mat-label>
+                      <input [(ngModel)]="supplier.codeCompany" [disabled]="disabled_condition"  matInput placeholder="Código de empleado (Propia empresa)">
+                  </mat-form-field>
+              </div>   
+          </div>
+          <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6">
+                  <mat-form-field  style="width: 100%;" appearance="fill">
+                      <mat-label class="text-center">Fecha de Nacimiento</mat-label>
+                      <input [(ngModel)]="supplier.birthdate" [disabled]="disabled_condition" type="date" matInput placeholder="Nacimiento">
+                  </mat-form-field>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6">
+                  <mat-form-field  style="width: 100%;" appearance="fill">
+                      <mat-label class="text-center">Seleccionar Género</mat-label>
+                      <mat-select [(ngModel)]="supplier.gender" [disabled]="disabled_condition" placeholder="Género">
+                          <mat-option value="F">Femenino</mat-option>
+                          <mat-option value="M">Masculino</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </div>
+          </div>
+      
+          <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12" >
+                  <mat-form-field style="width: 100%;" appearance="fill">
+                      <mat-label>Actividad o puesto</mat-label>
+                      <input [(ngModel)]="supplier.activity" [disabled]="disabled_condition" matInput placeholder="Actividad o puesto">
+                  </mat-form-field>
+              </div>
+          </div>
+      </section>
+      <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-4" *ngIf="action_form=='S'">
+              <button mat-raised-button (click)="previousForm()" class="flaticon2-back btn_back"> Volver</button> 
+          </div>  
+          <div class="col-xs-12 col-sm-12 col-md-4" *ngIf="action_form=='S'">
+              <button mat-raised-button (click)="addSupplier()" class="flaticon2-accept btn_movistarceleste"> {{submitText}}</button> 
+          </div> 
+         
+      </div>  
+      <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 offset-md-3" *ngIf="action_form=='E'">
+              <button mat-raised-button (click)="addSupplier()" class="flaticon2-accept btn_movistarceleste"> {{submitText}}</button> 
+          </div> 
+      </div>
+      
+  </div>
+
+  <!-- <div class="col-md-12">
+      <button mat-raised-button (click)="addSupplier()" class="btn_movistarceleste">+ Crear usuario</button> 
+  </div>    
+  <div *ngIf="disabled_condition" class="col-md-12">
+      <button mat-raised-button (click)="resetForm()" class="btn_movistarceleste">+ Limpiar formulario</button> 
+  </div> -->
+</div>

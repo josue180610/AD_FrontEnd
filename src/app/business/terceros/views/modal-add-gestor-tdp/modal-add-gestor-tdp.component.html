@@ -1,0 +1,77 @@
+<div style="width: 95%;margin-left: auto;margin-right: auto;">
+  <section id="header-main-title" style="width: 100%;margin-bottom: 5px;">
+      <p class="text-center main-title">Buscar nuevo gestor tdp    <i class="flaticon-close " (click)="onClose()" style="float: right;cursor: pointer;color: #ffffff;margin-right: 2px;font-size: 15px;"></i></p>
+      <mat-divider></mat-divider>
+      <img src="../../../../../../assets/media/formSections/office-worker.png" class="img rounded mx-auto d-block" style="margin-top: 5px;">
+  </section>
+  <mat-divider></mat-divider>
+  
+      
+      <section [hidden]="(lstEmployee.length>0)" id="details_function">
+          <div style="width: 100%;margin-left: auto;margin-right: auto;">
+              <p style="text-align: center;font-size: 15px;color: #00a9e0;margin-top: 5px;">¿Cómo funciona este panel?</p>
+              <p class="show-description">Esta opción te permitirá seleccionar un colaborador Telefónica para la gestión del servicio seleccionado.</p>
+              
+          </div>
+      </section>
+      <section id="search-employee">
+          <p style="display: block;background-color: #00a9e0;color: #ffffff;padding: 5px;">Búsqueda de colaboradores para el servicio : <b>{{serviceName}}</b></p>
+          <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                  <div class="input-group">
+                      <input class="col-sm-10"  [(ngModel)]="byemployeeinp" placeholder="Ingrese el Cip, Dni o Nombre del colaborador">
+                      <i class="flaticon-search search-employee"  (click)="searchByEmployee()"></i>
+          
+                  </div>
+              </div>
+             
+          </div>
+          
+      </section>
+      <tbody [hidden]="!(lstEmployee.length>0)">
+          <div style="overflow: auto;" >
+              <table class="terceros-table table-bordered" style="margin-left: auto;margin-right: auto;" mat-table  [dataSource]="dataSource">
+  
+                  <ng-container matColumnDef="CIP">
+                      <th mat-header-cell *matHeaderCellDef> CIP </th>
+                      <td mat-cell *matCellDef="let element"> {{element.cip}} </td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="DOC">
+                      <th mat-header-cell *matHeaderCellDef> DNI </th>
+                      <td mat-cell *matCellDef="let element"> {{element.national_id}} </td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="NAME">
+                      <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="LASTNAME1">
+                      <th mat-header-cell *matHeaderCellDef> APE.PATERNO </th>
+                      <td mat-cell *matCellDef="let element"> {{element.last_name_1}} </td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="LASTNAME2">
+                      <th mat-header-cell *matHeaderCellDef> APE.MATERNO </th>
+                      <td mat-cell *matCellDef="let element"> {{element.last_name_2}} </td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="ACTION">
+                      <th mat-header-cell *matHeaderCellDef> ... </th>
+                      <td mat-cell *matCellDef="let element">
+                          <button  (click)="asignManagerTdp(element)"
+                          class="add-gestor">Seleccionar</button>    
+                      </td>
+                  </ng-container>
+  
+                  
+  
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+              
+          </div>
+      </tbody>
+  </div>

@@ -39,6 +39,10 @@ import { AuthGuard } from './commons/guards/auth.guard';
       {
         path:"coronavirus",
         loadChildren:'./business/coronavirus/coronavirus.module#CoronavirusModule'
+      },
+      {
+        path:'terceros',
+        loadChildren:'./business/terceros/terceros.module#TercerosModule'
       }
  
     ]

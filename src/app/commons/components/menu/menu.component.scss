@@ -12,7 +12,7 @@
   background-color: $color-celeste-oscuro;
   cursor: pointer;
   border-radius: 15px;
-  font-size: 15px;
+  
 }
 .menu-a-item-active{
   width: 100%;
@@ -38,7 +38,7 @@
   padding: 0;
   margin: 0;
 }
-.menu-wrapper ul li:last-child{
+.menu-wrapper ul li{
   margin-bottom:10px;
   margin-left: 10px;
   margin-top:10px;

@@ -1,0 +1,241 @@
+<!-- <div class="titlecomp">
+	<div style="display: flex;">
+		<div>
+			<h3 style="color: #00a9e0;">Panel de administración </h3>
+			<p>Administra a tu equipo</p>
+		</div>
+	</div>
+    <hr>
+</div>
+
+<div *ngIf="!loading && deshabilitados.length > 0" class="cardtdp">
+    <div class="cardtdp-header" style="background-color: #de5151;"> ACCIONES REQUERIDAS | {{company.companyName  + " - " +  company.name}}</div>  
+    <div class="cardtdp-content">
+        <div style="overflow: auto;">
+            <table class="terceros-table">
+                <thead>
+                    <tr>
+                        <th>DNI</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Código</th>
+                        <th>Estado</th>
+                        <th>Detalle</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let sup of deshabilitados">
+                        <td><b>{{sup.nationalId}}</b></td>
+                        <td>{{sup.name + ' ' + sup.lastName1}}</td>
+                        <td>{{sup.mail}}</td>
+                        <td>{{sup.codeCompany}}</td>
+                        <td><b>{{getCoronaStatus(sup.coronaStatus)}}</b></td>        
+                        <td>{{sup.statusDetail}}</td>                 
+                        <td><b> {{sup.updatedAt | date:'dd/MM/yyyy'}} </b></td>
+                        <td>
+                            <button (click)="habilitar(sup)" class="link-edit">Habilitar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div [hidden]="loading" class="cardtdp">
+    <div class="cardtdp-header"> Lista de empleados</div>  
+    <div class="cardtdp-content">
+        <div class="panel-row">
+            <div>
+                <img style="background-color: #5bc500; width: 50px; border-radius: 25px;" src="../../../../../../assets_client/media/logos/terceros.png">
+            </div>
+            <div style="padding: 4px 10px;">
+                <div style="font-size: 14px;font-weight: 500;"> <b>Empresa:</b> {{companyName}}</div>
+                <div style="font-size: 14px;font-weight: 500;"> <b>Servicio:</b> 
+                    <mat-form-field class="text-center" style="width: 250px;">
+                        <mat-label class="text-center text-primary"></mat-label>
+                        <mat-select [(ngModel)]="id_service" (selectionChange)="laodData(1)">
+                            <mat-option *ngIf="suppliersCompanyService.length>1" [value]="0">Mostrar todos..</mat-option>
+                          <mat-option *ngFor="let value of suppliersCompanyService" [value]="value.id">
+                            {{value.name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+                
+            </div>
+            <div style="flex:  1 1;"></div>
+            <div class="panel-search-terceros">
+                <div>
+                    <button  (click)="newTercero()"  class="btn-cahrgesupp"><i class="fas fa-user-plus"></i> Nuevo usuario</button>
+                    <button  (click)="masiveChargeModal()" class="btn-cahrgesupp-fill"><i class="far fa-file-excel"></i> Carga masiva</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <img src="../../../../../../assets/media/formSections/company.png" class="img rounded mx-auto d-block">
+                  <h3 class="text-center" style="color: #00a9e0;">Usuarios Disponibles</h3>
+          </div>
+        </div>
+        <div class="panel-search-terceros" style="width: 100%;">
+            <label class="panel-terceros-label">Buscar colaborador tercero</label>               
+                <mat-form-field appearance="fill">
+                    <mat-label>Buscar por..</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Buscar por correo, dni, codigo de empresa, etc" style="width: 100%;" #input>
+                </mat-form-field>
+            
+        </div>
+        <div style="overflow: auto;">
+            <table mat-table [dataSource]="dataSource" class="terceros-table table-bordered table-hover">
+
+                <ng-container matColumnDef="DOCUMENT">
+                  <th mat-header-cell *matHeaderCellDef> Dni </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nationalId}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="NAME">
+                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name + ' ' + element.lastName1}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="MAIL">
+                  <th mat-header-cell *matHeaderCellDef> Correo </th>
+                  <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="CODECOMPANY">
+                  <th mat-header-cell *matHeaderCellDef> Código empresa </th>
+                  <td mat-cell *matCellDef="let element"> {{element.codeCompany}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="SEX">
+                    <th mat-header-cell *matHeaderCellDef> Genero </th>
+                    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="SERVICE">
+                    <th mat-header-cell *matHeaderCellDef> Servicio </th>
+                    <td mat-cell *matCellDef="let element"> {{element.serviceName}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="STATUS">
+                    <th mat-header-cell *matHeaderCellDef> Estado </th>
+                    <td mat-cell *matCellDef="let element"> <b>{{getCoronaStatus(element.coronaStatus)}}</b> </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="CHECKING">
+                    <th mat-header-cell *matHeaderCellDef> Pase de ingreso </th>
+                    <td mat-cell *matCellDef="let element" > 
+                    <span *ngIf="element.statusToken=='Generado'" style="background-color: #5bc500;color: #ffffff;padding: 5px 8px;border-radius: 5px;">{{element.statusToken}}</span> 
+                    <span *ngIf="element.statusToken=='Bloqueado'" style="background-color: #e87171;color: #ffffff;padding: 5px 8px;border-radius: 5px;">{{element.statusToken}}</span> 
+                    <span *ngIf="element.statusToken=='Pendiente'" style="background-color: #00a9e0;;color: #ffffff;padding: 5px 8px;border-radius: 5px;">{{element.statusToken}}</span> 
+    
+                </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="ACTION">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <button *ngIf="element.id" (click)="editSupplier(element)" class="link-edit">Editar</button>
+                        <button *ngIf="element.id" (click)="deleteSupplier(element.id,'D')" class="link-delete">Eliminar</button>
+                    </td>
+                  </ng-container>
+
+                  <ng-container *ngIf="id_service!=0" matColumnDef="ADDGESTOR">
+                    <th mat-header-cell *matHeaderCellDef> Gestor Tercero </th>
+                    <td mat-cell *matCellDef="let element"> 
+                      <button class="link-add" *ngIf="element.mgn==0" (click)="asignNewGestor(element)">Asignar</button>
+                      <p *ngIf="element.mgn==1" style="color: #5bc500;"><b>Asignado</b></p>
+                    </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons></mat-paginator>
+
+        </div>
+    </div>
+</div>
+<br> -->
+<!--begin service disabled-->
+<!-- <div class="cardtdp" style="padding-top: 10px;padding-left: 20px;padding-right: 20px;">
+    <section  [hidden]="!(suppliersServiceDisabled.length>0)">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <img src="../../../../../../assets/media/formSections/optimization.png" class="img rounded mx-auto d-block">
+                <h3 class="text-center" style="color: #db5151;">Usuarios inhabilitados</h3>
+        </div>
+      </div>
+      <div class="panel-search-terceros" style="width: 100%;">
+        <label class="panel-terceros-disabled-label">Buscar usuarios inhabilitados</label>               
+            <mat-form-field appearance="fill">
+                <mat-label>Buscar por..</mat-label>
+                <input matInput (keyup)="applyFilter2($event)" placeholder="Buscar por nombre del servicio, compañia, estado, etc" style="width: 100%;" #input2>
+            </mat-form-field>
+        
+    </div>
+        <div style="overflow: auto;">
+            <table mat-table [dataSource]="dataSourceService" class="terceros-table table-hover table-bordered">
+              
+              <ng-container matColumnDef="SUPPLIERNAME">
+                <th mat-header-cell *matHeaderCellDef> Nombre del colaborador </th>
+                <td mat-cell *matCellDef="let element"> {{element.supplierName}} </td>
+              </ng-container>
+
+                <ng-container matColumnDef="COMPANYNAME">
+                  <th mat-header-cell *matHeaderCellDef> Nombre de compañia </th>
+                  <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="SERVICENAME">
+                  <th mat-header-cell *matHeaderCellDef> Nombre del servicio </th>
+                  <td mat-cell *matCellDef="let element"> {{element.serviceName}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="CONDITION">
+                  <th mat-header-cell *matHeaderCellDef> Estado </th>
+                  <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.condition=='No disponible'" 
+                    style="background-color: #e87171;color: #ffffff;padding: 5px 8px;border-radius: 5px;">
+                    {{element.condition}}</span> 
+                  </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="DATEDISABLED">
+                  <th mat-header-cell *matHeaderCellDef> Fecha de inhabilitación de servicio </th>
+                  <td mat-cell *matCellDef="let element"> {{element.dateDisabled}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="ACTION">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element"> 
+                      <button  (click)="deleteSupplier(element.idSupplier,'E')"class="link-edit">Habilitar</button>
+                    </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayColumnsService"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayColumnsService;"></tr>
+              
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+              </table>
+              <mat-paginator #MatPaginatorDisabled [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons></mat-paginator>
+
+        </div>
+
+    </section>
+</div> -->
+
+<!-- <div *ngIf="!loading" class="cardtdp">
+    <div class="cardtdp-content">
+        Cargando... 
+    </div>
+</div> -->

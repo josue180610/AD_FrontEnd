@@ -1,0 +1,56 @@
+.sign-container{
+    border: solid 1px #979797;
+    width: 300px;
+    height: 150px;
+    margin: auto;
+}
+.button-terceros-cont {
+    display: flex;
+    width: 100%;
+    margin-top: 30px;
+}
+.button-terceros-primary{
+    width: 90%;
+    display: block;
+    margin: 5px auto;
+    color: #fff;
+    background-color: #5bc500;
+}
+.button-terceros-secondary{
+    width: 90%;
+    display: block;
+    margin: 5px auto;
+    border: solid 2px #5bc500;
+    color: #5bc500;
+    background-color: transparent;
+}
+.modal-banner-top{
+    text-align: center;
+    margin-bottom: 20px;
+    background: #00a9e0;
+    color: #fff;
+    padding: 10px;
+    line-height: 30px;
+}
+.close-onbanner{
+    background-color: #ffffff73;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    border: none;
+    float: right;
+    font-size: 11px;
+    transition: ease 0.3s;
+}
+.close-onbanner:hover{
+    color: #00a9e0;
+    background-color: #ffffffc0;
+}
+@media (max-width: 450px) {
+    .sign-container {
+      width: 100%;
+      overflow: hidden;
+    }
+
+}

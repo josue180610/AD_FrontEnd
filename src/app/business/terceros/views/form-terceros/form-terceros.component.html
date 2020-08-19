@@ -1,0 +1,94 @@
+<div class="titlecomp">
+	<div style="display: flex;">
+		<div>
+			<h3 style="color: #00a9e0;">Registro de datos</h3>
+			<p>Tu salud es lo primero</p>
+		</div>
+	</div>
+    <hr>
+</div>
+<div *ngIf="ready" class="cardtdp">
+
+    <div *ngIf="viewStatus !== 1">
+        <div class="form-baner-terceros">
+            <div style="flex: 1 1; text-align: center;"><i class="flaticon-add-label-button"></i> {{noFormMessage}}</div>
+        </div>  
+        <div *ngIf="viewStatus == 2" class="cardtdp-content">
+            <h5 style="text-align: center;">{{myName}}</h5>                
+            <button mat-flat-button class="button-terceros-skinny-primary" (click)="seeAccess()" >Ver mi pase</button>            
+        </div>
+    </div>
+
+    <mat-tab-group *ngIf="viewStatus == 1" [(selectedIndex)]="activetab" class="example-stretched-tabs">
+        <mat-tab label="1 - Sintomas"> 
+            <div class="form-baner-terceros">
+                <div style="flex: 1 1; text-align: center;">¿Has estado en contacto con algún paciente con coronavirus en los últimos 14 días?</div>
+                <section>
+                    <mat-slide-toggle (change)="changeToggle($event)"></mat-slide-toggle>
+                </section>
+            </div>  
+            <div class="cardtdp-content">
+                <h5 style="text-align: center;">¿Presentas alguno de los siguientes sintomas?</h5>
+                <ul class="form-list-sintomas">
+                    <li *ngFor="let s of sintomas">
+                        <div class="sintoma-icon"> <img style="width: 100%;" [src]="s.icon"> </div>
+                        <div class="sintoma-text">{{s.description}}</div>
+                        <div (click)="changeSymptomOption(s.id,true)" [ngClass]="{'sintoma-resp-active': s.option && s.touched}" class="sintoma-resp">Sí</div>
+                        <div (click)="changeSymptomOption(s.id,false)" [ngClass]="{'sintoma-resp-active': !s.option && s.touched}" class="sintoma-resp">No</div>
+                    </li>
+                </ul>
+                <div class="form-disclaimer-dj">
+                    <mat-checkbox [(ngModel)]="checkboxdj" (change)="changeCheckbox($event)">Confirmo que todos los datos expresados en esta plataforma constituyen una <b>declaración jurada</b> de mi parte.</mat-checkbox>
+                </div>
+                <div class="button-terceros-cont">
+                    <button [disabled]="!checkboxdj" mat-flat-button color="primary" (click)="nextStep()" >Continuar</button>
+                </div>
+            </div>  
+        
+        </mat-tab>
+        <mat-tab [disabled]='tab2disabled' label="2 - Ubicación"> 
+            <div class="cardtdp-content">              
+                <h5 style="text-align: center; margin: 20px;">Responde las siguientes preguntas</h5>
+                <div class="form-terceros-questions">
+                    <label>¿En dónde se ubica tu lugar de trabajo?</label>
+                    <select (change)="changeCity($event)" [(ngModel)]="city_option">
+                        <option value="" selected disabled>-- Seleccione 1 --</option>
+                        <option *ngFor="let op of cities" [value]="op.code"  >{{op.description}}</option>
+                    </select>
+                </div>
+                <div class="form-terceros-questions">
+                    <label>¿A qué sede de la compañía asistirá hoy?</label>
+                    <select [disabled]="!sedes_active" [(ngModel)]="sede_option">
+                        <option value="0" selected disabled>-- Seleccione 1 --</option>
+                        <option *ngFor="let op2 of sedes" [value]="op2.id" >{{op2.description}}</option>
+                    </select>
+                </div>
+                <div class="form-terceros-questions">
+                    <label>¿En qué piso te encontrarás durante el día?</label>
+                    <input [(ngModel)]="piso" type="text" placeholder="Ej. Piso 3 y 8">
+                </div>
+                <div class="form-terceros-questions">
+                    <label>¿Qué tipo de medio de transporte usa?</label>
+                    <div style="display: flex;">
+                        <div (click)="changeTransportType(1)" [ngClass]="{'sintoma-resp-active': transport_type == 1}" class="form-terceros-option">Privado</div>
+                        <div style="flex: 1 1;"></div>
+                        <div (click)="changeTransportType(2)" [ngClass]="{'sintoma-resp-active': transport_type == 2}" class="form-terceros-option">Público</div>
+                    </div>
+                </div>
+                <div class="form-terceros-questions">
+                    <label>Especifica el medio de transporte</label>
+                    <select [disabled]="!transports_detail_active" [(ngModel)]="transport_option">
+                        <option value="0" selected disabled>-- Seleccione 1 --</option>
+                        <option *ngFor="let op3 of transports_detail" [value]="op3.id">{{op3.description}}</option>
+                    </select>
+                </div>
+                <div class="button-terceros-cont">
+                    <button mat-flat-button color="primary" (click)="generateAccess()" >Generar ingreso</button>
+                </div>
+            </div> 
+        </mat-tab>
+    </mat-tab-group>    
+</div>
+<div *ngIf="!ready" style="text-align:center;">
+    Estamos preparando todo...
+</div>

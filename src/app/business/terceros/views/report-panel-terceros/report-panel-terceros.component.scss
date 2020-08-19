@@ -1,0 +1,71 @@
+h1,h2,h3,h4,h5{
+    color: #00a9e0;
+}
+.container-view-report{
+    width:100%;
+    padding: 5px;
+}
+.label-datepicker{
+    color: #00a9e0;font-size: 15px;text-align: center;
+}
+.subcontainer-view-report{
+    width:100%;
+}
+.btn-datepicker{
+    background-color:#00a9e0;color: #ffffff;padding: 5px;border-radius: 5px;
+}
+.border-datepicker{
+    border: 2px solid #c3c3c3;
+    color: #00a9e0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+}
+.btn-search-data{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #ffffff;
+    color: #00a9e0;
+    border: 2px solid #00a9e0;
+    transition: 0.3s;
+    width: 100%;
+   
+}
+.btn-search-data:hover{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #00a9e0;
+    color: #ffffff;
+    border: 2px solid #00a9e0;
+    transition: 0.3s;
+    width: 100%;
+}
+.p-format{
+    color: #00a9e0;
+    font-size: 15px;
+    margin-top: 10px;
+}
+table th{
+    background-color: #00a9e0;
+    color: #ffffff;
+    text-align: center;
+   
+    padding: 5px;
+}
+table td{
+    background-color: #c0bcbc;
+    color: #000000;
+    text-align: center;
+    
+    padding: 5px;
+}
+
+.main-title-module-report{
+    width: 95%;margin-left: auto;margin-right: auto;
+}

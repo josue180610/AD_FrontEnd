@@ -1,0 +1,50 @@
+<div style="position: relative;">
+  <button (click)="closeDialog()" class="close-qr"> <i class="flaticon2-cancel-music"></i> </button>
+</div>
+
+<div *ngIf="result  && (resultStatus == 3)">
+  <h5 style="text-align: center;  margin-top: 10px;">{{name}}</h5>
+  <div class="mqr-cip">{{title}}</div>
+  <div class="qr-block">
+      <i style="color: #5bc500;" class="flaticon-like"></i>
+  </div>
+  <div class="timereg">
+      Hora de registro: <b>{{hora | date : 'shortTime' }}</b>
+  </div>
+  <div *ngIf="condition">
+      <h6 style="text-align: center; margin-top: 20px; color: #00A9E0;">¡<b>Todo salió bien</b>!</h6>
+      <p style="color: #979797;">El usuario cumple con los requerimientos, por lo que se le debe permitir el acceso.</p>
+  </div>
+  <button mat-flat-button class="button-terceros-primary" (click)="closeDialog()" >Aceptar</button>
+</div>
+<div *ngIf=" (!result && (resultStatus == 2 || resultStatus == 4 || resultStatus == 5 || resultStatus == 6 || resultStatus == 3))">
+  <h5 style="text-align: center; margin-top: 10px;">{{name}}</h5>
+  <div class="mqr-cip-x">{{title_denied}}</div>
+  <div *ngIf="result_flag" class="qr-block">
+      <div *ngIf="like" class="form-inline">
+          <i  style="color: rgb(0,169,224);" class="flaticon-like"></i>
+          <i style="color: #dd5d6a;" class="fas fa-temperature-high"></i>
+      </div>
+      <div *ngIf="!like" class="text-center">
+          <i style="color: #dd5d6a;" class="fas fa-temperature-high"></i>
+      </div>
+  </div>
+  <div *ngIf="!result_flag" class="qr-block">
+      <div *ngIf="like" class="form-inline">
+          <i  style="color: rgb(0,169,224);" class="flaticon-like"></i>
+          <i style="color: #dd5d6a;" class="flaticon-warning-sign "></i>
+      </div>
+      <div *ngIf="!like" class="text-center">
+          <i style="color: #dd5d6a;" class="flaticon-warning-sign "></i>
+      </div>
+  </div>
+  <div class="timereg">
+      Hora de registro: <b>{{hora | date : 'shortTime' }}</b>
+  </div>
+  <div>
+      <h6 style="text-align: center; margin-top: 20px; color: #dd5d6a;">¡Cuidemos nuestra <b>salud</b>!</h6>
+      <p style="color: #979797;">{{message_temp}}<b> Su supervisor ya fue notificado.</b></p>
+  </div>
+  <button mat-flat-button class="button-terceros-primary" (click)="closeDialog()" >Aceptar</button>
+           
+</div>

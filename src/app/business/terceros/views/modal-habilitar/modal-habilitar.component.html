@@ -1,0 +1,32 @@
+<div style="position: relative;">
+  <button (click)="closeDialog()" class="close-qr"> <i class="flaticon2-cancel-music"></i> </button>
+</div>
+<div >
+  <div class="mqr-cip-x">Acciones requeridas para:</div>
+  <h5 style="text-align: center; margin-top: 10px;">{{supplier.name + ' ' +supplier.lastName1}}</h5>
+  <h6 style="text-align: center; margin-top: 10px;">DNI: {{supplier.nationalId}}</h6>
+  <div class="qr-block">
+      <i style="color: #dd5d6a;" class="fas fa-temperature-high"></i>
+  </div>
+  <div class="timereg">
+      El usuario se encuentra deshabilitado ya qué: {{supplier.statusDetail}}
+  </div>
+  <div class="timereg">
+     Para habilitar a {{supplier.name + ' ' +supplier.lastName1}} se requiere adjuntar <b>evidencia médica</b> que sustente que está listo para volver al trabajo. Por favor adjunte dichos documentos a continuación:
+  </div>
+  <div class="form-disclaimer-dj">
+      <mat-checkbox [(ngModel)]="checkbox">Declaro que {{supplier.name + ' ' +supplier.lastName1}} pasó por un proceso de revisión médica.</mat-checkbox>
+  </div>
+  <div style="display: flex; flex-wrap: wrap;">
+      <div  class="inputfile_container">
+          <button (click)="clickAttachFile()" mat-raised-button class="filebuton">
+              Seleccionar documento
+          </button>
+          <div class="filename">{{filename}}</div>	            		
+          <input  #fileinput class="fileinput" type="file" accept=".pdf" />
+      </div>
+      
+      <button [disabled]="!checkbox || !fileloaded" (click)="sendRequest()" mat-flat-button class="btn-process-terceros">PROCESAR</button>
+  </div>
+  <input #atachfileInput accept="application/pdf" class="fileinput" type="file" (change)="attachFileChange($event)"/>     
+</div>

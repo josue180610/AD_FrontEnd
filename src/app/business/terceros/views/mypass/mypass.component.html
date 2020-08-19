@@ -1,0 +1,63 @@
+
+<div class="titlecomp">
+	<div style="display: flex;">
+		<div>
+			<h3 style="color: #00a9e0;">Mi pase activo</h3>
+		</div>
+	</div>
+    <hr>
+</div>
+<div *ngIf="!ready" style="text-align: center;">Estamos preparando todo...</div>
+
+
+<div *ngIf="ready"class="cardtdp">
+    <div class="form-baner-terceros">
+        <div style="flex: 1 1; text-align: center;">{{banner}}</div>
+    </div>
+    <div  class="cardtdp-content">
+        <h5 style="text-align: center;">{{myName}}</h5>
+        <div *ngIf="viewStatus == 1" class="button-terceros-cont">        
+            <button mat-flat-button class="button-terceros-primary" (click)="generatePass()" >Generar pase de ingreso</button>
+        </div>
+
+        <div *ngIf="viewStatus == 2">
+            <div class="qr-block">
+                <ngx-qrcode 
+                    [elementType]="elementType" 
+                    [value] = "value"
+                    cssClass = "aclass"
+                    errorCorrectionLevel = "L">
+                </ngx-qrcode>            
+            </div>
+            <div class="mqr-info">
+                <div style="flex: 1 1;">Ingreso a oficina</div>
+                <span class="qr-status">PERMITIDO</span>
+            </div>
+            <!-- <div class="mqr-info">
+                <div style="flex: 1 1;">Válido hasta</div>
+                <span class="qr-vencimiento">17/04/2020</span>
+            </div> -->
+        </div>
+
+        <div *ngIf="viewStatus == 3">
+            <div class="qr-block">
+                <i style="font-size: 60px; color: #e94f4f;" class="fa fa-user-alt-slash"></i>          
+            </div>
+            <div class="mqr-info">
+                <div style="flex: 1 1;">Ingreso a oficina</div>
+                <span class="qr-status-2">DENEGADO</span>
+            </div>
+        </div>        
+        <div>
+            <h6 style="text-align: center; margin-top: 20px;">¡Sigue estas indicaciones para prevenir el COVID-19!</h6>
+            <ul class="qr-recomendaciones-list">
+                <li>Lávate las manos cada dos horas por 20 segundos.</li>
+                <li>Manten distancia de 1.5 m entre persona y persona.</li>
+                <li>Evita tocarte la nariz, ojos y boca.</li>
+                <li>Cúbrete con el antebrazo al toser o estornudar.</li>
+            </ul>
+        </div>
+
+
+    </div>
+</div>

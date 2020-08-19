@@ -1,0 +1,28 @@
+<div style="position: relative;">
+
+  <button (click)="closeDialog()" class="close-qr"> <i class="flaticon2-cancel-music"></i> </button>
+</div>
+<div>
+  <h5 style="text-align: center;">{{myName}}</h5>
+  <div class="mqr-cip">¡Es mejor que permanezcas en casa!</div>
+  <div class="qr-block">
+      <i class="fas fa-shield-virus"></i>
+  </div>
+  <div class="mqr-info">
+      <div style="flex: 1 1;">Reporte de síntomas</div>
+      <span class="qr-vencimiento">17/04/2020</span>
+  </div>
+  <div>
+      <h6 style="text-align: center; margin-top: 20px; color: #00a9e0;">¡Tu <b>salud</b> es primero!</h6>
+      <p style="color: #979797;">En el cuestionario que llenaste reportaste posibles síntomas de COVID-19, por ello te recomendamos comunicarte con tu médico ocupacional y seguir todas sus indicaciones.<br>
+      Podrás generar tu acceso cuando el gestor de tu empresa reporte que te encuentras mejor.</p>
+  </div>
+  <div class="row">
+      <div class="col-md-6">
+          <button mat-flat-button class="button-terceros-secondary" (click)="closeDialog()" >Cancelar</button>
+      </div> 
+      <div class="col-md-6">
+          <button mat-flat-button class="button-terceros-primary" (click)="acept()" >Confirmar y finalizar</button>
+      </div>       
+  </div>
+</div>

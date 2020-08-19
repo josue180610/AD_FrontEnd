@@ -1,0 +1,37 @@
+<!-- <div class="titlecomp">
+	<div style="display: flex;">
+		<div>
+			<h3 style="color: #00a9e0;">Registro de sintomas</h3>
+			<p>Tu salud es lo primero</p>
+		</div>
+	</div>
+    <hr>
+</div>
+<div *ngIf="ready" class="cardtdp">
+    <div class="form-baner-terceros">
+        <div style="flex: 1 1; text-align: center;">{{formMessage}}</div>
+    </div>
+    <div *ngIf="formenable && viewStatus!=0" class="cardtdp-content">
+        <h5 style="text-align: center;">{{myName}}</h5>
+        <h5 style="text-align: center;">¿Presentas alguno de los siguientes sintomas?</h5>
+        <ul class="form-list-sintomas">
+            <li *ngFor="let s of sintomas">
+                <div class="sintoma-icon"> <img style="width: 100%;" [src]="s.icon"> </div>
+                <div class="sintoma-text">{{s.description}}</div>
+                <div (click)="changeSymptomOption(s.id,true)" [ngClass]="{'sintoma-resp-active': s.option && s.touched}" class="sintoma-resp">Sí</div>
+                <div (click)="changeSymptomOption(s.id,false)" [ngClass]="{'sintoma-resp-active': !s.option && s.touched}" class="sintoma-resp">No</div>
+            </li>
+        </ul>
+        <div class="button-terceros-cont">
+            <button mat-flat-button color="primary" (click)="reportSypmtoms()" >Reportar síntomas</button>
+        </div>
+    </div>  
+    <div *ngIf="!formenable && viewStatus!=0" class="cardtdp-content">
+        <h5 style="text-align: center;">{{myName}}</h5>
+        <p style="text-align: center;">Aún no has generado tu pase de ingreso.</p>
+        <button mat-flat-button class="button-terceros-primary" (click)="generatePass()" >Generar pase de ingreso</button>        
+    </div>       
+</div>
+<div *ngIf="!ready" style="text-align:center;">
+    Estamos preparando todo...
+</div> -->

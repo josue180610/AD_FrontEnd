@@ -1,0 +1,58 @@
+<h4 class="modalheader">Carga masiva de empleados
+  <span style="flex: 1 1 auto"></span>
+  <span (click)="closeModal()" class="modalclosebutton"> <i class="flaticon2-cancel-music"></i> </span>
+</h4>
+<div style="padding: 10px;">
+  <b>Formato de carga:</b> <a target="_blank" href="https://drive.google.com/open?export=download&id=1lG8dq0begT_vENOyPPXLDNZastbAFovb" class="download-btn"><i class="far fa-file-excel"></i> descargar</a> 
+  <br>
+  <b>Archivo:</b>    <input  #fileinput style="padding: 5px;" type="file" accept=".xlsx" (change)="onFileChange($event)">
+  <b  style="margin-left: 10px;">Servicios disponibles:</b> <mat-form-field class="text-center">
+      <mat-label class="text-center text-primary"></mat-label>
+      <mat-select [(ngModel)]="id_service" [disabled]="condition_service">
+          <mat-option>Seleccinar servicio..</mat-option>
+        <mat-option *ngFor="let value of suppliersCompanyService" [value]="value.id">
+          {{value.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  <div class="preview-cont">
+      <div class="tabletitle">Preview:</div>
+      <table class="preview-table">
+          <thead>
+              <tr>
+                  <th>DNI</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Codigo</th>
+                  <th>Correo</th>
+                  <th>Nacimiento</th>
+                  <th>Genero</th>
+                  <th>Actividad</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let dato of hojaDatos">
+                  <td>{{dato.nationalId}}</td>
+                  <td>{{dato.name}}</td>
+                  <td>{{dato.lastName1 + ' ' + dato.lastName2}}</td>
+                  <td>{{dato.codeCompany}}</td>
+                  <td>{{dato.mail}}</td>
+                  <td>{{dato.birthdate}}</td>
+                  <td>{{dato.gender}}</td>
+                  <td>{{dato.activity}}</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+  <div *ngIf="errors.length > 0" class="errorlog">
+      <div class="tabletitle">Lista de errores:</div>
+      <ul>
+          <li *ngFor="let error of errors">{{error}}</li>
+      </ul>
+  </div>
+  <div style="display: flex;">
+      <button (click)="closeModal()" class="btn-clear"><i class="fas fa-times"></i> Cancelar</button>
+      <div style="flex: 1 1;"></div>
+      <button (click)="saveCorrects()" class="btn-charge"> <i class="fas fa-cloud-upload-alt"></i> Cargar correctos</button>
+  </div>
+</div>

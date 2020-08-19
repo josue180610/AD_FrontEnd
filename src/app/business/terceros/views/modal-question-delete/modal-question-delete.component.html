@@ -1,0 +1,67 @@
+<h4 mat-dialog-title>
+  <mat-toolbar role="toolbar" class="task-header">
+      <img src="./assets_client/media/logos/logo-movistar.png" width="50px" class="imgdialog" alt="">
+      <span class="text-center"> Aviso del Sistema</span>
+ 
+      <span class="fx-spacer"></span>
+      <button mat-icon-button (click)="onNoClick()">
+          <mat-icon mat-list-icon>close</mat-icon>
+      </button>
+  </mat-toolbar>
+</h4>
+<div style="width: 95%;margin-left: auto;margin-right: auto;padding: 10px;">
+      <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 offset-md-3">
+              <img src="../../../../../../assets/media/formSections/question-mark.png" class="rounded mx-auto d-block">
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              
+              <div class="input-group">
+                  <p *ngIf="typeAction=='D'" class="text-center"><b>¿Desea deshabilitar al colaborador {{supplier_name}} del servicio? :</b></p>
+                  <p *ngIf="typeAction=='E'" class="text-center"><b>¿Desea habilitar algunos de los servicios al colaborador {{supplier_name}}? :</b></p>
+<!--                     <p *ngIf="condition_service" class="background-message" style="margin-top: -2px;text-align: center;width: 100%;">{{service_name}}</p>
+-->                    <mat-form-field class="text-center" style="margin-top: -10px;width: 100%;" appearance="fill">
+                      <mat-label class="text-center text-primary"></mat-label>
+                      <mat-select [disabled]="condition_service" [(ngModel)]="id_service"  multiple>
+                          <mat-option *ngIf="suppliersCompanyService.length>0" (click)="selectAll()">All..</mat-option>
+                        <mat-option *ngFor="let value of suppliersCompanyService" (onSelectionChange)="getValues($event)"  style="color: rgb(0, 169, 224);" [value]="value.id">
+                          {{value.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+<!--                       <p class="background-message" *ngIf="suppliersCompanyService.length==0">{{message_condition}}</p>
+-->                </div>
+              <div *ngIf="typeAction=='D'" class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                      <button class="btn btn-danger btn-block" (click)="deleteSupplier('D')">Sí, deseo eliminar</button>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                      <button class="btn btn-success btn-block" (click)="onNoClick()">No, deseo eliminar</button>
+                  </div>
+              </div>
+              <div *ngIf="typeAction=='E'" class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                      <button class="btn btn-danger btn-block" (click)="deleteSupplier('E')">Sí, deseo habilitar</button>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                      <button class="btn btn-success btn-block" (click)="onNoClick()">No, deseo habilitar</button>
+                  </div>
+              </div>
+          </div>
+      </div><br>
+      <!-- <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <p><b>o ¿Desea eliminar a {{supplier_name}} de todos los servicios asignados?</b></p>
+              <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                      <button class="btn btn-danger btn-block" (click)="deleteAllSupplier()">Sí, deseo eliminar</button>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6">
+                      <button class="btn btn-success btn-block" (click)="onNoClick()">No, deseo eliminar</button>
+                  </div>
+              </div>
+          </div>
+      </div> -->
+</div>
