@@ -15,14 +15,21 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { CoronavirusTeamComponent } from './views/coronavirus-team/coronavirus-team.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import { ModalCoronavirusRelationshipComponent } from './views/modal-coronavirus-relationship/modal-coronavirus-relationship.component';
+import { ModalCoronavirusReportComponent } from './views/modal-coronavirus-report/modal-coronavirus-report.component';
+import { ModalCoronavirusSympComponent } from './views/modal-coronavirus-symp/modal-coronavirus-symp.component';
+import {MatIconModule} from '@angular/material/icon'; 
+import { LoaderComponent } from '../../../app/commons/components/loader/loader.component';
 @NgModule({
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
   ],
-  providers: [DatePipe],
-  declarations: [CoronavirusAdminComponent,CoronavirusCheckingComponent,CoronavirusFormComponent,CoronavirusTeamComponent],
+  providers: [DatePipe,LoaderComponent],
+  entryComponents: [ModalCoronavirusRelationshipComponent,ModalCoronavirusReportComponent,ModalCoronavirusSympComponent],
+  declarations: [CoronavirusAdminComponent,CoronavirusCheckingComponent,CoronavirusFormComponent,CoronavirusTeamComponent,
+    ModalCoronavirusRelationshipComponent,ModalCoronavirusReportComponent,ModalCoronavirusSympComponent],
   imports: [
+    MatIconModule,
     MatPaginatorModule,
     MatTableModule,
     MatFormFieldModule,

@@ -1,6 +1,17 @@
 .font-style{
     color: rgb(0,169,224);
-
+    margin-top: 2px;
+}
+.titlecomp{
+    margin: 0 25px;
+    /* padding: 30px; */
+    color: #565656;
+}
+.titlecomp h3{
+    margin: auto;
+}
+.titlecomp p{
+    margin: auto;
 }
 .cor_searchbutton:hover{
     background-color: #0982aa ;
@@ -107,21 +118,19 @@
         cursor: pointer;
       }
       .cor_inputreport{
-        padding: 6px 14px;
-        border: solid 2px #00a9e0;
         background-color: #00a9e0;
         color:#ffffff;
-        margin-left: 15px;
-        width: 200px;
+        /* margin-left: 15px; */
+        width: 100%;
     }
-    .cor_inputreport:hover{
+    /* .cor_inputreport:hover{
         padding: 6px 14px;
         border: solid 2px #8e8d8d;
         margin-left: 15px;
         width: 200px;
         background-color: #00a9e0;
         color:white;
-    }
+    } */
 
 table tr{
     text-align: center;

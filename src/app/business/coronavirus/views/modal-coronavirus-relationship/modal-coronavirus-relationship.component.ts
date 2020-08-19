@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'tdp-modal-coronavirus-relationship',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalCoronavirusRelationshipComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private http:HttpClient,
+    private dialogRef:MatDialogRef<ModalCoronavirusRelationshipComponent>,
+    @Inject(MAT_DIALOG_DATA) private data:any
+  ) { }
 
   ngOnInit() {
   }

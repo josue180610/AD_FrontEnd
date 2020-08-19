@@ -1,3 +1,47 @@
-<p>
-  modal-coronavirus-report works!
-</p>
+
+<div class="row" style="background-color: #D3D4D3;">
+
+  <div class="col-md-2 text-center" style="padding: 10px;"><img src="../../../../../assets/images/media/logos/logo-movistar.png" width="50px" alt="">
+  </div>
+  <div class="col-md-8 text-center" style="margin-top: auto;margin-bottom: auto;"><h3>Reportes</h3></div>
+  <div class="col-md-2 text-center" style="padding: 10px;"><span class="fx-spacer"></span>
+    <svg (click)="onNoClick()" width="2em" height="3em" viewBox="0 0 16 16" class="bi bi-x-square close-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+      <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+      <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+    </svg>
+<!--   <img src="../../../../../assets/images/media/flags/baseline_disabled_by_default_black_18dp.png" style="background-color: aqua;">    
+ -->  </div>
+  </div>
+  <br>
+  <mat-card>
+          <mat-card-header>
+                  <mat-card-title class="title-modal">Seleccionar el tipo de reporte :</mat-card-title>
+                  <hr>
+          </mat-card-header>
+          <mat-card-content>
+                  <div class="row">
+                      <div class="col-md-8 offset-2">
+                              <mat-form-field style="width: 100%;">
+                                      <mat-label class="title-modal">Selecciona una opcion</mat-label>
+                                      <mat-select [(ngModel)]="index">
+                                        <!-- <mat-option>None</mat-option> -->
+                                        <mat-option *ngIf="!condition_report_assist" value="1C">Reporte General</mat-option>
+                                        <mat-option *ngIf="condition_report_assist" value="1A">Reporte de Asistencias</mat-option>
+                                        <mat-option *ngIf="!condition_report_assist" value="2C">Reporte de archivos de empleados</mat-option>
+                                        <mat-option *ngIf="!condition_report_assist" value="3C">Reporte de enfermedades cronicas por empleados</mat-option>
+                                        <mat-option *ngIf="!condition_report_assist" value="4C">Reporte de historico corinavirus TDP</mat-option>
+                                        <!-- <mat-option value="2">No aplica</mat-option>
+                                        <mat-option value="3">No aplica</mat-option> -->
+                                      </mat-select>
+                                    </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="row">
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                  <button class="btn btn-generate btn-block" (click)="execute_report()">Generar</button>
+                          </div>
+                  </div>
+          </mat-card-content>
+  </mat-card>
+  

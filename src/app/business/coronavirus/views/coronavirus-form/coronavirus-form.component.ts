@@ -19,6 +19,8 @@ import Swal from 'sweetalert2'
 import { corona_home_request } from '../models/request_corona_home';
 import { ModalCoronavirusRelationshipComponent } from '../modal-coronavirus-relationship/modal-coronavirus-relationship.component';
 import { CATEGORY_DOC, TYPE_DOC, CONTAINER_CORONA_DOCUMENT, URL_AZURE_STORAGE_CORONAVIRUS } from '../../../../../app/services/var.constants';
+import { LoaderComponent } from '../../../../../app/commons/components/loader/loader.component';
+import { LoaderSubjectService } from '../../../../../app/commons/components/loader/loader-subject.service';
 @Component({
   selector: 'tdp-coronavirus-form',
   templateUrl: './coronavirus-form.component.html',
@@ -138,7 +140,9 @@ createForm() {
 constructor(public dialog: MatDialog, private route: ActivatedRoute,
   private router: Router, private http: HttpClient, private ref: ChangeDetectorRef,
   @Optional() @Inject(MAT_DIALOG_DATA) public data: any, @Optional() public dialogRef: MatDialogRef<CoronavirusFormComponent>,
-  private datePide:DatePipe) {
+  private datePide:DatePipe,
+  private loader:LoaderComponent,
+  private loaderSubjectService: LoaderSubjectService) {
   /* this.tokenServ = new TokenService(); */
   this.createForm();
   this.background_color = '#FFFFFF';
@@ -730,6 +734,14 @@ textValidate(text) {
   }
 }
   ngOnInit() {
+    
+    setTimeout(() => {
+      /* this.loaderSubjectService.showLoader("Cargando componentes.."); */
+     /*  this.loaderSubjectService.closeLoader(); */
+    }, 300);
+    
+    
+
   }
 
 }

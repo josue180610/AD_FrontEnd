@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'tdp-modal-coronavirus-symp',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalCoronavirusSympComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private http:HttpClient,
+    private dialogRef:MatDialogRef<ModalCoronavirusSympComponent>
+  ) { }
 
   ngOnInit() {
   }

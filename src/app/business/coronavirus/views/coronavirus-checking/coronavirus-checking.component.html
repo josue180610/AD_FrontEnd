@@ -1,3 +1,151 @@
-<p>
-  coronavirus-checking works!
-</p>
+<div class="titlecomp">
+  <div style="display: flex;">
+      <div>
+          <h3 class="font-style">Control de Asistencia</h3>
+          <p>Modulo de manejo de asistencia de empleados</p>
+      </div>
+  </div>
+  <hr>
+</div>
+<mat-card [formGroup]="candidateForm" class="container-form">
+
+        
+  <div class="row">
+      
+      <div class="col-xs-12 col-sm-12 col-md-4">
+              <h5 class="font-style">Generar Reportes</h5>
+              <div class="d-flex">
+                  <button class="btn btn-block cor_inputreport" (click)="show_report_covid19()">Generar!</button>
+              </div>
+          </div>
+      <div class="col-xs-12 col-sm-12 col-md-4">
+              <h5 class="font-style">Seleccionar archivo</h5>
+              <div class="d-flex">
+                  <label for="btn-file" class="btn btn-block btn_savedatamasive">Registrar datos</label>
+                  <input type="file" id="btn-file" name="btnfileinput" (change)="onFileChange($event)" #btnfileinput>
+              </div>
+          </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+        <div class="form-inline">
+            <h5 class="font-style">Para descargar el Formato excel para el Registro de Asistencia de empleados :</h5>
+        <p style="margin-top: 15px;"><a href="../../../../../assets/files/coronavirus/Modelo_carga_asistencia.xlsx" download><button
+            class="btn btn-block btn_savedatamasive">CLICK AQUÍ</button>
+    </a></p>
+        </div>
+    </div>
+</div>
+<hr>
+
+<mat-card-content>
+  <div class="row">
+      <div class="col-md-8">
+              <h5 class="font-style">Buscar por rango de fecha :</h5>
+              <div class="row">
+                      
+                      <div class="col-xs-12 col-sm-12 col-md-6">
+                      
+                      <div class="form-inline">
+                              
+                              <input class="text-center form-control col-xs-12 col-sm-10 col-md-10 col-lg-10"
+                                  [matDatepicker]="picker1" [(ngModel)]="txt_start_date" name="fecha1"
+                                  formControlName="date1" placeholder="Desde...">
+                              <mat-datepicker-toggle class="col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker" matSuffix
+                                  [for]="picker1">
+                              </mat-datepicker-toggle>
+                              <mat-datepicker #picker1></mat-datepicker>
+                          </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-6">
+                      
+                      <div class="form-inline">
+                             
+                              <input class="text-center form-control col-xs-12 col-sm-10 col-md-10 col-lg-10"
+                                  [matDatepicker]="picker2" [(ngModel)]="txt_end_date" name="fecha2"
+                                  formControlName="date2" placeholder="Hasta...">
+                              <mat-datepicker-toggle class="col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker" matSuffix
+                                  [for]="picker2">
+                              </mat-datepicker-toggle>
+                              <mat-datepicker #picker2></mat-datepicker>
+                          </div>
+                      </div>
+                  </div>
+      </div>
+      <div class="col-md-4">
+          <button class="btn btn-block btn_savedatamasive" style="margin-top: 35px;" (click)="showData(txt_start_date,txt_end_date)">Buscar</button>
+      </div>
+  </div>
+  
+</mat-card-content>
+</mat-card>
+<br>
+<mat-card class="container-form">
+<mat-card-content>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h5 class="font-style">Buscar empleado :</h5>
+            <input class="inputSearchChecking" matInput (keyup)="applyFilter($event)"
+                placeholder="Buscar por nombre,apellido,cip">
+        </div>
+    </div>
+
+  <div class="table-responsive">
+      <table class="table table-bordered" mat-table [dataSource]="dataSource" matSort>
+
+          
+          <ng-container matColumnDef="CIP">
+              <th class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header> CIP </th>
+              <td mat-cell *matCellDef="let row"> {{row.cip}} </td>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="EMPLEADO">
+              <th class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header> EMPLEADO </th>
+              <td mat-cell *matCellDef="let row"> {{row.id_employee}} </td>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="FECHA DE ASISTENCIA">
+              <th class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header> FECHA DE ASISTENCIA
+              </th>
+              <td mat-cell *matCellDef="let row"> {{row.datemark}} </td>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="HORA DE ASISTENCIA">
+              <th class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header> HORA DE ASISTENCIA
+              </th>
+              <td mat-cell *matCellDef="let row"> {{row.hourmark}} </td>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="FORMATO DE ASISTENCIA">
+              <th class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header> FORMATO DE ASISTENCIA
+              </th>
+              <td mat-cell *matCellDef="let row"> {{row.typemark}} </td>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="COMENTARIO">
+              <th class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header> COMENTARIO </th>
+              <td mat-cell *matCellDef="let row"> {{row.comment}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ACCIONES">
+              <th class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header> ACCIONES</th>
+              <td mat-cell *matCellDef="let row">
+              <i class="flaticon-cancel remove-item" (click)="removeDataAssistManagement(row.id)"></i>    
+              </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[10, 20, 30,40,50,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+  </div>
+</mat-card-content>
+</mat-card>

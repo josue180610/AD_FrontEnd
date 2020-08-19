@@ -12,9 +12,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { API_SAVE_MASSIVE_DATA_REQUEST, API_GET_CORONAVIRUS_PRECONDITION_EDIT, API_CORONA_SEARCHEMPLOYEES, API_POST_CORONAVIRUS_CBO, API_GET_FIND_BY_STATUS, API_CORONA_REQUESTDETAIL } from '../../../../../app/services/url.constants';
 import { ModalCoronavirusReportComponent } from '../modal-coronavirus-report/modal-coronavirus-report.component';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import { CoronavirusFormComponent } from '../coronavirus-form/coronavirus-form.component';
-
+import { LoaderSubjectService } from '../../../../../app/commons/components/loader/loader-subject.service';
 @Component({
   selector: 'tdp-coronavirus-admin',
   templateUrl: './coronavirus-admin.component.html',
@@ -79,7 +79,8 @@ export class CoronavirusAdminComponent implements OnInit {
  array_id_role:Array<any>=[];
   userLogged = null;
   object_precondition: Coronavirus_edit;
-  constructor( public dialog: MatDialog, private http: HttpClient, private ref: ChangeDetectorRef) {
+  constructor( public dialog: MatDialog, private http: HttpClient, private ref: ChangeDetectorRef,
+  private loaderSubjectService: LoaderSubjectService) {
     /* this.tokenServ = new TokenService();  */ 
 
    }
@@ -355,7 +356,8 @@ export class CoronavirusAdminComponent implements OnInit {
       console.log(error);
     }
   }
-  ngOnInit() {
+  initData(){
+    
     try {
       this.array_permissions=this.tokenServ.getDatoFromToken()["permissions"];
       this.array_permissions.forEach(element => {
@@ -364,15 +366,24 @@ export class CoronavirusAdminComponent implements OnInit {
         }
       });
       this.userLogged = this.tokenServ.getDatoFromToken()["user"];
-      
+      this.load_data_cbo_table_master();
     } catch (error) {
       console.log(error)
     }
 
+  }
+  ngOnInit() {
+    setTimeout(() => {
+      this.loaderSubjectService.showLoader("Cargando componentes..");
+      this.initData();
+      /* this.loaderSubjectService.closeLoader(); */
+    }, 300);
+    
+    
     //validation token
     /* var gc: GeneralComponent = new GeneralComponent(this.store); */
     /* this.validateMenu = gc.validateSession("CORONA_ADMIN"); */
-    this.load_data_cbo_table_master()
+   
   }
 
 }

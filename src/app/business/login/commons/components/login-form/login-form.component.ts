@@ -51,7 +51,7 @@ export class LoginFormComponent {
     } */
     const email = this.loginFormReactive.email.value;
     const password = this.loginFormReactive.password.value;
-    this.loaderSubjectService.showLoader();
+    this.loaderSubjectService.showLoader("Verificando cuenta de usuario..");
 
     const request = {
       email, password
@@ -128,9 +128,12 @@ export class LoginFormComponent {
         localStorage.setItem("modules",JSON.stringify(modules));
         localStorage.setItem("user",JSON.stringify(request.email));
         localStorage.setItem("auth", "auth token");
-        this.router.navigateByUrl('/').then(() => {
-          this.loaderSubjectService.closeLoader();
-        });
+        setTimeout(() => {
+          this.router.navigateByUrl('/').then(() => {
+            this.loaderSubjectService.closeLoader();
+          });
+        }, 5000);
+        /*  */
       }else{
         this.loaderSubjectService.closeLoader();
         this.loginError = 'Credenciales incorrectas';
