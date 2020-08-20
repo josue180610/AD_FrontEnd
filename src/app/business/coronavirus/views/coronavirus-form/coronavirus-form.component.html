@@ -1,19 +1,21 @@
 
 
-  <h4 mat-dialog-title *ngIf="txt_condition_status">
-    <mat-toolbar role="toolbar" class="task-header">
-        <img src="./assets_client/media/logos/logo-movistar.png" width="50px" class="imgdialog" alt="">
-        <span> Aviso del Sistema</span>
-        <span class="fx-spacer"></span>
-        <button mat-icon-button (click)="onNoClick()">
-            <mat-icon mat-list-icon>close</mat-icon>
-        </button>
-    </mat-toolbar>
-</h4>
+
+<div *ngIf="txt_condition_status" class="row">
+               class="row" style="background-color: #D3D4D3;width: 90%;margin-left: auto;margin-right: auto;padding: 5px;">
+    <div class="input-group" style="margin-top: auto;margin-bottom: auto;display: flex;justify-content: center;" >
+        <img src="../../../../../assets/images/media/logos/logo-movistar.png" width="50px" alt="">
+        <h3 class="text-center p-1">Aviso del sistema</h3>
+        <svg (click)="onNoClick()" width="2em" height="3em" viewBox="0 0 16 16" class="bi bi-x-square close-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+            <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+            <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+          </svg>
+    </div>
+
+    </div>
 <mat-card class="container_coronavirus">
     <h2 class="text-center" style="color: white;background-color: #00a9e0;padding: 5px;">Registro de Estado</h2>
-
-
     <hr>
     <div class="row">
         <!-- <div class="col-md-3">
@@ -145,23 +147,29 @@
                     <div class="form-group">
                         <label>Telefóno de contacto
                             :</label>
-                        <input type="text" formControlName="phone"
+                        <tdp-st-input-text class="text-center" color="info" styleinput="outline" formControlName="phone"
+                         placeholder="##########" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                        </tdp-st-input-text>
+                        <!-- <input type="text" formControlName="phone"
                             class="form-control text-center" name="txt_telf_contact" placeholder="##########"
-                            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"> -->
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Dirección en caso de emergencia
                             :</label>
-                        <input type="text" formControlName="address"
-                            class="form-control text-center" name="txt_address" placeholder="Av ejemplo 123..">
+                        <tdp-st-input-text class="text-center" color="info" styleinput="outline" formControlName="address"
+                        placeholder="Av ejemplo 123..">
+                        </tdp-st-input-text>
+                        <!-- <input type="text" formControlName="address"
+                            class="form-control text-center" name="txt_address" placeholder="Av ejemplo 123.."> -->
                     </div>
                 </div>
             </div>
             <div class="row">
                
-                    <label><b>Enfermedades crónicas(Seleccione todas las opciones que te apliquen) :
+                    <label><b>Enfermedades crónicas(Seleccione todas las opciones que te apliquen)
                     </b>:</label>
                 <div class="col-100">
                     <fieldset style="border:  1px solid #00a9e0;padding: 5px;border-radius: 5px;">
@@ -173,20 +181,24 @@
                                         <!---->
 
                                         <div [style.background-color]="background_color">
-                                            <input [disabled]="txt_condition_general"
+                                            <tdp-st-checkbox  formControlName="chk2" [style.background-color]="background_color"
+                                             value="1" color="info" label="Trabajadores nacidos hasta 1960" style="color: #00a9e0;"></tdp-st-checkbox>
+                                            <!-- <input [disabled]="txt_condition_general"
                                                 [style.background-color]="background_color" type="checkbox" name="chk"
                                                 formControlName="chk2"
                                                 [value]="3">
                                             <label for="exampleCheck1"><b>Trabajadores nacidos hasta 1960</b>
-                                            </label><br>
+                                            </label><br> -->
                                         </div>
 
                                         <!---->
-                                        <input *ngIf="txt_sex_employee=='F'" type="checkbox" name="chk"
+                                        <tdp-st-checkbox *ngIf="txt_sex_employee=='F'" label="Mujeres en estado de
+                                        gestacion" formControlName="chk0" color="info" value="1"></tdp-st-checkbox><br>
+                                        <!-- <input *ngIf="txt_sex_employee=='F'" type="checkbox" name="chk"
                                         formControlName="chk0" [value]="1"
                                             style="cursor:pointer">
                                         <label *ngIf="txt_sex_employee=='F'" for="exampleCheck1"><b>Mujeres en estado de
-                                            gestacion</b></label><br>
+                                            gestacion</b></label><br> -->
                                         <!---->
                                         <!-- <input type="checkbox" name="chk" [(ngModel)]="txt_chk_1"
                                                 [ngModelOptions]="{standalone: true}" [value]="2"  style="cursor:pointer"> -->
@@ -243,32 +255,39 @@
                                             <!-- input type text group Enfermedades cardiovasculares -->
                                             <div *ngIf="condition_Enfermedades_cardiovasculares" class="col-md-12">
                                                 <label><b>Otro tipo de Enfermedades cardiovasculares :</b></label>
-                                                <input type="text" [disabled]="condition_legal_entity  && level_access==1" style="width: 100%;"
+                                                <tdp-st-input-text formControlName="cardiovasculares" placeholder="Ingresar otro tipo de enfermedad"
+                                                styleinput="outline"></tdp-st-input-text>
+                                                <!-- <input type="text" [disabled]="condition_legal_entity  && level_access==1" style="width: 100%;"
                                                     formControlName="cardiovasculares"
                                                     class="form-control"
                                                     placeholder="Ingresar otro tipo de enfermedad"
-                                                    name="txt_other_cardio">
+                                                    name="txt_other_cardio"> -->
                                             </div>
                                             <!-- input type text group Enfermedades pulmonares cronicas-->
                                             <div *ngIf="condition_Enfermedades_pulmonares" class="col-md-12">
                                                 <label><b>Otro tipo de Enfermedades pulmonares cronicas :</b></label>
-                                                <input type="text" [disabled]="condition_legal_entity  && level_access==1" style="width: 100%;"
+                                                <tdp-st-input-text formControlName="pulmonare" placeholder="Ingresar otro tipo de enfermedad"
+                                                styleinput="outline" [disabled]="condition_legal_entity  && level_access==1"></tdp-st-input-text>
+                                                <!-- <input type="text" [disabled]="condition_legal_entity  && level_access==1" style="width: 100%;"
                                                 formControlName="pulmonare"
                                                 class="form-control"
                                                 placeholder="Ingresar otro tipo de enfermedad"
-                                                name="txt_other_pulm">
+                                                name="txt_other_pulm"> -->
                                             </div>
                                             <!-- input type text group Enfermedades de inmunosupresion-->
                                             <div *ngIf="condition_Enfermedades_inmunosupresion" class="col-md-12">
                                                 <label><b>Otro tipo de Enfermedades de inmunosupresion :</b></label>
-                                                <input type="text"  [disabled]="condition_legal_entity  && level_access==1"  style="width: 100%;"
+                                                <tdp-st-input-text formControlName="inmunosupresion" placeholder="Ingresar otro tipo de enfermedad"
+                                                styleinput="outline" [disabled]="condition_legal_entity  && level_access==1"></tdp-st-input-text>
+
+                                                <!-- <input type="text"  [disabled]="condition_legal_entity  && level_access==1"  style="width: 100%;"
                                                     formControlName="inmunosupresion"
                                                     class="form-control"
                                                     placeholder="Ingresar otro tipo de enfermedad"
-                                                    name="txt_other_inmu">
+                                                    name="txt_other_inmu"> -->
                                             </div>
                                         </div><br>
-                                        <div *ngIf="condition_upload_document" class="form-inline">
+                                        <div  class="form-inline">
 
                                             <section class="container_checkbox1" id="container_chk_1">
 
@@ -278,15 +297,23 @@
                                                                     class="font-style flaticon2-medical-records label-obs">
                                                                     Adjuntar documento :</p>
                                                             </div>
-                                                            <div class="col-xs-12 col-sm-12 col-md-4"><input type="text"
+                                                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                                                <tdp-st-input-text [style.background-color]="background_color"
+                                                                formControlName="filenameazure"
+                                                                placeholder="Ingresar otro tipo de enfermedad"
+                                                                styleinput="outline" 
+                                                                [disabled]="condition_legal_entity  && level_access==1"
+                                                                disabled="true" style="border: 2px solid #00a9e0;background-color: #00a9e0;color: #ffffff;"></tdp-st-input-text>
+
+                                                                <!-- <input type="text"
                                                                     name="txt_filename" class="form-control"
                                                                     style="width: 100%;"
                                                                     [style.background-color]="background_color"
                                                                     formControlName="filenameazure"
-                                                                    readonly>
+                                                                    readonly> -->
                                                             </div>
-                                                            <div class="col-xs-12 col-sm-12 col-md-2" [hidden]="condition_legal_entity  && level_access==1"> <button
-                                                                    for="btn-file"
+                                                            <div class="col-xs-12 col-sm-12 col-md-2" [hidden]="condition_legal_entity  && level_access==1">
+                                                                 <button for="btn-file"
                                                                     class="btn btn-block btn_savedatacondition">Examinar</button>
                                                                 <input  [disabled]="condition_legal_entity  && level_access==1"  type="file" id="btn-file" name="btnfileCondition"
                                                                     (change)="uploadFileHome($event)" #btnfileCondition>
@@ -296,65 +323,99 @@
                                                                     class="fas fa-download btn-download"></i></div>
                                                 </div>
                                                 <hr>
-                                                <div class="row">
-                                                    <span class="badge-primary" style="margin:15px;padding:10px;color:white"><b>Si tienes alguna consulta,duda o deseas realizar alguna modificación de las enfermedades crónicas reportadas comunícate con Carlos Ramirez al correo carlos.ramirezla@telefonica.com</b></span>
-                                                    </div>
+                                                <div class="row bg-danger" style="overflow: auto;">
+                                                <div class="col-md-12 col-lg-12" style="padding:10px;color:white;background-color: #00a9e0;">
+                                                <p>Si tienes alguna consulta,duda o deseas realizar alguna modificación de las enfermedades crónicas reportadas comunícate con Carlos Ramirez al correo carlos.ramirezla@telefonica.com</p>
+                                                </div>
+                                                </div>
                                             </section>
                                         </div>
                                         <div *ngIf="false" [style.background-color]="background_color">
-                                            <input [disabled]="txt_condition_general"
+                                            <tdp-st-checkbox  [disabled]="txt_condition_general"
+                                            label="Otro tipo de factor de riesgo" formControlName="chk11"
+                                             color="info" value="1"></tdp-st-checkbox><br>
+                                            <!-- <input [disabled]="txt_condition_general"
                                                 [style.background-color]="background_color" type="checkbox" name="chk"
                                                 formControlName="chk11"
                                                 [value]="3">
                                             <label for="exampleCheck1"><b>Otro tipo de factor de riesgo</b>
-                                            </label><br>
+                                            </label><br> -->
                                         </div>
                                         <div *ngIf="false" [style.background-color]="background_color">
-                                            <input [disabled]="txt_condition_general"
+                                            <tdp-st-checkbox  [disabled]="txt_condition_general"
+                                            label="Al cuidado de un familiar" formControlName="chk12"
+                                             color="info" value="1"></tdp-st-checkbox><br>
+                                            <!-- <input [disabled]="txt_condition_general"
                                                 [style.background-color]="background_color" type="checkbox" name="chk"
                                                 formControlName="chk12"
                                                 [value]="3">
                                             <label for="exampleCheck1"><b>Al cuidado de un familiar</b>
-                                            </label><br>
+                                            </label><br> -->
                                         </div>
                                     </fieldset>
 
-                                    <fieldset *ngIf="!txt_condition_general">
+                                    <fieldset *ngIf="!txt_condition_general" style="border: 1px groove #00a9e0;">
                                         <legend>Otros :</legend>
-
-                                        <input type="checkbox" name="chk" formControlName="chk3" [value]="4" style="cursor:pointer">
+                                        <tdp-st-checkbox  [disabled]="txt_condition_general"
+                                        label="Personal con licencia Sindical" formControlName="chk3"
+                                        color="info" value="1"></tdp-st-checkbox><br>
+                                        <!-- <input type="checkbox" name="chk" formControlName="chk3" [value]="4" style="cursor:pointer">
                                         <label for="exampleCheck1"><b>Personal con licencia Sindical</b>
-                                        </label><br>
-                                        <input type="checkbox" name="chk" formControlName="chk4" [value]="5" style="cursor:pointer">
+                                        </label><br> -->
+                                        <tdp-st-checkbox  [disabled]="txt_condition_general"
+                                        label="Personal con Licencia por periodo de Lactancia" formControlName="chk4"
+                                        color="info" value="1"></tdp-st-checkbox><br>
+                                        <!-- <input type="checkbox" name="chk" formControlName="chk4" [value]="5" style="cursor:pointer">
                                         <label for="exampleCheck1"><b>Personal con Licencia por periodo de Lactancia</b>
-                                        </label><br>
-                                        <input type="checkbox" name="chk" formControlName="chk5" [value]="6" style="cursor:pointer">
+                                        </label><br> -->
+                                        <tdp-st-checkbox  [disabled]="txt_condition_general"
+                                        label="Personal Licencia Médica" formControlName="chk5"
+                                        color="info" value="1"></tdp-st-checkbox><br>
+
+                                        <!-- <input type="checkbox" name="chk" formControlName="chk5" [value]="6" style="cursor:pointer">
                                         <label for="exampleCheck1"><b>Personal Licencia Médica</b>
-                                        </label><br>
-                                        <input type="checkbox" name="chk" formControlName="chk6" [value]="7" style="cursor:pointer">
+                                        </label><br> -->
+
+                                        <tdp-st-checkbox  [disabled]="txt_condition_general"
+                                        label="Otras Licencias" formControlName="chk6"
+                                        color="info" value="1"></tdp-st-checkbox><br>
+                                        <!-- <input type="checkbox" name="chk" formControlName="chk6" [value]="7" style="cursor:pointer">
                                         <label for="exampleCheck1"><b>Otras Licencias</b>
-                                        </label><br>
-                                        <input type="checkbox" name="chk" formControlName="chk7" [value]="8" style="cursor:pointer">
+                                        </label><br> -->
+
+                                        <tdp-st-checkbox  [disabled]="txt_condition_general"
+                                        label="Nuevos requerimientos Personas que necesita
+                                        CITRIX/VPN
+                                        para sumarse al trabajar remoto" formControlName="chk7"
+                                        color="info" value="1"></tdp-st-checkbox><br>
+
+                                        <!-- <input type="checkbox" name="chk" formControlName="chk7" [value]="8" style="cursor:pointer">
                                         <label for="exampleCheck1"><b>Nuevos requerimientos Personas que necesita
                                             CITRIX/VPN
                                             para sumarse al trabajar remoto</b>
-                                        </label><br>
+                                        </label><br> -->
 
-                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_9"
-                                            [ngModelOptions]="{standalone: true}" [value]="10" style="cursor:pointer">
+                                        <tdp-st-checkbox  [disabled]="txt_condition_general"
+                                        label="Contacto con persona con resultado positivo" formControlName="chk9"
+                                        color="info" value="1"></tdp-st-checkbox><br>
+
+                                        <!-- <input type="checkbox" name="chk" formControlName="chk9" [value]="10" style="cursor:pointer">
                                         <label for="exampleCheck1"><b>Contacto con persona con resultado positivo</b>
-                                        </label>
+                                        </label> -->
+
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <input type="checkbox" name="chk" [(ngModel)]="txt_chk_8"
-                                                    [ngModelOptions]="{standalone: true}" [value]="9"
+                                                <tdp-st-checkbox  [disabled]="txt_condition_general"
+                                                label="Personal sin retorno al país" formControlName="chk8"
+                                                color="info" value="1"></tdp-st-checkbox><br>
+
+                                                <!-- <input type="checkbox" name="chk" formControlName="chk8" [value]="9"
                                                     style="cursor:pointer">
                                                 <label for="exampleCheck1"><b>Personal sin retorno al país</b>
-                                                </label>
+                                                </label> -->
                                             </div>
                                             <div *ngIf="txt_chk_8==true" class="col-md-7">
-                                                <mat-select [(ngModel)]="txt_country"
-                                                    [ngModelOptions]="{standalone: true}" class="form-control">
+                                                <mat-select formControlName="country" class="form-control">
                                                     <mat-option>None</mat-option>
                                                     <mat-option *ngFor="let value of array_corona_country"
                                                         [value]="value.id">
@@ -382,8 +443,7 @@
                                         <br>
                                         <div class="form-group">
                                             <label><b># Selecciona el medio de transporte para ir a tu lugar de trabajo :</b></label>
-                                            <mat-select [(ngModel)]="txt_transport"
-                                                [ngModelOptions]="{standalone: true}"
+                                            <mat-select formControlName="transport"
                                                 class="form-control"
                                                 style="width: 100%;border:1px solid green;padding:5;">
                                                 <mat-option
@@ -406,6 +466,15 @@
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
                                         <div class="input-group">
+                                            <!-- <tdp-st-input-text
+                                            formControlName="weight"
+                                            placeholder="Colocar el peso en Kg"
+                                            styleinput="outline" 
+                                            (tdpOnChange)="caculate_imc()"
+                                            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+                                            >
+                                            
+                                            </tdp-st-input-text> -->
                                             <input type="text"  class="form-control"
                                             ngDefaultControl 
                                             (change)="caculate_imc()" formControlName="weight"
@@ -419,7 +488,16 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
-                                    <div class="input-group">     
+                                    <div class="input-group">   
+                                        <!-- <tdp-st-input-text
+                                        formControlName="height"
+                                        placeholder="Colocar su altura en cm"
+                                        styleinput="outline" 
+                                        (tdpOnChange)="caculate_imc()"
+                                        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+                                        >
+                                        
+                                        </tdp-st-input-text>  --> 
                                         <input type="text"  class="form-control"
                                         ngDefaultControl 
                                         (change)="caculate_imc()" formControlName="height"
@@ -434,9 +512,16 @@
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text"  class="form-control"
-                                    
-                                    (change)="caculate_imc()" formControlName="imc">     
+                                        <!-- <tdp-st-input-text
+                                        formControlName="imc"
+                                        placeholder="0"
+                                        styleinput="outline" 
+                                        (tdpOnChange)="caculate_imc()"
+                                        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+                                        >
+                                        </tdp-st-input-text>  --> 
+                                    <input type="text"  class="form-control"
+                                    (change)="caculate_imc()" formControlName="imc">   
                                     <p style="margin-left: 5px;margin-top: 7px;"><b>IMC</b></p>
                                     </div>
                                     </div>
@@ -457,13 +542,13 @@
                                             de Riesgo?</b>
                                         </label><br>
                                         <fieldset>
-                                            <tdp-st-radio-group formControlName="chk10"  (change)="showModalRelationship(chk10)">
-                                                <tdp-st-radio [value]="1">
+                                            <tdp-st-radio-group formControlName="chk10"  (tdpOnClick)="showModalRelationship(1)">
+                                                <tdp-st-radio color="info" label="Sí" value="1">
                                                     
-                                                </tdp-st-radio>Sí
-                                                <tdp-st-radio [value]="0">
+                                                </tdp-st-radio>
+                                                <tdp-st-radio color="info" label="No" value="0">
                                                     
-                                                </tdp-st-radio>No
+                                                </tdp-st-radio>
                                             </tdp-st-radio-group>
                                             <!-- <mat-radio-group formControlName="chk10">
                                                     <mat-radio-button  [value]="1">
@@ -477,7 +562,7 @@
                                             
                                         </fieldset>
                                         <button *ngIf="txt_chk_10==1?true:false" class="btn btn_showRelataionship"
-                                            (click)="show_modal_relationship(2)"
+                                            (tdpOnClick)="showModalRelationship('2')"
                                             style="margin-left: 10px;">Agregar otra persona</button>
                                     </div>
                                     <!--Table : Show family-->
@@ -550,47 +635,20 @@
             </div> -->
 
             <div class="row">
-                <div class="col-100">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <label>Comentario:</label><br>
-                        <textarea formControlName="comment" class="txt-area"
-                            matInput placeholder="Por ejemplo: Tengo sintomas como resfrio,fiebre, etc."></textarea>
+                        <label>Comentario:</label>
+                        <tdp-st-textarea  class="txt-area" formControlName="comment"
+                        placeholder="Por ejemplo : Tengo sintomas como resfrio,fiebre, etc."
+                        >
+                        </tdp-st-textarea>
+                        <!-- <textarea formControlName="comment" class="txt-area"
+                            matInput placeholder="Por ejemplo : Tengo sintomas como resfrio,fiebre, etc."></textarea> -->
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div *ngIf="false" class="col-100">
-                    <div class="form-group">
-                        <label>Documentos adjuntos
-
-                            :</label>
-                        <button class="btn btn-block btn-primary">
-                            Adjuntar documentos
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div *ngIf="false" class="col-100">
-                    <div class="form-group">
-                        <label>Fecha de Fin
-
-                            :</label>
-                        <div class="form-inline">
-                            <input class="text-center form-control col-xs-12 col-sm-10 col-md-10 col-lg-10"
-                                [matDatepicker]="picker2"  name="fecha2"
-                                formControlName="date2" placeholder="YYYY-MM-DD">
-                            <mat-datepicker-toggle class="col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker" matSuffix
-                                [for]="picker2">
-                            </mat-datepicker-toggle>
-                            <mat-datepicker #picker2></mat-datepicker>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div *ngIf="txt_condition_status" class="row">
+            <!-- <div *ngIf="txt_condition_status" class="row">
                 <div class="col-100">
                     <div class="form-group">
                         <label>Comentario:</label><br>
@@ -599,7 +657,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-md-12" style="color: #954B97;padding: 5px;text-transform: uppercase;">
                     Toda información que sea declarada y registrada a través de este portal web será empleada por la

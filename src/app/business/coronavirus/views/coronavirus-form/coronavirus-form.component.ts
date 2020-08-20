@@ -174,7 +174,8 @@ this.coronavirusForm = this.fb.group({
   cardiovasculares:new FormControl(''),
   pulmonare:new FormControl(''),
   inmunosupresion:new FormControl(''),
-  filenameazure:new FormControl(''),
+  filenameazure:new FormControl('ejemplo.txt'),
+  country:new FormControl(0),
   chk0:new FormControl(false),
   chk1:new FormControl(false),
   chk2:new FormControl(false),
@@ -189,7 +190,7 @@ this.coronavirusForm = this.fb.group({
   chk11:new FormControl(false),
   chk12:new FormControl(false),
   transport:new FormControl(0),
-  comment:new FormControl('')
+  comment:new FormControl('Por ejemplo : Tengo sintomas como resfrio,fiebre, etc.')
 })
 }
 onNoClick(): void {
@@ -295,7 +296,6 @@ getDataFormCoronavirus(id_employee: any) {
     "id_emp": this.txt_id_employee
   }
   this.http.post(API_POST_CORONAVIRUS_CBO, Json, {}).toPromise().then(data => {
-    console.log(data);
     if(data["status"]==true){
     this.array_corona_reason = data["array_r"]
     this.array_corona_status = data["array"]
@@ -631,13 +631,14 @@ register_corona_request() {
 
 showModalRelationship(param: any) {
   console.log(param);
-  console.log(this.coronavirusForm.get("chk10").value)
+  let idRelationship=this.coronavirusForm.get("chk10").value;
   let dialogRef: any;
     if (param == 1) {
-      if (this.coronavirusForm.get("chk10").value != 0) {
+      console.log("Entro aqui")
+      if (idRelationship != 0) {
         dialogRef = this.dialog.open(ModalCoronavirusRelationshipComponent, {
-          width: '70%',
-          height: '500px',
+          width: '80%',
+          height: '550px',
           /*recive el dato como un diccionario de datos {key:value}*/
           data: {
             array_Relationship: this.array_corona_relationship,
@@ -647,13 +648,13 @@ showModalRelationship(param: any) {
         });
       }
     }
-    if(this.txt_chk_10==0){
+    if(idRelationship==0){
       this.txt_condition_show_table=false;
     }
     if (param == 2) {
       dialogRef = this.dialog.open(ModalCoronavirusRelationshipComponent, {
-        width: '70%',
-        height: '500px',
+        width: '80%',
+        height: '550px',
         /*recive el dato como un diccionario de datos {key:value}*/
         data: {
           array_Relationship: this.array_corona_relationship,

@@ -375,8 +375,8 @@ export class CoronavirusAdminComponent implements OnInit {
   }
   ngOnInit() {
     setTimeout(() => {
-      this.loaderSubjectService.showLoader("Cargando componentes..");
-      this.initData();
+      /* this.loaderSubjectService.showLoader("Cargando componentes..");
+      this.initData(); */
       /* this.loaderSubjectService.closeLoader(); */
     }, 300);
     

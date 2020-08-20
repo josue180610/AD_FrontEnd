@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RequestFamily } from '../models/corona_request_family';
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'tdp-modal-coronavirus-relationship',
@@ -10,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./modal-coronavirus-relationship.component.scss']
 })
 export class ModalCoronavirusRelationshipComponent implements OnInit {
+  relationGroup:FormGroup
   txt_name_relationship = "";
   array_corona_relationship_value: Array<RequestFamily> = []
   aux_array_corona_relationship_value: Array<RequestFamily> = []
@@ -31,8 +33,26 @@ export class ModalCoronavirusRelationshipComponent implements OnInit {
   constructor(
     private http:HttpClient,
     private dialogRef:MatDialogRef<ModalCoronavirusRelationshipComponent>,
-    @Inject(MAT_DIALOG_DATA) private data:any
-  ) { }
+    @Inject(MAT_DIALOG_DATA) private data:any,
+    private fb:FormBuilder
+  ) { 
+    this.createFormGroup();
+  }
+  createFormGroup(){
+    this.relationGroup=this.fb.group({
+      chk1:new FormControl(false),
+      chk2:new FormControl(false),
+      chk3:new FormControl(false),
+      chk4:new FormControl(false),
+      name:new FormControl(""),
+      lastName1:new FormControl(""),
+      lastName2:new FormControl(""),
+      comment:new FormControl(""),
+      relationship:new FormControl(0),
+      otherRelationship:new FormControl(""),
+      
+    })
+  }
   clean_inputs() {
     this.txt_name = "";
     this.txt_last_name_1 = "";

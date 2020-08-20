@@ -254,3 +254,14 @@ table tr td label{
   [type="file"]:focus + label {
     outline: 1px dotted #000;
   }
+  .close-icon{
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    color: #ffffff;
+    border-radius: 30px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 15px;
+    cursor: pointer;
+}
