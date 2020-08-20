@@ -10,7 +10,6 @@ const MAIN_URL_MAILING_LOCAL = "http://localhost:5000";
 const MAIN_URL_LOCAL_PYTHON="http://localhost:5000";
 //==============================================================================================
 //GENERAL URL AQUI CAMBIAR
-
 const MAIN_URL = MAIN_URL_LOCAL_PYTHON;
 
 //SESSION
