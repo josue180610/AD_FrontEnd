@@ -4,7 +4,7 @@ import { API_TER_GEN_ACCESS, API_TER_STARTERDATA, API_TER_SEDES } from '../../..
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Sintomas,Transport } from '../../terceros.models';
+import { ISintomas,ITransport } from '../../terceros.models';
 import { ModalSignComponent } from '../modal-sign/modal-sign.component';
 import { ModalQrComponent } from '../modal-qr/modal-qr.component';
 
@@ -100,7 +100,7 @@ export class FormTercerosComponent implements OnInit {
   tab2disabled:boolean = true;
   // BLOQUE 1
   coronaContactFlag:boolean=false;
-  sintomas:Sintomas[] = [ ];  
+  sintomas:ISintomas[] = [ ];  
   checkboxdj:boolean = false;
 
   changeToggle(e){
@@ -199,8 +199,8 @@ export class FormTercerosComponent implements OnInit {
   sede_option:number = 0;
   transport_option:number = 0;
   piso:string = '';
-  transports:Transport[]=[];  
-  transports_detail:Transport[]=[];
+  transports:ITransport[]=[];  
+  transports_detail:ITransport[]=[];
   transports_detail_active:boolean=false;
   transport_type:number=0;
   

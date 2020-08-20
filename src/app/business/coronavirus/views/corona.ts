@@ -1,4 +1,4 @@
-export interface obj_request_condition {
+export interface IObjRequestCondition {
     id_employee: any;
     id_cor_con_det: any;
     other_cor_det: any;

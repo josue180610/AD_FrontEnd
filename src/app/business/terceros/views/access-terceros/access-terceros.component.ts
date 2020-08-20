@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { LoaderSubjectService } from '../../../../../app/commons/components/loader/loader-subject.service';
-import { Tercero, Employee } from '../../terceros.models';
+import { Tercero, IEmployee } from '../../terceros.models';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { API_TER__ACCESS_VALIDATION__, API_TER_POST_AGREE_EMPLOYEE, API_TER__ACCESS_REGISTER__ } from '../../../../../app/services/url.constants';
@@ -324,7 +324,7 @@ export class AccessTercerosComponent implements OnInit {
   saveData(){
     
     if(this.userType=="E"){
-      let employee : Employee
+      let employee : IEmployee
         employee={idEmployee:this.supplier.id,temperature:this.temperature,
         comment:this.comments,typeMove:this.movetype,
         sede:this.supplier["sede"]==null?0:this.supplier["sede"],

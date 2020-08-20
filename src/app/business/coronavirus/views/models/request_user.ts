@@ -1,4 +1,4 @@
-export class requestUser{
+export class RequestUser{
     id:any;
     status:any;
     name:any;

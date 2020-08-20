@@ -1,4 +1,4 @@
-export class employee_json{
+export class EmployeeJson{
     id:number;
     nationalId:string;
     name:string;

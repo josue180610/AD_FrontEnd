@@ -1,13 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { admi_data } from '../models/coronavirus_admi_data';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { coronaEmployee, officeAccess } from '../models/corona.models';
 import { Coronavirus } from '../models/coronavirus_generic';
-import { coronaCondition } from '../models/corona_condition';
-import { request_condition } from '../models/corona_request_condition';
-import { Coronavirus_edit } from '../models/coronavirus_edit';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { API_SAVE_MASSIVE_DATA_REQUEST, API_GET_CORONAVIRUS_PRECONDITION_EDIT, API_CORONA_SEARCHEMPLOYEES, API_POST_CORONAVIRUS_CBO, API_GET_FIND_BY_STATUS, API_CORONA_REQUESTDETAIL } from '../../../../../app/services/url.constants';
@@ -15,6 +10,12 @@ import { ModalCoronavirusReportComponent } from '../modal-coronavirus-report/mod
 import Swal from 'sweetalert2';
 import { CoronavirusFormComponent } from '../coronavirus-form/coronavirus-form.component';
 import { LoaderSubjectService } from '../../../../../app/commons/components/loader/loader-subject.service';
+import { AdmiData } from '../models/coronavirus_admi_data';
+import { CoronaCondition } from '../models/corona_condition';
+import { RequestCondition } from '../models/corona_request_condition';
+import { IOfficeAccess, ICoronaEmployee } from '../models/corona.models';
+import { CoronavirusEdit } from '../models/coronavirus_edit';
+import { AuthService } from '../../../../../app/services/auth-config-service';
 @Component({
   selector: 'tdp-coronavirus-admin',
   templateUrl: './coronavirus-admin.component.html',
@@ -31,7 +32,7 @@ export class CoronavirusAdminComponent implements OnInit {
   displayedColumns: string[] = ['CIP', 'EMPLEADO', 'DNI', 'SITUACION'
     , 'FECHA EFECTIVA DE SITUACION', 'CONDICIONES', 'TIPO', 'FECHA EFECTIVA DE TIPO DE PERMANENCIA',
     'ESTADO', 'PAIS','COMENTARIO','ACCIONES'];
-  dataSource: MatTableDataSource<admi_data>;
+  dataSource: MatTableDataSource<AdmiData>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -49,20 +50,20 @@ export class CoronavirusAdminComponent implements OnInit {
   txt_chk_8: any = false;
   txt_chk_9: any = false;
   txt_chk_generic: any;
-  array_cronica: Array<coronaCondition> = []
-  array_request_condition:Array<request_condition>=[]
+  array_cronica: Array<CoronaCondition> = []
+  array_request_condition:Array<RequestCondition>=[]
   condition_cronica = false;
   condition_precondition = false;
   //paginacion
   items = [];
 
   // VARS
-  searchResults: Array<admi_data> = [];
-  array_condition: Array<admi_data> = [];
+  searchResults: Array<AdmiData> = [];
+  array_condition: Array<AdmiData> = [];
   loading: boolean = false;
   showDetail: boolean = false;
-  personDetails: coronaEmployee;
-  array_access:Array<officeAccess>=[{id:1,name:"Permitido"},{id:0,name:"Restringido"}]
+  personDetails: ICoronaEmployee;
+  array_access:Array<IOfficeAccess>=[{id:1,name:"Permitido"},{id:0,name:"Restringido"}]
   byemployeeinp: String = "";
   array_corona_status: Array<Coronavirus> = []
   array_corona_type: Array<Coronavirus> = []
@@ -78,11 +79,11 @@ export class CoronavirusAdminComponent implements OnInit {
  //roles
  array_id_role:Array<any>=[];
   userLogged = null;
-  object_precondition: Coronavirus_edit;
+  object_precondition: CoronavirusEdit;
   constructor( public dialog: MatDialog, private http: HttpClient, private ref: ChangeDetectorRef,
-  private loaderSubjectService: LoaderSubjectService) {
+  private loaderSubjectService: LoaderSubjectService, private token:AuthService) {
     /* this.tokenServ = new TokenService();  */ 
-
+    this.token.getValidateMenuByUser("Administración");
    }
    onChangePage(pageOfItems: Array<any>) {
     // update current page of items
@@ -107,7 +108,7 @@ export class CoronavirusAdminComponent implements OnInit {
 
   showPrecondition(id_emp) {
     let param = "?id_employee=" + id_emp;
-    this.http.get<Coronavirus_edit>(API_GET_CORONAVIRUS_PRECONDITION_EDIT + param).subscribe(data => {
+    this.http.get<CoronavirusEdit>(API_GET_CORONAVIRUS_PRECONDITION_EDIT + param).subscribe(data => {
       this.object_precondition = data;
       this.txt_chk_0 = this.object_precondition.precondition_1 == 1 ? this.txt_chk_0 = true : this.txt_chk_0 = false;
       this.txt_chk_1 = this.object_precondition.precondition_2 == 1 ? this.txt_chk_1 = true : this.txt_chk_1 = false;
@@ -128,7 +129,7 @@ export class CoronavirusAdminComponent implements OnInit {
     const request = { filter: this.byemployeeinp, role_x:this.array_id_role }
     this.loading = true;
     /* this.blockUI.start("Loading...."); */
-    this.http.post<admi_data[]>(API_CORONA_SEARCHEMPLOYEES, request).toPromise().then(resp => {
+    this.http.post<AdmiData[]>(API_CORONA_SEARCHEMPLOYEES, request).toPromise().then(resp => {
       try {
         this.searchResults = resp["results"]
       this.array_cronica = resp["results"]["0"]["array_cronico"]
@@ -191,7 +192,7 @@ export class CoronavirusAdminComponent implements OnInit {
     let param = {"status":id_status_det,
                   "param":this.array_id_role};
     /* this.blockUI.start("Loading...."); */
-    this.http.post<admi_data[]>(API_GET_FIND_BY_STATUS,param,{}).toPromise().then(data => {
+    this.http.post<AdmiData[]>(API_GET_FIND_BY_STATUS,param,{}).toPromise().then(data => {
       try {
         this.searchResults = data;
         this.array_cronica = data.length == 0 ? [] : data["0"]["array_cronico"];
@@ -226,7 +227,7 @@ export class CoronavirusAdminComponent implements OnInit {
     this.txt_reason = "";
     this.txt_access="";
   }
-  showDetails(emp: coronaEmployee) {
+  showDetails(emp: ICoronaEmployee) {
     this.showDetail = true;
     this.personDetails = emp;
     if (emp.id_request) {

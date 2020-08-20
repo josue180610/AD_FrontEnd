@@ -12,7 +12,8 @@ import {
   TDPAuthenticationModule, 
   TDPDirectivesModule,
   TDPLoggerModule,
-  TDPStorageModule
+  TDPStorageModule,
+  TDPLocalStorage
 } from '@tdp/ng-commons';
 
 import { environment } from '../environments/environment';
@@ -29,6 +30,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core'; 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AuthService } from './services/auth-config-service';
+import { DatePipe } from '@angular/common';
   
   
  @NgModule({
@@ -58,7 +61,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     NgxPaginationModule,
     HttpClientModule  
    ],
-  providers: [
+  providers: [AuthService,DatePipe,TDPLocalStorage,
     {  provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent]

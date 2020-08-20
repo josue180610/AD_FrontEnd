@@ -26,7 +26,6 @@ export class LoaderComponent implements OnInit, OnDestroy {
 
   private loaderSubscription() {
     this.loaderSubscriptionRef = this.loaderSubjectService.loader$.subscribe((state) => {
-      console.log(state)
       this.showLoader = state["condition"];
       if (this.showLoader==true){
         this.message=state["message"]

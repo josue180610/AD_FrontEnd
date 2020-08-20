@@ -1,4 +1,4 @@
-export interface coronaEmployee{
+export interface ICoronaEmployee{
     id:number,
     name:String,
     cip:String,
@@ -10,7 +10,7 @@ export interface coronaEmployee{
     id_request?:number,
     details?:[]
 }
-export interface officeAccess{
+export interface IOfficeAccess{
     id:any;
     name:any;
   }

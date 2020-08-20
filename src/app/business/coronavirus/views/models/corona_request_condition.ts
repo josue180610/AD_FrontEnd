@@ -1,4 +1,4 @@
-export class request_condition{
+export class RequestCondition{
 updated_at: any;
 other_chronic_diseases: any;
 status: any;

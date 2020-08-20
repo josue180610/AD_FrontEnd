@@ -23,28 +23,28 @@ export interface Idelete{
 export interface Icode{
   id:any;
 }
-export interface company{
+export interface ICompany{
   id:any;
   name:any;
 
 }
-export interface Transport{
+export interface ITransport{
   id:number;
   description:string;
   icon:string;
   type:boolean;   
 }
 
-export interface companyService{
+export interface ICompanyService{
   id:any;
   id_company:any;
   name:any;
 }
-export interface suppServices{
+export interface ISuppServices{
     id:any;
     name:any;
   }
-  export interface servicesDisabled{
+  export interface IServicesDisabled{
     idSupplier:any;
     idService: any;
     supplierName:any;
@@ -53,20 +53,20 @@ export interface suppServices{
     condition: any;
     dateDisabled:any;
   }
-export interface Sintomas{
+export interface ISintomas{
     id:number;
     description:string;
     icon:string;
     option?:boolean;
     touched?:boolean;     
 }
-export interface showMngTdp{
+export interface IShowMngTdp{
     id:any;
     fullname:any;
     national_id:any;
     cip:any;
   }
-export interface Transport{
+export interface ITransport{
     id:number;
     description:string;
     icon:string;
@@ -74,7 +74,7 @@ export interface Transport{
 }
 
 
-export interface Employee{
+export interface IEmployee{
 idEmployee:any;
 temperature:any;
 comment:any;
@@ -88,31 +88,31 @@ nationalId:any;
 timezone:any;
 }
 
-export interface Company {
+export interface ICompany {
     id:any;
     status:any;
     code:any;
     name:any;
 }
 
-export interface cService{
+export interface ICService{
     id:any;
     name:any;
 }
 
-export interface requestUserServ{
+export interface IRequestUserServ{
     id_serv:any;
     id_user:any;
     created_by:any;
     updated_by:any;
 }
-export interface changeSupp{
+export interface IChangeSupp{
     idSupp:any;
     idServ:any;
     created_by:any;
     updated_by:any;
   }
-export interface employeeData{
+export interface IEmployeeData{
     cip:any;
     id:any;
     last_name_1:any;
@@ -123,7 +123,7 @@ export interface employeeData{
     national_id;
   }
 
-export interface reportData{
+export interface IReportData{
     dni:any;
     name:any;
     lastName1:any;

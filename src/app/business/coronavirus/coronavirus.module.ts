@@ -20,15 +20,20 @@ import { ModalCoronavirusReportComponent } from './views/modal-coronavirus-repor
 import { ModalCoronavirusSympComponent } from './views/modal-coronavirus-symp/modal-coronavirus-symp.component';
 import {MatIconModule} from '@angular/material/icon'; 
 import { LoaderComponent } from '../../../app/commons/components/loader/loader.component';
+import { coronavirusFormReactive } from './views/coronavirus-form/CoronaFormReactive';
+import { AuthService } from '../../../app/services/auth-config-service';
+import { TDPDirectivesModule } from "@tdp/ng-commons";
+
 @NgModule({
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
   ],
-  providers: [DatePipe,LoaderComponent],
+  providers: [DatePipe,LoaderComponent,AuthService],
   entryComponents: [ModalCoronavirusRelationshipComponent,ModalCoronavirusReportComponent,ModalCoronavirusSympComponent],
   declarations: [CoronavirusAdminComponent,CoronavirusCheckingComponent,CoronavirusFormComponent,CoronavirusTeamComponent,
     ModalCoronavirusRelationshipComponent,ModalCoronavirusReportComponent,ModalCoronavirusSympComponent],
   imports: [
+    TDPDirectivesModule,
     MatIconModule,
     MatPaginatorModule,
     MatTableModule,

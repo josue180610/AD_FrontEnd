@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { showMngTdp } from '../../terceros.models';
+import {  IShowMngTdp } from '../../terceros.models';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
@@ -14,7 +14,7 @@ export class ModalShowGestorTdpComponent implements OnInit {
   displayedColumns=["DOC","CIP","NAME","ACTION"]
   dataSource=null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  array_gestorTdp:Array<showMngTdp>=[]
+  array_gestorTdp:Array<IShowMngTdp>=[]
   body:any;
   constructor(@Inject(MAT_DIALOG_DATA) private data:any,
   private dialogRef:MatDialogRef<ModalShowGestorTdpComponent>,

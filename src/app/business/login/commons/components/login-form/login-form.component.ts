@@ -6,8 +6,9 @@ import { TDPLocalStorageService } from '@tdp/ng-commons';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from '../../../auth.service';
 import { URL_POST_SESSION } from '../../../../../../app/services/url.constants';
+import { Module, User } from '../../../../../../app/services/auth.model';
+import { AuthService } from '../../../../../../app/services/auth-config-service';
  
 
 // CommonJS
@@ -24,15 +25,16 @@ export class LoginFormComponent {
   loginEmailErrors = LoginEmailErrors;
   loginError = '';
   showError = false;
-
+  userDto:User;
   constructor(
     public loginFormReactive: LoginFormReactive,
     private loaderSubjectService: LoaderSubjectService,
     private localStorageService: TDPLocalStorageService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private auth:AuthService
   ) {
-    this.validateSession();
+   
   }
 
   private validateSession() {
@@ -69,8 +71,14 @@ export class LoginFormComponent {
       if (resp['auth']){
         let modules = [];
         let access = resp['modules'];
-        let user=[];
-
+        let auxAccess: Array<Module>=[]
+        let user:User
+        user=resp["user"];
+        console.log(user);
+        auxAccess=resp['modules'];
+        console.log(auxAccess)
+        localStorage.setItem("userDTO",JSON.stringify(user));
+        localStorage.setItem("permissionDTO",JSON.stringify(auxAccess));
         access.forEach(access => {
             let accesslvl = {
               accessType: access.accessType,

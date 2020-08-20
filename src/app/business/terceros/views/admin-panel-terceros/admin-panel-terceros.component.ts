@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ModalHabilitarComponent } from '../modal-habilitar/modal-habilitar.component';
 import { ModalMasiveChargeComponent } from '../modal-masive-charge/modal-masive-charge.component';
-import { Tercero, changeSupp, servicesDisabled, suppServices } from '../../terceros.models';
+import { Tercero, IChangeSupp, IServicesDisabled, ISuppServices } from '../../terceros.models';
 import Swal from 'sweetalert2';
 import { API_TER_POST_ADDNEW_GESTOR_SERVICE, API_TER_SUPPLIER_DELETE, API_TER_GET_COMPANYSERVICE_SUPP_GESTOR, API_TER_POST_SUPPLIERS_ADMIN, API_TER_SUPPLIERS } from '../../../../../app/services/url.constants';
 import { ModalNewterceroComponent } from '../modal-newtercero/modal-newtercero.component';
@@ -33,8 +33,8 @@ export class AdminPanelTercerosComponent implements OnInit {
   suppliersBack:Tercero[];
   deshabilitados:Tercero[];
   suppliersCompanyService:Array<any>=[];
-  suppliersGestorCompanyService:Array<suppServices>=[];
-  suppliersServiceDisabled:Array<servicesDisabled>=[];
+  suppliersGestorCompanyService:Array<ISuppServices>=[];
+  suppliersServiceDisabled:Array<IServicesDisabled>=[];
   supplier_id=0;
   user_id=0;
   gestorName=""
