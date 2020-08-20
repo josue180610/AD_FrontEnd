@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Inject, ChangeDetectorRef } from '@angular/core';
-import { employeeData } from '../../terceros.models';
+import {  IEmployeeData } from '../../terceros.models';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
@@ -29,7 +29,7 @@ export class ModalAddGestorTdpComponent implements OnInit {
   displayedColumns: string[] = ['CIP','DOC','NAME','LASTNAME1','LASTNAME2','ACTION'];
   dataSource=null;
   //array employee
-  lstEmployee:Array<employeeData>=[];
+  lstEmployee:Array<IEmployeeData>=[];
   constructor(@Inject(MAT_DIALOG_DATA)private data:any,
   private dialogRef:MatDialogRef<ModalAddGestorTdpComponent>,
   private dialog:MatDialog,
@@ -61,7 +61,7 @@ export class ModalAddGestorTdpComponent implements OnInit {
     /* this.blockUI.start("Loading data.."); */
     this.loaderSubjectService.showLoader("Cargando datos..");
     const request = { filter: this.byemployeeinp, role_x:this.array_id_role }
-    this.http.post<employeeData[]>(API_TER_MNG_TDP_POST, request).toPromise().then(resp => {
+    this.http.post<IEmployeeData[]>(API_TER_MNG_TDP_POST, request).toPromise().then(resp => {
       if (resp['status']==1) {
         this.lstEmployee=resp["employee"];
         
@@ -81,7 +81,7 @@ export class ModalAddGestorTdpComponent implements OnInit {
      
     })
   }
-  asignManagerTdp(emp:employeeData){
+  asignManagerTdp(emp:IEmployeeData){
     let json={
       "condition":1,
       "employee":emp

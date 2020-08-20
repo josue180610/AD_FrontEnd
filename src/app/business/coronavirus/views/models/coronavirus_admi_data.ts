@@ -1,4 +1,4 @@
-export class admi_data{
+export class AdmiData{
     id: number;
 name: string;
 cip: string;

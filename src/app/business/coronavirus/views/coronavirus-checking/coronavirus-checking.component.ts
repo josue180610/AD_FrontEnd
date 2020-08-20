@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { API_GET_CORONAVIRUS_ASSIST, API_SAVE_MASSIVE_DATA, API_POST_CORONAVIRUS_ASSIT_DATE, API_DELETE_REMOVE_ASSIST} from '../../../../../app/services/url.constants';
 import { ModalCoronavirusReportComponent } from '../modal-coronavirus-report/modal-coronavirus-report.component';
 import { LoaderSubjectService } from '../../../../../app/commons/components/loader/loader-subject.service';
+import { AuthService } from '../../../../../app/services/auth-config-service';
 
 @Component({
   selector: 'tdp-coronavirus-checking',
@@ -49,12 +50,16 @@ createForm() {
     date2: new FormControl()
  });
 }
-constructor(private ref: ChangeDetectorRef, private http:HttpClient,public dialog: MatDialog,private loaderSubjectService: LoaderSubjectService) { 
+constructor(private ref: ChangeDetectorRef, 
+  private http:HttpClient,
+  public dialog: MatDialog,
+  private loaderSubjectService: LoaderSubjectService,
+  private token:AuthService) { 
   //init variable date
   this.txt_start_date="";
   this.txt_end_date="";
   this.createForm();
-  /* this.tokenServ = new TokenService(); */  
+  this.token.getValidateMenuByUser("Asistencia");
 }
 show_report_covid19() {
   const dialogRef = this.dialog.open(ModalCoronavirusReportComponent, {

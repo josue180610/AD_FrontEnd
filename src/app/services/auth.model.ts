@@ -1,0 +1,34 @@
+export class User{
+    displayname:any;
+    employeeCustoms:{
+    id:any;
+    lastName1:any;
+    lastName2:any;
+    legalEntity:any;
+    name:any;
+    };
+    id:any;
+    mail:any;
+    roles:{
+        id:any;
+        name:any;
+    }
+    status:any;
+}
+export class Module{
+    accessType:any;
+    society:{
+        code:any;
+        id:any;
+        name:any;
+    }
+    view:{
+        code:any;
+        id:any;
+        levelAccess:any;
+        moduleCode:any;
+        moduleName:any;
+        name:any;
+        path:any;
+    }
+}

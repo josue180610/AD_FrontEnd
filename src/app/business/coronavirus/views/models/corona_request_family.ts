@@ -1,4 +1,4 @@
-export class request_family{
+export class RequestFamily{
     id:any;
     status:any;
     name:any;

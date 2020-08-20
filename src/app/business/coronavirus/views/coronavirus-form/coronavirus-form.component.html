@@ -39,7 +39,7 @@
                             <label>Situacion laboral :</label>
 
                             <mat-select [disabled]="txt_condition_general" [style.background-color]="background_color"
-                                [(ngModel)]="txt_status" [ngModelOptions]="{standalone: true}" class="form-control">
+                                formControlName="laboralCondition" class="form-control">
                                 <mat-option>None</mat-option>
                                 <mat-option *ngFor="let value of array_corona_status" [value]="value.id">
                                     {{value.name}}</mat-option>
@@ -56,7 +56,7 @@
                             :</label>
                         <div class="form-inline">
                             <input class="text-center form-control col-xs-12 col-sm-12 col-md-12 col-lg-10"
-                                [matDatepicker]="picker" [(ngModel)]="txt_reason_date" name="fecha1"
+                                [matDatepicker]="picker"  name="fecha1"
                                 formControlName="date1" placeholder="YYYY-MM-DD" [disabled]="txt_condition_general">
                             <mat-datepicker-toggle class="col-xs-12 col-sm-12 col-md-12 col-lg-2 btn-datepicker" matSuffix
                                 [for]="picker">
@@ -72,7 +72,7 @@
                     <div class="form-group">
                         <label>Tipo de presencia :</label>
                         <mat-select [disabled]="txt_condition_general" [style.background-color]="background_color"
-                            [(ngModel)]="txt_type" [ngModelOptions]="{standalone: true}" class="form-control">
+                            formControlName="laboralType" class="form-control">
                             <mat-option>None</mat-option>
                             <mat-option *ngFor="let value of array_corona_type" [value]="value.id">{{value.name}}
                             </mat-option>
@@ -87,7 +87,7 @@
                             :</label>
                         <div class="form-inline">
                             <input class="text-center form-control col-xs-12 col-sm-12 col-md-12 col-lg-10"
-                                [matDatepicker]="picker2" [(ngModel)]="txt_date_type" name="fecha2"
+                                [matDatepicker]="picker2" name="fecha2"
                                 formControlName="date2" placeholder="YYYY-MM-DD" [disabled]="txt_condition_general">
                             <mat-datepicker-toggle class="col-xs-12 col-sm-12 col-md-12 col-lg-2 btn-datepicker" matSuffix
                                 [for]="picker2">
@@ -103,8 +103,7 @@
                     <div class="form-group">
 
                         <label>Estado de salud:</label>
-                        {{txt_id_reason}}
-                        <mat-select [(ngModel)]="txt_id_reason" [ngModelOptions]="{standalone: true}"
+                        <mat-select formControlName="laboralHealtStatus"
                             class="form-control">
                             <mat-option>None</mat-option>
                             <mat-option *ngFor="let value of array_corona_reason" [value]="value.id">{{value.name}}
@@ -123,7 +122,7 @@
 
                         <label>Estado de salud:</label>
 
-                        <mat-select [(ngModel)]="txt_id_reason" [ngModelOptions]="{standalone: true}"
+                        <mat-select formControlName="laboralHealtStatus"
                             class="form-control">
                             <mat-option>None</mat-option>
                             <mat-option *ngFor="let value of array_corona_reason" [value]="value.id">{{value.name}}
@@ -146,7 +145,7 @@
                     <div class="form-group">
                         <label>Telefóno de contacto
                             :</label>
-                        <input type="text" [(ngModel)]="txt_phone" [ngModelOptions]="{standalone: true}"
+                        <input type="text" formControlName="phone"
                             class="form-control text-center" name="txt_telf_contact" placeholder="##########"
                             onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                     </div>
@@ -155,8 +154,8 @@
                     <div class="form-group">
                         <label>Dirección en caso de emergencia
                             :</label>
-                        <input type="text" [(ngModel)]="txt_address" [ngModelOptions]="{standalone: true}"
-                            class="form-control text-center" name="txt_telf_contact" placeholder="##########">
+                        <input type="text" formControlName="address"
+                            class="form-control text-center" name="txt_address" placeholder="Av ejemplo 123..">
                     </div>
                 </div>
             </div>
@@ -176,7 +175,7 @@
                                         <div [style.background-color]="background_color">
                                             <input [disabled]="txt_condition_general"
                                                 [style.background-color]="background_color" type="checkbox" name="chk"
-                                                [(ngModel)]="txt_chk_2" [ngModelOptions]="{standalone: true}"
+                                                formControlName="chk2"
                                                 [value]="3">
                                             <label for="exampleCheck1"><b>Trabajadores nacidos hasta 1960</b>
                                             </label><br>
@@ -184,7 +183,7 @@
 
                                         <!---->
                                         <input *ngIf="txt_sex_employee=='F'" type="checkbox" name="chk"
-                                            [(ngModel)]="txt_chk_0" [ngModelOptions]="{standalone: true}" [value]="1"
+                                        formControlName="chk0" [value]="1"
                                             style="cursor:pointer">
                                         <label *ngIf="txt_sex_employee=='F'" for="exampleCheck1"><b>Mujeres en estado de
                                             gestacion</b></label><br>
@@ -245,25 +244,26 @@
                                             <div *ngIf="condition_Enfermedades_cardiovasculares" class="col-md-12">
                                                 <label><b>Otro tipo de Enfermedades cardiovasculares :</b></label>
                                                 <input type="text" [disabled]="condition_legal_entity  && level_access==1" style="width: 100%;"
-                                                    [(ngModel)]="txt_cardiovasculares"
-                                                    [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    formControlName="cardiovasculares"
+                                                    class="form-control"
                                                     placeholder="Ingresar otro tipo de enfermedad"
                                                     name="txt_other_cardio">
                                             </div>
                                             <!-- input type text group Enfermedades pulmonares cronicas-->
                                             <div *ngIf="condition_Enfermedades_pulmonares" class="col-md-12">
                                                 <label><b>Otro tipo de Enfermedades pulmonares cronicas :</b></label>
-                                                <input type="text" [disabled]="condition_legal_entity  && level_access==1" style="width: 100%;" [(ngModel)]="txt_pulmonare"
-                                                    [ngModelOptions]="{standalone: true}" class="form-control"
-                                                    placeholder="Ingresar otro tipo de enfermedad"
-                                                    name="txt_other_pulm">
+                                                <input type="text" [disabled]="condition_legal_entity  && level_access==1" style="width: 100%;"
+                                                formControlName="pulmonare"
+                                                class="form-control"
+                                                placeholder="Ingresar otro tipo de enfermedad"
+                                                name="txt_other_pulm">
                                             </div>
                                             <!-- input type text group Enfermedades de inmunosupresion-->
                                             <div *ngIf="condition_Enfermedades_inmunosupresion" class="col-md-12">
                                                 <label><b>Otro tipo de Enfermedades de inmunosupresion :</b></label>
                                                 <input type="text"  [disabled]="condition_legal_entity  && level_access==1"  style="width: 100%;"
-                                                    [(ngModel)]="txt_inmunosupresion"
-                                                    [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    formControlName="inmunosupresion"
+                                                    class="form-control"
                                                     placeholder="Ingresar otro tipo de enfermedad"
                                                     name="txt_other_inmu">
                                             </div>
@@ -282,8 +282,8 @@
                                                                     name="txt_filename" class="form-control"
                                                                     style="width: 100%;"
                                                                     [style.background-color]="background_color"
-                                                                    [(ngModel)]="filenameazure"
-                                                                    [ngModelOptions]="{standalone: true}" readonly>
+                                                                    formControlName="filenameazure"
+                                                                    readonly>
                                                             </div>
                                                             <div class="col-xs-12 col-sm-12 col-md-2" [hidden]="condition_legal_entity  && level_access==1"> <button
                                                                     for="btn-file"
@@ -304,7 +304,7 @@
                                         <div *ngIf="false" [style.background-color]="background_color">
                                             <input [disabled]="txt_condition_general"
                                                 [style.background-color]="background_color" type="checkbox" name="chk"
-                                                [(ngModel)]="txt_chk_2" [ngModelOptions]="{standalone: true}"
+                                                formControlName="chk11"
                                                 [value]="3">
                                             <label for="exampleCheck1"><b>Otro tipo de factor de riesgo</b>
                                             </label><br>
@@ -312,7 +312,7 @@
                                         <div *ngIf="false" [style.background-color]="background_color">
                                             <input [disabled]="txt_condition_general"
                                                 [style.background-color]="background_color" type="checkbox" name="chk"
-                                                [(ngModel)]="txt_chk_2" [ngModelOptions]="{standalone: true}"
+                                                formControlName="chk12"
                                                 [value]="3">
                                             <label for="exampleCheck1"><b>Al cuidado de un familiar</b>
                                             </label><br>
@@ -322,24 +322,19 @@
                                     <fieldset *ngIf="!txt_condition_general">
                                         <legend>Otros :</legend>
 
-                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_3"
-                                            [ngModelOptions]="{standalone: true}" [value]="4" style="cursor:pointer">
+                                        <input type="checkbox" name="chk" formControlName="chk3" [value]="4" style="cursor:pointer">
                                         <label for="exampleCheck1"><b>Personal con licencia Sindical</b>
                                         </label><br>
-                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_4"
-                                            [ngModelOptions]="{standalone: true}" [value]="5" style="cursor:pointer">
+                                        <input type="checkbox" name="chk" formControlName="chk4" [value]="5" style="cursor:pointer">
                                         <label for="exampleCheck1"><b>Personal con Licencia por periodo de Lactancia</b>
                                         </label><br>
-                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_5"
-                                            [ngModelOptions]="{standalone: true}" [value]="6" style="cursor:pointer">
+                                        <input type="checkbox" name="chk" formControlName="chk5" [value]="6" style="cursor:pointer">
                                         <label for="exampleCheck1"><b>Personal Licencia Médica</b>
                                         </label><br>
-                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_6"
-                                            [ngModelOptions]="{standalone: true}" [value]="7" style="cursor:pointer">
+                                        <input type="checkbox" name="chk" formControlName="chk6" [value]="7" style="cursor:pointer">
                                         <label for="exampleCheck1"><b>Otras Licencias</b>
                                         </label><br>
-                                        <input type="checkbox" name="chk" [(ngModel)]="txt_chk_7"
-                                            [ngModelOptions]="{standalone: true}" [value]="8" style="cursor:pointer">
+                                        <input type="checkbox" name="chk" formControlName="chk7" [value]="8" style="cursor:pointer">
                                         <label for="exampleCheck1"><b>Nuevos requerimientos Personas que necesita
                                             CITRIX/VPN
                                             para sumarse al trabajar remoto</b>
@@ -411,10 +406,10 @@
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="text" [disabled]="txt_imc>0 && txt_pre_register==1 && level_access==1 && condition_legal_entity==true" class="form-control"
-                                            name="txt_weight" 
-                                            (change)="caculate_imc()" [(ngModel)]="txt_weight"
-                                            [ngModelOptions]="{standalone: true}"
+                                            <input type="text"  class="form-control"
+                                            ngDefaultControl 
+                                            (change)="caculate_imc()" formControlName="weight"
+                                            
                                             placeholder="Colocar el peso en Kg"
                                             onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                             <p style="margin-left: 5px;margin-top: 7px;"><b>Kg</b></p>
@@ -425,10 +420,10 @@
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
                                     <div class="input-group">     
-                                        <input type="text" [disabled]="txt_imc>0 && txt_pre_register==1 && level_access==1 && condition_legal_entity==true" class="form-control"
-                                        name="txt_weight" 
-                                        (change)="caculate_imc()" [(ngModel)]="txt_height"
-                                        [ngModelOptions]="{standalone: true}"
+                                        <input type="text"  class="form-control"
+                                        ngDefaultControl 
+                                        (change)="caculate_imc()" formControlName="height"
+                                        
                                         placeholder="Colocar su altura en cm"
                                         onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                                         <p style="margin-left: 5px;margin-top: 7px;"><b>Cm</b></p>
@@ -440,20 +435,16 @@
                                     <div class="form-group">
                                     <div class="input-group">
                                         <input type="text"  class="form-control"
-                                    name="txt_weight" 
-                                    (change)="caculate_imc()" [(ngModel)]="txt_imc"
-                                    [ngModelOptions]="{standalone: true}"
-                                    placeholder="Colocar el peso en Kg" disabled
-                                    onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
-                                         
+                                    
+                                    (change)="caculate_imc()" formControlName="imc">     
                                     <p style="margin-left: 5px;margin-top: 7px;"><b>IMC</b></p>
                                     </div>
                                     </div>
                                 </div>
                             </div>
-                            <p *ngIf="txt_height>=100&&txt_height<=250?false:true">La altura ingresada es incorrecta. No podra calcular si imc, ya que el rango de valores aceptados se encuentra entre 100cm y 250cm. </p>
-                            <p *ngIf="txt_weight>=0&&txt_weight<=250?false:true">El peso ingresado es incorrecta. No podra calcular si imc, ya que el maximo peso aceptado es 250kg. </p>
-                        
+                            <!-- <p *ngIf="coronaReactive.weight.value>=100&&coronaReactive.weight.value<=250?false:true">La altura ingresada es incorrecta. No podra calcular si imc, ya que el rango de valores aceptados se encuentra entre 100cm y 250cm. </p>
+                            <p *ngIf="coronaReactive.height.value>=0&&coronaReactive.height.value<=250?false:true">El peso ingresado es incorrecta. No podra calcular si imc, ya que el maximo peso aceptado es 250kg. </p>
+                         -->
                         </div>
                         <hr>
                         <div class="row">
@@ -466,15 +457,22 @@
                                             de Riesgo?</b>
                                         </label><br>
                                         <fieldset>
-                                            <mat-radio-group [(ngModel)]="txt_chk_10"
-                                            [ngModelOptions]="{standalone: true}"  (change)="show_modal_relationship(txt_chk_10)">
-                                                    <mat-radio-button class="example-radio-button"  [value]="1">
+                                            <tdp-st-radio-group formControlName="chk10"  (change)="showModalRelationship(chk10)">
+                                                <tdp-st-radio [value]="1">
+                                                    
+                                                </tdp-st-radio>Sí
+                                                <tdp-st-radio [value]="0">
+                                                    
+                                                </tdp-st-radio>No
+                                            </tdp-st-radio-group>
+                                            <!-- <mat-radio-group formControlName="chk10">
+                                                    <mat-radio-button  [value]="1">
                                                     Sí
                                                     </mat-radio-button>
-                                                    <mat-radio-button class="example-radio-button"  [value]="0">
+                                                    <mat-radio-button  [value]="0">
                                                     No
                                                     </mat-radio-button>
-                                                    </mat-radio-group>
+                                                    </mat-radio-group> -->
                                                    
                                             
                                         </fieldset>
@@ -555,7 +553,7 @@
                 <div class="col-100">
                     <div class="form-group">
                         <label>Comentario:</label><br>
-                        <textarea [(ngModel)]="txt_coment" [ngModelOptions]="{standalone: true}" class="txt-area"
+                        <textarea formControlName="comment" class="txt-area"
                             matInput placeholder="Por ejemplo: Tengo sintomas como resfrio,fiebre, etc."></textarea>
                     </div>
                 </div>
@@ -570,18 +568,6 @@
                         <button class="btn btn-block btn-primary">
                             Adjuntar documentos
                         </button>
-                        <!-- <mat-select [disabled]="condition_Matselect" [(ngModel)]="txt_candidate_district"
-                                                                class="col-xs-4 form-control" [formControl]="myDistrict"
-                                                                (selectionChange)="district_name()" placeholder="Buscar..">
-                                                                <mat-option>
-                                                                    <ngx-mat-select-search [formControl]="searchDistrict">
-                                                                    </ngx-mat-select-search>
-                                                                </mat-option>
-                                
-                                                                <mat-option *ngFor="let option of filteredDistrict | async" [value]="option">
-                                                                    {{option}}
-                                                                </mat-option>
-                                                            </mat-select> -->
                     </div>
                 </div>
             </div>
@@ -594,7 +580,7 @@
                             :</label>
                         <div class="form-inline">
                             <input class="text-center form-control col-xs-12 col-sm-10 col-md-10 col-lg-10"
-                                [matDatepicker]="picker2" [(ngModel)]="txt_end_date" name="fecha2"
+                                [matDatepicker]="picker2"  name="fecha2"
                                 formControlName="date2" placeholder="YYYY-MM-DD">
                             <mat-datepicker-toggle class="col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker" matSuffix
                                 [for]="picker2">
@@ -608,7 +594,7 @@
                 <div class="col-100">
                     <div class="form-group">
                         <label>Comentario:</label><br>
-                        <textarea [(ngModel)]="txt_coment" [ngModelOptions]="{standalone: true}" class="txt-area"
+                        <textarea formControlName="comment" class="txt-area"
                             matInput placeholder="Por ejemplo: Tengo sintomas como resfrio,fiebre, etc."></textarea>
                     </div>
                 </div>

@@ -1,3 +1,142 @@
-<p>
-  modal-coronavirus-relationship works!
-</p>
+<div class="row" style="background-color: #D3D4D3;">
+
+  <div class="col-md-2 text-center" style="padding: 10px;"><img src="./assets_client/media/logos/logo-movistar.png" width="50px" class="imgdialog" alt="">
+  </div>
+  <div class="col-md-8 text-center" style="margin-top: auto;margin-bottom: auto;"><h3>Registro de la persona de riesgo con la que vives</h3></div>
+  <div class="col-md-2 text-center" style="padding: 10px;"><span class="fx-spacer"></span>
+      <button mat-icon-button (click)="onNoClick()">
+          <mat-icon mat-list-icon>close</mat-icon>
+      </button></div>
+  </div>
+  <hr>
+<section id="sect-1">
+  <div class="row">
+      <div class="col-md-8">
+          <label class="label-format"><b>Nombre completo</b> :</label>
+          <input type="text" name="txt_fullname" [(ngModel)]="txt_name"
+           [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Nombre completo...">
+      </div>
+      <div class="col-md-4">
+          <label class="label-format"><b>Parentesco</b> :</label>
+          <mat-select [(ngModel)]="txt_relationship" [ngModelOptions]="{standalone: true}"
+                              class="form-control" (selectionChange)="show_other_relationship()">
+                              <mat-option>None</mat-option>
+                              <mat-option *ngFor="let value of array_corona_relationship" [value]="value.id">{{value.name}}
+                              </mat-option>
+                          </mat-select>
+      </div>
+      <!-- <div class="col-md-6">
+          <label>Apellido Paterno :</label>
+          <input type="text" name="txt_fullname" [(ngModel)]="txt_last_name_1"
+           [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Nombre completo...">
+      </div> -->
+      
+  </div>
+  <!-- <div class="row">
+      <div class="col-md-6">
+          <label>Apellido Materno :</label>
+          <input type="text" name="txt_fullname" [(ngModel)]="txt_last_name_2"
+           [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Nombre completo...">
+      </div>
+      <div class="col-md-6">
+          <label>Parentesco :</label>
+          <mat-select [(ngModel)]="txt_relationship" [ngModelOptions]="{standalone: true}"
+                              class="form-control" (selectionChange)="show_other_relationship()">
+                              <mat-option>None</mat-option>
+                              <mat-option *ngFor="let value of array_corona_relationship" [value]="value.id">{{value.name}}
+                              </mat-option>
+                          </mat-select>
+      </div>
+  </div> -->
+  <div *ngIf="txt_condition_relationship" class="row">
+      <div class="col-md-12">
+          <label class="label-format">Especifica el tipo de Parentesco :</label>
+          <input type="text" name="txt_otherRelationship" [(ngModel)]="txt_otherRelationship" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Nombre completo...">
+      </div>
+  </div>
+</section>
+<section id="sect-2">
+  <hr>
+  <label class="label-format"><b>Selecciona una o más condiciones :</b></label>
+<div class="row">
+  
+<div class="col-md-6">
+  
+  <div>
+      <input type="checkbox" name="chk" [(ngModel)]="txt_chk_1"
+      [ngModelOptions]="{standalone: true}" [value]="1">
+     <label  for="exampleCheck1">Mayor a 60 años
+     </label><br>
+   </div>
+</div>
+<div class="col-md-6">
+  <div>
+      <input type="checkbox" name="chk" [(ngModel)]="txt_chk_2"
+      [ngModelOptions]="{standalone: true}" [value]="1">
+     <label  for="exampleCheck1">Enfermedad crónica
+     </label><br>
+   </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+      <div>
+          <input type="checkbox" name="chk" [(ngModel)]="txt_chk_3"
+          [ngModelOptions]="{standalone: true}" [value]="1">
+         <label  for="exampleCheck1">Embarazo
+         </label><br>
+       </div>
+  </div>
+  <div class="col-md-6">
+      <div>
+          <input type="checkbox" name="chk" [(ngModel)]="txt_chk_4"
+          [ngModelOptions]="{standalone: true}" [value]="1">
+         <label  for="exampleCheck1">Expuesto: Hospital, Policia , Militar.
+         </label><br>
+       </div>
+  </div>
+  </div>
+</section>
+<section id="sect-3">
+  <hr>
+<div class="row">
+  <div class="col-md-12">
+      <label class="label-format"><b>Coloca tus observaciones o comentarios</b></label>
+      <textarea class="txt-area" name="txt_coment" [(ngModel)]="txt_comment"
+      [ngModelOptions]="{standalone: true}" placeholder="Padras utilizar esta seccion para : indicar alguna enfermedad crónica,
+      sugerencia, direcciones entre otras cosas.">
+
+      </textarea>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+      <button class="btn btn-block btn_add" (click)="addFamily()">Agregar</button>
+  </div>
+ <!--  <div class="col-md-4">
+      <button (click)="reset()" class="btn btn-block btn-clean">Nuevo</button>
+  </div>
+  <div class="col-md-4">
+      <button (click)="onNoClick()" class="btn btn-block btn_add">Guardar</button>
+  </div> -->
+</div>
+</section>
+<!-- <section id="sect-4" *ngIf="txt_condition_show_table">
+  <hr>
+  <label class="label-format">Familiares registrados :</label>
+  <table class="table table-hover">
+      <thead class="header-table">
+          <tr>
+              <th>Nombre completo </th>
+          <th>Parentesco</th>
+          <th>..</th>
+          </tr>
+      </thead>
+      <tbody *ngFor="let value of array_corona_relationship_value" style="text-align: center;">
+          <td>{{value.name}}</td>
+          <td>{{value.action=="T"?value.id_relationship!=7?value.name_relationship:value.other_relationship:value.id_relationship}}</td>
+          <td><i class="flaticon-cancel remove-item" (click)="removeById(value.id)"></i></td>
+      </tbody>
+  </table>
+</section> -->

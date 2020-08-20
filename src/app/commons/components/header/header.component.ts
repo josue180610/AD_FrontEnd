@@ -50,6 +50,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('modules');
     localStorage.removeItem('auth');
     localStorage.removeItem('user');
+    localStorage.clear();
     setTimeout(() => {
       this.loaderSubjectService.closeLoader(); 
       this.router.navigateByUrl('/login');

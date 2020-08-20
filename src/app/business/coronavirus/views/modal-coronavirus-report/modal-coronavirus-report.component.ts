@@ -17,12 +17,6 @@ export class ModalCoronavirusReportComponent implements OnInit {
    tokenServ: any;
    userLogged = null;
   //________________
-  menu_name:any="";
-  rol_name:any;
-  access_level:any=0;
-  validateAccess:any;
-  validateMenu:any;
-  //________________
   /* @BlockUI() blockUI: NgBlockUI; */
   condition_report_assist=false;
   //variables

@@ -1,4 +1,4 @@
-export class only_date{
+export class OnlyDate{
 status: any;
 id: any;
 description: any;

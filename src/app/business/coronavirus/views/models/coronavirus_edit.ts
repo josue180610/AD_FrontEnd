@@ -1,4 +1,4 @@
-export class Coronavirus_edit {
+export class CoronavirusEdit {
     id_request: number;
     id_reason: number;
     id_employee: number;

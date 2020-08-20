@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { API_TER_REPORT_MODULE } from '../../../../../app/services/url.constants';
 import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
-import { company, companyService, reportData } from '../../terceros.models';
+import { ICompany, ICompanyService, IReportData } from '../../terceros.models';
 import { MatPaginator } from '@angular/material/paginator';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
@@ -19,9 +19,9 @@ export class ReportPanelTercerosComponent implements OnInit {
   name_company="";
   name_service="";
   filter="";
-  array_companyOptions:Array<company>=[];
-  array_companyServiceOptions:Array<companyService>=[];
-  find_companyServiceOptions:Array<companyService>=[];
+  array_companyOptions:Array<ICompany>=[];
+  array_companyServiceOptions:Array<ICompanyService>=[];
+  find_companyServiceOptions:Array<ICompanyService>=[];
   /* @BlockUI() blockUI: NgBlockUI; */
   companyRuc:any="5558745896520025";
   displayedColumns=[
@@ -32,7 +32,7 @@ export class ReportPanelTercerosComponent implements OnInit {
     "COUNTOUT","COUNTIN"
   ]
   dataSource=null;
-  array_reportGeneral:Array<reportData>=[];
+  array_reportGeneral:Array<IReportData>=[];
   array_idService:Array<any>=[]
   condition_all=0;
   user_id=null;

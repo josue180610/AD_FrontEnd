@@ -1,4 +1,4 @@
-export class condition_active{
+export class ConditionActive{
     id:any;
     accessLevel:any;
     flag:any;

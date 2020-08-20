@@ -1,4 +1,4 @@
-export class coronaCondition{
+export class CoronaCondition{
     
         updated_at:any;
         other_chronic_diseases: any;

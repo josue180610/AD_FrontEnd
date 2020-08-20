@@ -1,4 +1,4 @@
-export class generic{
+export class Generic{
     id:any;
     name:any;
 }

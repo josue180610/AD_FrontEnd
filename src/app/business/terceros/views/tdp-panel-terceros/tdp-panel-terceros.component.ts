@@ -3,7 +3,7 @@ import { ModalAsignmanagerComponent } from '../modal-asignmanager/modal-asignman
 import { MatPaginator } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
-import { Company, requestUserServ, cService, showMngTdp } from '../../terceros.models';
+import { ICompany, IRequestUserServ,ICService, IShowMngTdp } from '../../terceros.models';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs/operators';
@@ -30,10 +30,10 @@ export class TdpPanelTercerosComponent implements OnInit {
  myCompnay= new FormControl();
  searchMyCompany=new FormControl();
  filteredRelation: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
- optionCompany:Array<Company>=[];
+ optionCompany:Array<ICompany>=[];
  optionCompanyFilter:string[]=[];
- request:requestUserServ;
- array_company_service:Array<cService>=[]
+ request:IRequestUserServ;
+ array_company_service:Array<ICService>=[]
  condition_service=false;
  form_condition=true;
  show_message_condition=false;
@@ -46,7 +46,7 @@ export class TdpPanelTercerosComponent implements OnInit {
  actionForm = '';
  company_id =2;
  id_user;
- array_gestorTdp:Array<showMngTdp>=[]
+ array_gestorTdp:Array<IShowMngTdp>=[]
  company = {
    ruc:'',
    alias:'',    
@@ -288,7 +288,7 @@ export class TdpPanelTercerosComponent implements OnInit {
  }
  showManagerGestor(obj:any){
    let param="?idService="+obj.id;
-   this.http.get<showMngTdp[]>(API_TER_POST_ADD_USERSERVICE+param).subscribe(resp=>{
+   this.http.get<IShowMngTdp[]>(API_TER_POST_ADD_USERSERVICE+param).subscribe(resp=>{
      console.log(resp);
      if(resp["condition"]==true){
        this.array_gestorTdp=resp["employee"];

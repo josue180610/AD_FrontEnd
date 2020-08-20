@@ -1,4 +1,4 @@
-export class corona_home_request{
+export class CoronaHomeRequest{
     array_family:any;
     array:any;
     id_employee:any;
