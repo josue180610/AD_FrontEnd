@@ -43,7 +43,7 @@ export class RolesGuardGuard implements CanActivate {
     if (temp == 1 || state.url == "/") {
       return true;
     } else {
-      this.router.navigateByUrl("/login");
+      this.router.navigateByUrl("");
       return false;
     }
   }
