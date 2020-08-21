@@ -153,6 +153,7 @@ constructor(public dialog: MatDialog, private route: ActivatedRoute,
   this.createFormGroup();
   this.userLogged=token.getTokenUser();
   this.txt_id_employee=this.userLogged.employeeCustoms.id;
+  console.log(this.txt_id_employee);
   this.txt_created_by=this.userLogged.id;
   this.txt_updated_by=this.userLogged.id;
   this.token.getValidateMenuByUser("Formulario");
