@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RequestFamily } from '../models/corona_request_family';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { CoronavirusDrow } from '../models/coronavirus_generic';
 
 @Component({
   selector: 'tdp-modal-coronavirus-relationship',
@@ -13,7 +14,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 export class ModalCoronavirusRelationshipComponent implements OnInit {
   relationGroup:FormGroup
   txt_name_relationship = "";
-  array_corona_relationship_value: Array<RequestFamily> = []
+  arrayCoronaRelationship: Array<CoronavirusDrow> = []
   aux_array_corona_relationship_value: Array<RequestFamily> = []
   array_corona_relationship: Array<any> = []
   txt_id_request: any;
@@ -54,14 +55,15 @@ export class ModalCoronavirusRelationshipComponent implements OnInit {
     })
   }
   clean_inputs() {
-    this.txt_name = "";
-    this.txt_last_name_1 = "";
-    this.txt_last_name_2 = "";
-    this.txt_comment = "";
-    this.txt_chk_1 = false;
-    this.txt_chk_2 = false;
-    this.txt_chk_3 = false;
-    this.txt_chk_4 = false;
+    this.relationGroup.get("name").setValue("");
+    this.relationGroup.get("lastName1").setValue("");
+    this.relationGroup.get("lastName2").setValue("");
+    this.relationGroup.get("comment").setValue("");
+    this.relationGroup.get("otherRelationship").setValue("");
+    this.relationGroup.get("ck1").setValue(false);
+    this.relationGroup.get("ck2").setValue(false);
+    this.relationGroup.get("ck3").setValue(false);
+    this.relationGroup.get("ck4").setValue(false);
   }
   show_other_relationship() {
     if (this.txt_relationship == 7) {
@@ -71,14 +73,17 @@ export class ModalCoronavirusRelationshipComponent implements OnInit {
     }
   }
   ngOnInit() {
+    if(this.data!=null){
+      this.arrayCoronaRelationship=this.data.arrayRelationship;
+    }
     this.txt_id_request = this.data.id_request;
     /* this.showDataByIdRequest(this.txt_id_request); */
   }
   onNoClick(): void {
-    this.dialogRef.close(this.array_corona_relationship_value.length==0?[]:this.array_corona_relationship_value);
+    this.dialogRef.close(this.arrayCoronaRelationship.length==0?[]:this.arrayCoronaRelationship);
   }
   reset() {
-    this.array_corona_relationship_value = [];
+    this.arrayCoronaRelationship = [];
   }
   addFamily() {
     let flag = true;
@@ -116,7 +121,7 @@ export class ModalCoronavirusRelationshipComponent implements OnInit {
       let family = null;
       this.array_corona_relationship.forEach(element => {
         if (Number(element["id"]) == Number(this.txt_relationship)) {
-          family = new RequestFamily(String(this.array_corona_relationship_value.length+1)+"a", 1, this.txt_name, this.txt_last_name_1, this.txt_last_name_2,
+          family = new RequestFamily(String(this.arrayCoronaRelationship.length+1)+"a", 1, this.txt_name, this.txt_last_name_1, this.txt_last_name_2,
             this.txt_relationship,
             element["name"],
             this.txt_chk_1 == true ? 1 : 0,
@@ -128,7 +133,7 @@ export class ModalCoronavirusRelationshipComponent implements OnInit {
             "T");
         }
       });
-      this.array_corona_relationship_value.push(family);
+      this.arrayCoronaRelationship.push(family);
       this.clean_inputs();
       this.onNoClick();
     }

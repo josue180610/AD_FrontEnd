@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-4">
             <label class="label-format"><b>Parentesco</b> :</label>
-            <tdp-st-select type="outline"></tdp-st-select>
+            <tdp-st-select [listitems]="arrayCoronaRelationship" type="outline"></tdp-st-select>
             <!-- <mat-select [(ngModel)]="txt_relationship" [ngModelOptions]="{standalone: true}"
                                 class="form-control" (selectionChange)="show_other_relationship()">
                                 <mat-option>None</mat-option>

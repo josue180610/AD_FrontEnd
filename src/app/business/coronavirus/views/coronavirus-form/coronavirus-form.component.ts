@@ -6,7 +6,7 @@ import { CoronavirusDrow } from '../models/coronavirus_generic';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import {API_GET_CORONAFORM, API_SAVE_CORONA_DOCUMENT, API_GET_CORONAVIRUS_GROUP_DETAIL, API_POST_CORONAVIRUS_CBO, API_GET_CORONAVIRUS_EDIT_FORM, API_GET_DISABLED_ACCESS, API_POST_CORONAVIRUS_REQUEST } from '../../../../../app/services/url.constants';
 import Swal from 'sweetalert2'
@@ -132,9 +132,10 @@ arrayCoronaCountry: Array<ICoronaDrowCountry> = []
 arrayCoronaPrecondition: Array<CoronavirusDrow> = []
 arrayCoronaRelationship: Array<CoronavirusDrow> = []
 arrayCoronaEdit: Array<CoronavirusEdit> = []
-arrayCoronaGroup: Array<any> = []
-arrayCoronaNotGroup: Array<any> = [];
+arrayCoronaGroup: Array<CoronavirusDrow> = []
+arrayCoronaNotGroup: Array<CoronavirusDrow> = [];
 arrayCoronaGeneral: Array<GroupData> = [];
+arrayCoronaGroupLabel:Array<CoronavirusDrow>=[];
 arrayCoronaOther: Array<GroupData> = [];
 coronaDocument:CoronaDocument = null;
 
@@ -214,8 +215,15 @@ clickMove(cip: string, type: string) {
 getDataCoronaForm(idEmp:any){
   this.loaderSubjectService.showLoader("Cargando datos..");
   let request="?ID_EMPLOYEE="+idEmp;
-  this.http.get(API_GET_CORONAFORM+request).subscribe(resp=>{
-    console.log(resp);
+  let header = new HttpHeaders({
+    "UNICA-ServiceId": "550e8400-e29b-41d4-a716-446655440000",
+    "UNICA-Application": "qallarix",
+    "UNICA-User": "admin",
+    "UNICA-PID": "550e8400-e29b-41d4-a716-446655440000",
+    "ClientId":"apimanagement"
+  });
+  this.http.get(API_GET_CORONAFORM+request,{headers:header}).subscribe(resp=>{
+    
     try {
       this.arrayCoronaReason=resp["coronaReason"]!=null?resp["coronaReason"]:[];
       this.arrayCoronaStatus=resp["coronaStatus"]!=null?resp["coronaStatus"]:[];
@@ -225,22 +233,32 @@ getDataCoronaForm(idEmp:any){
       this.arrayCoronaGeneral=resp["coronaGroup"]!=null?resp["coronaGroup"]:[];
       if(this.arrayCoronaGeneral.length>0){
         this.arrayCoronaGeneral.forEach(element => {
-          if (element.group.name == "Generico") {
-            this.arrayCoronaNotGroup.push(element.groupDetail);
+          this.arrayCoronaGroupLabel.push(element.group);
+          if (element.group.label == "Generico") {
+            /* console.log(element.groupDetail) */
+            this.arrayCoronaNotGroup=element["groupDetails"];
           } else {
-            this.arrayCoronaGroup.push(element);
+            /* console.log(element.groupDetail) */
+            this.arrayCoronaGroup.push(element["groupDetails"]);
           }
         });
+        /* console.log("Corona generic")
+        console.log(this.arrayCoronaNotGroup) */
+        console.log("Corona not generic")
+        console.log(this.arrayCoronaGroup)
       }
       this.arrayCoronaCountry=resp["coronaCountry"]!=null?resp["coronaCountry"]:[];
+      this.ref.detectChanges();
     } catch (error) {
       Swal.fire ({
         icon:'error',
         text:error
       })
     }
-
-  })
+    this.loaderSubjectService.closeLoader();
+  }
+  
+  )
 }
 //permite mostrar el boton para agregar familiares
 addFamilyRelationship() {
@@ -674,7 +692,7 @@ showModalRelationship(param: any) {
           height: '550px',
           /*recive el dato como un diccionario de datos {key:value}*/
           data: {
-            array_Relationship: this.arrayCoronaRelationship,
+            arrayRelationship: this.arrayCoronaRelationship,
             id_request: this.txt_id
           }
 

@@ -30,13 +30,11 @@ export class RolesGuardGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     let temp = 0;
     let Modules = JSON.parse(this.IlocalStorage.getItem("modules"));
-    console.log(Modules);
     Modules.forEach((element) => {
       element.views.forEach((a) => {
         if (a.path == state.url) {
           temp = 1;
         }
-        console.log(temp);
       });
     });
 

@@ -43,7 +43,6 @@ export class AuthService {
         let permission :Array<Module>=[]
         permission= JSON.parse(localStorage.getItem("permissionDTO"));
         let index= permission.indexOf(permission.find(d=>d.view.name==menu));
-        console.log(index)
         if (index<0){
             this.logoutV2();
         }else{

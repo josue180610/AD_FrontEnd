@@ -38,15 +38,17 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                     <div class="form-group">
                         <div class="form-group">
-                            <label>Situacion laboral :</label>
-
-                            <mat-select [disabled]="txt_condition_general" [style.background-color]="background_color"
+                            
+                            <!-- <mat-select [disabled]="txt_condition_general" [style.background-color]="background_color"
                                 formControlName="laboralCondition" class="form-control">
                                 <mat-option>None</mat-option>
                                 <mat-option *ngFor="let value of array_corona_status" [value]="value.id">
                                     {{value.name}}</mat-option>
-                            </mat-select>
-
+                            </mat-select> -->
+                            <label>Situacion laboral :</label>
+                            <tdp-st-select [listitems]="arrayCoronaStatus" formControlName="laboralCondition"
+                            [style.background-color]="background_color"
+                            type="outline"></tdp-st-select>
                         </div>
 
                     </div>
@@ -73,12 +75,15 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                     <div class="form-group">
                         <label>Tipo de presencia :</label>
-                        <mat-select [disabled]="txt_condition_general" [style.background-color]="background_color"
+                        <tdp-st-select [listitems]="arrayCoronaType" formControlName="laboralType"
+                        [style.background-color]="background_color" [disabled]="txt_condition_general" >
+                        </tdp-st-select>
+                        <!-- <mat-select [disabled]="txt_condition_general" [style.background-color]="background_color"
                             formControlName="laboralType" class="form-control">
                             <mat-option>None</mat-option>
                             <mat-option *ngFor="let value of array_corona_type" [value]="value.id">{{value.name}}
                             </mat-option>
-                        </mat-select>
+                        </mat-select> -->
 
                     </div>
                 </div>
@@ -105,12 +110,14 @@
                     <div class="form-group">
 
                         <label>Estado de salud:</label>
-                        <mat-select formControlName="laboralHealtStatus"
+                        <tdp-st-select formControlName="laboralHealtStatus" [listitems]="arrayCoronaReason">
+                        </tdp-st-select>
+                        <!-- <mat-select formControlName="laboralHealtStatus"
                             class="form-control">
                             <mat-option>None</mat-option>
                             <mat-option *ngFor="let value of array_corona_reason" [value]="value.id">{{value.name}}
                             </mat-option>
-                        </mat-select>
+                        </mat-select> -->
 
                     </div>
                 </div>
@@ -124,12 +131,8 @@
 
                         <label>Estado de salud:</label>
 
-                        <mat-select formControlName="laboralHealtStatus"
-                            class="form-control">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let value of array_corona_reason" [value]="value.id">{{value.name}}
-                            </mat-option>
-                        </mat-select>
+                        <tdp-st-select formControlName="laboralHealtStatus" [listitems]="arrayCoronaReason">
+                        </tdp-st-select>
 
                     </div>
                 </div>
@@ -217,27 +220,27 @@
                                                     <div class="col-sm-12 col-xs-12 col-md-12">
                                                         <div style="width: 100%;margin-right:10px; "
                                                             class="form-inline">
-                                                            <mat-form-field appearance="outline" class="mat-form-style" >
                                                                 <!-- <mat-label class="font-style-mat-select text-center">Seleccionar
                                                                                 </mat-label> -->
+                                                                                <mat-form-field appearance="outline" class="mat-form-style" >
                                                                 <mat-select [disabled]="condition_legal_entity && level_access==1" formControlName="codeSelect"
                                                                     [(ngModel)]="select" multiple>
                                                                     <mat-option (onSelectionChange)="getValues($event)"
                                                                         class="font-style-mat-select"
-                                                                        *ngFor="let codeSelect of array_corona_not_group[0]"
-                                                                        [value]="codeSelect.id">
-                                                                        {{codeSelect.name}}
+                                                                        *ngFor="let codeSelect of arrayCoronaNotGroup"
+                                                                        [value]="codeSelect.value">
+                                                                        {{codeSelect.label}}
                                                                     </mat-option>
                                                                     <mat-optgroup
-                                                                        *ngFor="let group of this.array_corona_group"
-                                                                        [label]="textValidate(group.group)"
+                                                                        *ngFor="let group of arrayCoronaGroupLabel;let i = index"
+                                                                        [label]="textValidate(group.label)"
                                                                         [disabled]="group.disabled">
                                                                         <mat-option
                                                                             (onSelectionChange)="getValues($event)"
                                                                             class="font-style-mat-select"
-                                                                            *ngFor="let codeSelect of group.group_detail"
-                                                                            [value]="codeSelect.id">
-                                                                            {{codeSelect.name}}
+                                                                            *ngFor="let codeSelect of arrayCoronaGroup[i]"
+                                                                            >
+                                                                            {{codeSelect.label}}
                                                                         </mat-option>
                                                                     </mat-optgroup>
                                                                 </mat-select>
@@ -415,12 +418,13 @@
                                                 </label> -->
                                             </div>
                                             <div *ngIf="txt_chk_8==true" class="col-md-7">
-                                                <mat-select formControlName="country" class="form-control">
+                                                <tdp-st-select [listitems]="arrayCoronaCountry" formControlName="country"></tdp-st-select>
+                                                <!-- <mat-select formControlName="country" class="form-control">
                                                     <mat-option>None</mat-option>
                                                     <mat-option *ngFor="let value of array_corona_country"
                                                         [value]="value.id">
                                                         {{value.name}}</mat-option>
-                                                </mat-select>
+                                                </mat-select> -->
                                             </div>
                                         </div>
                                     </fieldset>
@@ -443,14 +447,15 @@
                                         <br>
                                         <div class="form-group">
                                             <label><b># Selecciona el medio de transporte para ir a tu lugar de trabajo :</b></label>
-                                            <mat-select formControlName="transport"
+                                            <tdp-st-select [listitems]="arrayCoronaTransport" formControlName="transport"></tdp-st-select>
+                                            <!-- <mat-select formControlName="transport"
                                                 class="form-control"
                                                 style="width: 100%;border:1px solid green;padding:5;">
                                                 <mat-option
                                                     *ngFor="let value of array_corona_transport"
                                                     [value]="value.id">{{value.name}}
                                                 </mat-option>
-                                            </mat-select>
+                                            </mat-select> -->
                                         </div>
                                     
                                     <!---->

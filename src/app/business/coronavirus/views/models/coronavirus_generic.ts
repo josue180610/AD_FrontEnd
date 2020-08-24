@@ -1,4 +1,4 @@
 export class CoronavirusDrow{
-    id:any;
-    name:any;
+    value:any;
+    label:any;
 }
