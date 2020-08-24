@@ -8,6 +8,7 @@ const MAIN_URL_MAILING_QAS = "https://rhdigitalback-dev.azurewebsites.net";
 const MAIN_URL_LOCAL = "http://localhost:8080";
 const MAIN_URL_MAILING_LOCAL = "http://localhost:5000";
 const MAIN_URL_LOCAL_PYTHON="http://localhost:5000";
+const MAIN_URL_LOCAL_CORONA="http://localhost:8082";
 //==============================================================================================
 //GENERAL URL AQUI CAMBIAR
 const MAIN_URL = MAIN_URL_LOCAL_PYTHON;
@@ -270,6 +271,11 @@ export const API_SR_SAVE_PROCESS_STATE = MAIN_URL + "/sr_save_process_status";
 export const API_SR_GET_ALL_PROCESS = MAIN_URL + "/get_all_process";
 
 // CORONAVIRUS
+
+//nuevas url
+export const API_GET_CORONAFORM=MAIN_URL_LOCAL_CORONA + "/coronaForm/getCoronaFormData";
+
+// antiguas
 export const API_GET_CORONAVIRUS_STATUS = MAIN_URL + "/getAllCoronavirusStatus"; //deprecado, no borrar igual se usan
 export const API_GET_CORONAVIRUS_REASON = MAIN_URL + "/getAllCoronavirusReason"; //deprecado, no borrar igual se usan
 export const API_POST_CORONAVIRUS_REQUEST =
