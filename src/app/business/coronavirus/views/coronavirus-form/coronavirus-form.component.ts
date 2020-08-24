@@ -2,13 +2,13 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef, Optional, Inject } fro
 
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
-import { Coronavirus } from '../models/coronavirus_generic';
+import { CoronavirusDrow } from '../models/coronavirus_generic';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
-import { API_SAVE_CORONA_DOCUMENT, API_GET_CORONAVIRUS_GROUP_DETAIL, API_POST_CORONAVIRUS_CBO, API_GET_CORONAVIRUS_EDIT_FORM, API_GET_DISABLED_ACCESS, API_POST_CORONAVIRUS_REQUEST } from '../../../../../app/services/url.constants';
+import {API_GET_CORONAFORM, API_SAVE_CORONA_DOCUMENT, API_GET_CORONAVIRUS_GROUP_DETAIL, API_POST_CORONAVIRUS_CBO, API_GET_CORONAVIRUS_EDIT_FORM, API_GET_DISABLED_ACCESS, API_POST_CORONAVIRUS_REQUEST } from '../../../../../app/services/url.constants';
 import Swal from 'sweetalert2'
 import { ModalCoronavirusRelationshipComponent } from '../modal-coronavirus-relationship/modal-coronavirus-relationship.component';
 import { CATEGORY_DOC, TYPE_DOC, CONTAINER_CORONA_DOCUMENT, URL_AZURE_STORAGE_CORONAVIRUS } from '../../../../../app/services/var.constants';
@@ -27,6 +27,11 @@ import { CoronaHomeRequest } from '../models/request_corona_home';
 import { AuthService } from '../../../../../app/services/auth-config-service';
 import { User } from '../../../../../app/services/auth.model';
 import { TDPLocalStorage } from '@tdp/ng-commons';
+export interface ICoronaDrowCountry{
+  id:any;
+  name:any;
+  timeZone:any;
+}
 @Component({
   selector: 'tdp-coronavirus-form',
   templateUrl: './coronavirus-form.component.html',
@@ -119,19 +124,19 @@ txt_pulmonare: any = "";
 tokenServ: null;
 userLogged : User;
 //array get all reason
-array_corona_transport
-array_corona_reason: Array<Coronavirus> = []
-array_corona_status: Array<Coronavirus> = []
-array_corona_type: Array<Coronavirus> = []
-array_corona_country: Array<Coronavirus> = []
-array_corona_precondition: Array<Coronavirus> = []
-array_corona_relationship: Array<Coronavirus> = []
-array_corona_edit: Array<CoronavirusEdit> = []
-array_corona_group: Array<GroupData> = []
-array_corona_not_group: Array<OnlyDate> = [];
-array_corona_general: Array<GroupData> = [];
-array_corona_other: Array<GroupData> = [];
-corona_document:CoronaDocument = null;
+arrayCoronaTransport: Array<CoronavirusDrow> = [];
+arrayCoronaReason: Array<CoronavirusDrow> = []
+arrayCoronaStatus: Array<CoronavirusDrow> = []
+arrayCoronaType: Array<CoronavirusDrow> = []
+arrayCoronaCountry: Array<ICoronaDrowCountry> = []
+arrayCoronaPrecondition: Array<CoronavirusDrow> = []
+arrayCoronaRelationship: Array<CoronavirusDrow> = []
+arrayCoronaEdit: Array<CoronavirusEdit> = []
+arrayCoronaGroup: Array<any> = []
+arrayCoronaNotGroup: Array<any> = [];
+arrayCoronaGeneral: Array<GroupData> = [];
+arrayCoronaOther: Array<GroupData> = [];
+coronaDocument:CoronaDocument = null;
 
 returnUrl = "";
 coronavirusForm:FormGroup;
@@ -206,6 +211,37 @@ clickMove(cip: string, type: string) {
   }
 }
 
+getDataCoronaForm(idEmp:any){
+  this.loaderSubjectService.showLoader("Cargando datos..");
+  let request="?ID_EMPLOYEE="+idEmp;
+  this.http.get(API_GET_CORONAFORM+request).subscribe(resp=>{
+    console.log(resp);
+    try {
+      this.arrayCoronaReason=resp["coronaReason"]!=null?resp["coronaReason"]:[];
+      this.arrayCoronaStatus=resp["coronaStatus"]!=null?resp["coronaStatus"]:[];
+      this.arrayCoronaType=resp["coronaType"]!=null?resp["coronaType"]:[];
+      this.arrayCoronaTransport=resp["coronaTransport"]!=null?resp["coronaTransport"]:[];
+      this.arrayCoronaRelationship=resp["coronaRelationship"]!=null?resp["coronaRelationship"]:[];
+      this.arrayCoronaGeneral=resp["coronaGroup"]!=null?resp["coronaGroup"]:[];
+      if(this.arrayCoronaGeneral.length>0){
+        this.arrayCoronaGeneral.forEach(element => {
+          if (element.group.name == "Generico") {
+            this.arrayCoronaNotGroup.push(element.groupDetail);
+          } else {
+            this.arrayCoronaGroup.push(element);
+          }
+        });
+      }
+      this.arrayCoronaCountry=resp["coronaCountry"]!=null?resp["coronaCountry"]:[];
+    } catch (error) {
+      Swal.fire ({
+        icon:'error',
+        text:error
+      })
+    }
+
+  })
+}
 //permite mostrar el boton para agregar familiares
 addFamilyRelationship() {
   if (this.array_corona_relationship_value.length > 0) {
@@ -274,7 +310,7 @@ getValues(event: {
 }
 
 // Permite obtener los valores para llenar los mat-select y poder seleccionar un valor.
-getAllCoronaGroupAndDetails() {
+/* getAllCoronaGroupAndDetails() {
 
   this.http.get<GroupData[]>(API_GET_CORONAVIRUS_GROUP_DETAIL).toPromise()
     .then(data => {
@@ -287,12 +323,10 @@ getAllCoronaGroupAndDetails() {
         }
       });
       this.ref.detectChanges();
-      /* this.blockUI.stop(); */
     })
 
-}
-getDataFormCoronavirus(id_employee: any) {
-  /* this.blockUI.start("Movistar..."); */
+} */
+/* getDataFormCoronavirus(id_employee: any) {
   let Json = {
     "id_emp": this.txt_id_employee
   }
@@ -309,12 +343,12 @@ getDataFormCoronavirus(id_employee: any) {
     this.txt_employee_name = data["employee_ssff"]["name"] + " " +
     data["employee_ssff"]["last_name_1"] + " " + data["employee_ssff"]["last_name_2"];
     this.txt_sex_employee = data["employee_ssff"]["gender"];
-    //Obtengo los datos de documento registrado por el empleado.
+    Obtengo los datos de documento registrado por el empleado.
     this.corona_document = data["corona_document"];
     this.id_document=this.corona_document!=null?this.corona_document.id_doc:null;
     this.filenameazure=this.corona_document!=null?this.corona_document.name:"";
-    //Obtengo el flag para los tag html segun el nivel de acceso
-    // si el flag es igual a 1, entonces el disabled esta activado, caso contrario, se pueden editar los tag html
+    Obtengo el flag para los tag html segun el nivel de acceso
+    si el flag es igual a 1, entonces el disabled esta activado, caso contrario, se pueden editar los tag html
     this.array_condition_active_html.forEach(element => {
       if(Number(element.accessLevel)==1){
         this.condition_legal_entity=element.flag==1?true:false;
@@ -323,7 +357,6 @@ getDataFormCoronavirus(id_employee: any) {
     if (data["status"] == true) {
       this.getDataForEditAdmin(id_employee);
     } else {
-      /* this.blockUI.stop(); */
     }
 
     }else{
@@ -334,7 +367,7 @@ getDataFormCoronavirus(id_employee: any) {
       
     }
   })
-}
+} */
 // Permite obtener los datos del registro de estado para mostrar al usuario y pueda modificarlos.
 getDataForEditAdmin(id_employee: any) {
   let url = "?id_employee=" + id_employee;
@@ -389,11 +422,10 @@ getDataForEditAdmin(id_employee: any) {
       });
 
     } catch (error) {
-      /* console.log(error); */
     }
     //permite agregar al mat-select de enfermedades cronicas, los valores seleccionados por el usuario.
-    this.getAllCoronaGroupAndDetails();
-    try {
+/*     this.getAllCoronaGroupAndDetails();
+ */    try {
       let objeto: IObjRequestCondition;
       this.array_cronica.forEach(element => {
         this.select.push(element["id_corona_condition_detail"]);
@@ -642,7 +674,7 @@ showModalRelationship(param: any) {
           height: '550px',
           /*recive el dato como un diccionario de datos {key:value}*/
           data: {
-            array_Relationship: this.array_corona_relationship,
+            array_Relationship: this.arrayCoronaRelationship,
             id_request: this.txt_id
           }
 
@@ -658,7 +690,7 @@ showModalRelationship(param: any) {
         height: '550px',
         /*recive el dato como un diccionario de datos {key:value}*/
         data: {
-          array_Relationship: this.array_corona_relationship,
+          array_Relationship: this.arrayCoronaRelationship,
           id_request: this.txt_id
         }
 
@@ -684,25 +716,25 @@ showModalRelationship(param: any) {
 }
 
 change_id_to_name(id_reason, status_det, type, country) {
-  for (let value of this.array_corona_reason) {
+  for (let value of this.arrayCoronaReason) {
     if (id_reason == value["id"]) {
       /* this.txt_id_reason = value["id"]; */
       this.coronavirusForm.get("laboralHealtStatus").setValue(value["id"]);
     }
   }
-  for (let value of this.array_corona_status) {
+  for (let value of this.arrayCoronaStatus) {
     if (status_det == value["id"]) {
       /* this.txt_status = value["id"]; */
       this.coronavirusForm.get("laboralCondition").setValue(value["id"])
     }
   }
-  for (let value of this.array_corona_type) {
+  for (let value of this.arrayCoronaType) {
     if (type == value["id"]) {
       /* this.txt_type = value["id"]; */
       this.coronavirusForm.get("laboralType").setValue(value["id"])
     }
   }
-  for (let value of this.array_corona_country) {
+  for (let value of this.arrayCoronaCountry) {
     if (country == value["id"]) {
       this.txt_country = value["id"];
     }
@@ -763,7 +795,7 @@ saveCoronaDocument(src, id_doc, typeDoc, catDoc, filename, id_emp, created_by, u
         text:data["message"]
       })
       
-      this.getDataFormCoronavirus(this.txt_id_employee);
+      /* this.getDataFormCoronavirus(this.txt_id_employee); */
       /* this.blockUI.stop(); */
     } else {
       Swal.fire ({
@@ -785,6 +817,7 @@ textValidate(text) {
   }
 }
   ngOnInit() {
+    this.getDataCoronaForm("3027");
     setTimeout(() => {
       /* this.loaderSubjectService.showLoader("Cargando componentes.."); */
      /*  this.loaderSubjectService.closeLoader(); */

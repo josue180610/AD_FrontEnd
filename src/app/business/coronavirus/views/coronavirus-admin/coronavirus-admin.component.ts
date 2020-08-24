@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@an
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Coronavirus } from '../models/coronavirus_generic';
+import { CoronavirusDrow } from '../models/coronavirus_generic';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { API_SAVE_MASSIVE_DATA_REQUEST, API_GET_CORONAVIRUS_PRECONDITION_EDIT, API_CORONA_SEARCHEMPLOYEES, API_POST_CORONAVIRUS_CBO, API_GET_FIND_BY_STATUS, API_CORONA_REQUESTDETAIL } from '../../../../../app/services/url.constants';
@@ -65,9 +65,9 @@ export class CoronavirusAdminComponent implements OnInit {
   personDetails: ICoronaEmployee;
   array_access:Array<IOfficeAccess>=[{id:1,name:"Permitido"},{id:0,name:"Restringido"}]
   byemployeeinp: String = "";
-  array_corona_status: Array<Coronavirus> = []
-  array_corona_type: Array<Coronavirus> = []
-  array_corona_reason: Array<Coronavirus> = []
+  array_corona_status: Array<CoronavirusDrow> = []
+  array_corona_type: Array<CoronavirusDrow> = []
+  array_corona_reason: Array<CoronavirusDrow> = []
 
   //variables para filtrado
   txt_status: any;

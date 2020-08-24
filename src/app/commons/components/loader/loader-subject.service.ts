@@ -1,21 +1,21 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class LoaderSubjectService {
   private loaderSubject = new BehaviorSubject(false);
   loader$ = this.loaderSubject.asObservable();
 
-  showLoader(text:any) {
+  showLoader(text: any) {
     if (this.loaderSubject.getValue()) {
-      return ;
+      return;
     }
-    let json={
-      "condition":true,
-      "message":text
-    }
+    let json = {
+      condition: true,
+      message: text,
+    };
     this.loaderSubject.next(json);
   }
 

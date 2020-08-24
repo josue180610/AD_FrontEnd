@@ -1,4 +1,9 @@
+import { CoronavirusDrow } from './coronavirus_generic';
+
 export class GroupData{
-    group:any;
-    group_detail:any;
+    group:{
+        id:any;
+        name:any;
+    };
+    groupDetail:Array<CoronavirusDrow>;
 }
